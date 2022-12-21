@@ -1,0 +1,158 @@
+@use 'app.scss';
+@use 'fonts.scss';
+@use 'editTask.scss';
+@use 'letterals.scss';
+@use 'login.scss';
+@use 'mixins.scss';
+@use 'task.scss';
+@use 'minimize.scss';
+@use 'taskList.scss';
+@use 'user.scss';
+@use 'userList.scss';
+@import 'mixins';
+@import 'letterals';
+
+body{
+    color:$darkTextColor;
+    box-sizing: border-box;
+}
+.page{
+    &_header{
+
+    }
+    &_wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+._container{
+    width: 1440px;
+}
+
+.headerPage{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 4px $disabledElementColor;
+    z-index: 10;
+    &_logo{
+        width: 120px;
+        height: 20px;
+        background-image: url('../../public/img/pageHeader/Logo.svg');
+        background-repeat: no-repeat;
+        box-sizing: border-box;
+        margin: 20px;
+    }
+    &_nav{
+
+    }
+    &_userProfile{
+
+    }
+}
+
+.navHeader{
+    width: 260px;
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    & >:first-child{
+        margin-right: 10px;
+    }
+    &_item{
+        @include navHeaderItem($white);
+        &__active{
+            @include navHeaderItem($primaryColor);
+        }
+    }
+}
+
+.headerUserProfile{
+    min-width: 148px;
+    max-width: 250px;
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    @include font("Roboto",16px,400,172%);
+    margin-right: 20px;
+    position: relative;
+    cursor: pointer;
+    &_name{
+        max-width: 200px;
+        height: 41px;
+        padding-top: 16px;
+    }
+    &_img{
+        width: 41px;
+        height: 41px;
+        border-radius: 21px;
+        border: 1px solid $primaryColor;
+        background-image: url('../../public/img/pageHeader/userImage.png');
+        background-size: contain;
+        margin-left: 10px;
+    }
+    &_dropdown{
+
+    }
+}
+
+.dropdownHeaderUserProfile{
+    position: absolute;
+    width: 136px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: $white;
+    box-shadow: 0px 0px 2px 2px $activeInputTextareaShadowColor;
+    top:45px;
+    right: 0;
+    @include font('Inter',12px,400,117%);
+    padding-top: 4px;
+    box-sizing: border-box;
+    & >*{
+        padding-left: 4px;
+        cursor: pointer;
+    }
+    &_lookProfile{
+        width: 136px;
+        height: 18px;
+        transition: 0.5s;
+        &:hover{
+            color:$primaryColor;
+        }
+    }
+    &_exit{
+        width: 136px;
+        height: 18px;
+        color:$errorColor;
+    }
+}
+
+._button{
+    &__success{
+        @include button($coloredButtonTextColor,$successColor,240px);
+        &:hover{
+            @include buttonColor($successHoveredButtonBorderBackgroundColor);
+        }
+        &:active{
+            @include buttonColor($successActiveButtonBorderBackgroundColor);
+        }
+    } 
+}
+
+._input{
+    @include input();
+    &:hover{
+        @include input($primaryColor);
+    }
+    &__active{
+        @include inputActive($activeInputTextareaShadowColor,$primaryColor);
+    }
+}
