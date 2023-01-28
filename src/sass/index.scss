@@ -1,3 +1,4 @@
+@use 'minimize.scss';
 @use 'app.scss';
 @use 'fonts.scss';
 @use 'editTask.scss';
@@ -5,14 +6,16 @@
 @use 'login.scss';
 @use 'mixins.scss';
 @use 'task.scss';
-@use 'minimize.scss';
 @use 'taskList.scss';
 @use 'user.scss';
 @use 'userList.scss';
+@use 'paginator.scss';
+@use 'filter.scss';
 @import 'mixins';
 @import 'letterals';
 
-body{
+
+body >*{
     color:$darkTextColor;
     box-sizing: border-box;
 }
@@ -91,13 +94,13 @@ body{
         padding-top: 16px;
     }
     &_img{
-        width: 41px;
-        height: 41px;
-        border-radius: 21px;
-        border: 1px solid $primaryColor;
-        background-image: url('../../public/img/pageHeader/userImage.png');
-        background-size: contain;
+        @include userProfilePhoto();
         margin-left: 10px;
+        & img{
+            width: inherit;
+            height: inherit;
+            border-radius: inherit;
+        }
     }
     &_dropdown{
 
@@ -137,22 +140,130 @@ body{
 
 ._button{
     &__success{
-        @include button($coloredButtonTextColor,$successColor,240px);
+        @include button($coloredButtonTextColor,$successColor);
         &:hover{
             @include buttonColor($successHoveredButtonBorderBackgroundColor);
         }
         &:active{
             @include buttonColor($successActiveButtonBorderBackgroundColor);
         }
-    } 
+    }
+    &__disabled{
+        @include button($disabledElementTextColor,$disabledElementColor);
+        cursor: default;
+    }
+    &__primary{
+        @include button($coloredButtonTextColor,$primaryColor);
+        &:hover{
+            @include buttonColor($primaryHoveredButtonBorderBackgroundColor);
+        }
+        &:active{
+            @include buttonColor($primaryActiveButtonBorderBackgroundColor);
+        }
+    }
+    &__white{
+        @include buttonWhite();
+    }
+    &__danger{
+        @include button($coloredButtonTextColor,$errorColor);
+        &:hover{
+            @include buttonColor($errorHoveredButtonBorderBackgroundColor);
+        }
+        &:active{
+            @include buttonColor($errorActiveButtonBorderBackgroundColor);
+        }
+    }
+    &__delete{
+        @include button($errorColor,$white);
+        &:hover{
+            color:$errorHoveredButtonBorderBackgroundColor;
+        }
+        &:active{
+            color:$errorActiveButtonBorderBackgroundColor;
+        }
+    }
 }
 
 ._input{
-    @include input();
+    @include input;
     &:hover{
         @include input($primaryColor);
     }
     &__active{
         @include inputActive($activeInputTextareaShadowColor,$primaryColor);
+    }
+    &::placeholder{
+        @include font('Inter',14px,400,172%);
+        color:$disabledElementTextColor;
+    }
+}
+
+._contentWrapper{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+._cardHeader{
+    width: inherit;
+    height: 28px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &_title{
+        min-width: 160px;
+        max-width: 800px;
+        height: inherit;
+        @include font("Roboto",24px,300,160%);
+    }
+    &_button{
+        height: 22px;
+    }
+    &_childs{
+        display: flex;
+        flex-direction: row;
+        & :not(:first-child){
+            margin-left: 10px;
+        }
+    }
+}
+
+._card{
+    padding: 20px;
+    background-color: $white;
+    margin-top: 20px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 5px 3px $disabledCheckboxBorderColor;
+    border-radius: 5px;
+}
+
+
+
+.textInput{
+    &__formLoginPage{
+        width: 240px;
+        height: 48px;
+        display: flex;
+        flex-direction: column;
+        &_label{
+            color:$labelTextColor;
+            @include font('Roboto',16px,400,171%);
+        }
+    }
+    &__filter{
+        width: 527px;
+        &_usersearch{
+            border: 1px solid $white;
+            box-shadow: inset 0px 0px 2px 1px $disabledElementColor;
+            &:hover{
+                @include input($primaryColor);
+                box-shadow: none;
+            }
+            &__active{
+                @include inputActive($activeInputTextareaShadowColor,$primaryColor);
+            }
+        }
     }
 }

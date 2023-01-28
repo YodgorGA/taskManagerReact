@@ -9,7 +9,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        background-color: #e3e3e3;
+        background-color: $pageWrapperGrayColor;
     }
     &_form{
         width: 300px;
@@ -41,22 +41,9 @@
             margin-bottom: 30px;
         }
     }
+    &_button{
+        width: 200px !important;
+    }
     
 }
 
-.itemFormLoginPage{
-    width: 240px;
-    height: 48px;
-    display: flex;
-    flex-direction: column;
-    &_label{
-        color:$labelTextColor;
-        @include font('Roboto',16px,400,171%);
-    }
-    &_email{
-        
-    }
-    &_password{
-        
-    }
-}

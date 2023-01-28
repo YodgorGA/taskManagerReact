@@ -1,0 +1,43 @@
+@import 'mixins';
+@import 'letterals';
+._paginator{
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    &_left{
+        
+    }
+    &_right{
+
+    }
+
+}
+
+.leftsidePaginator{
+    min-width: 176px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    
+    & >*{
+        @include font('Roboto',16px,400,172%);
+    }
+    &_prevButton{
+        padding: 0px 10px !important;
+    }
+    &_nextButton{
+        padding: 0px 10px !important;
+    }
+    &_numberButton{
+        padding: 0px 7px !important;
+    }
+}
+
+.rightSidePaginator{
+    @include rightSidePaginator($darkTextColor)
+}

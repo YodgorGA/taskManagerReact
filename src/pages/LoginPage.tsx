@@ -8,10 +8,10 @@ export const LoginPage:FC = () => {
       <div className="loginPage_form formLoginPage">
           <div className="formLoginPage_title">Авторизация</div>
           <div className="formLoginPage_items">
-              <Formitem type='text' label='Логин' purpose='email'/>
-              <Formitem type='password' label='Пароль' purpose='password'/>
+              <Formitem isLabelNeed={true} parentClass='formLoginPage' additionalClass='formLoginPage'type='text' label='Логин' purpose='email'/>
+              <Formitem isLabelNeed={true} parentClass='formLoginPage' additionalClass='formLoginPage'type='password' label='Пароль' purpose='password'/>
           </div>
-          <Button color='__success' content='Вход'/>
+          <Button parentClass='formLoginPage'color='success' content='Вход' />
       </div>
     </div>
   )
