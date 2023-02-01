@@ -1,0 +1,187 @@
+@import 'letterals';
+
+@mixin navHeaderItem($borderColor){
+    color:$darkTextColor;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid $borderColor;
+    @include font('Open Sans',24px,400,137%);
+}
+
+@mixin font($family,$size,$weight,$lh){
+    font-family: $family;
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $lh;
+}
+
+@mixin input($borderColor:$emptyInputTextareaBorderTextColor){
+    height: 24px;
+    width: inherit;
+    border-radius: 3px;
+    border:1px solid $borderColor;
+    box-sizing: border-box;
+    padding: 5px 10px 5px 10px;
+    border-style: solid;
+    @include font('Inter',14px,400,100%)
+}
+
+@mixin inputActive($shadowColor,$borderColor){
+    @include input($borderColor);
+    box-shadow: 0px 0px 2px 2px $shadowColor;
+}
+
+@mixin filterInput(){
+    @include font('Roboto',14px,400,150%);
+    padding: 5px 10px;
+    width: 527px;
+    height: 24px;
+    box-sizing: border-box;
+    border: 1px solid $white;
+    box-shadow: inset 0px 0px 2px 1px $disabledElementColor;
+    border-radius: 3px;
+    &::placeholder{
+        color:$disabledElementTextColor;
+    }
+}
+
+@mixin filterInputActive(){
+    @include font('Roboto',14px,400,150%);
+    padding: 5px 10px;
+    width: 527px;
+    height: 24px;
+    box-sizing: border-box;
+    border: 1px solid $primaryColor;
+    box-shadow: 0px 0px 2px 2px $activeInputTextareaShadowColor;
+    border-radius: 3px;
+    
+}
+
+@mixin button($textcolor:$darkTextColor, $backgroundColor:$defaultStayedButtonColor){
+    box-sizing: content-box;
+    width: fit-content;
+    padding: 0px 20px;
+    height: 22px;
+    @include font('Roboto',16px,400,119%);
+    color:$textcolor;
+    background-color: $backgroundColor;
+    border: 1px solid $backgroundColor;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@mixin buttonWhite(){
+    @include button($darkTextColor,$white);
+    border-color: $darkTextColor;
+    &:hover{
+        @include buttonColor($defaultActiveButtonColor);
+    }
+    &:active{
+        @include buttonColor($disabledElementColor);
+    }
+}
+
+@mixin buttonColor($backgroundBorderColor){
+    background-color: $backgroundBorderColor;
+    border-color: $backgroundBorderColor;
+}
+
+@mixin rightSidePaginator($textColor:$disabledElementTextColor){
+    min-width: 125px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    @include font('Roboto',14px,400,172%);
+    color:$textColor;
+    & >*{
+        margin-left: 10px;
+        align-self: center;
+        box-sizing: border-box;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    &_listView{
+        height: 18px;
+        width: 18px;
+        background-image: url('../.././../public/img/paginator/listIcon.svg');
+    }
+    &_cardView{
+        height: 18px;
+        width: 18px;
+        background: no-repeat url('../.././../public/img/paginator/cardsIcon.svg');
+
+    }
+}
+
+@mixin userProfilePhoto($w:39px,$h:$w){
+    width: $w;
+    height: $h;
+    border-radius: 20px;
+    border: 1px solid $primaryColor;
+}
+
+@mixin dropdownArrow($url){
+    width: 8px;
+    height: 14px;
+    background-image: url($url);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@mixin dropdown($box-shadow,$border){
+    height: 24px;
+    background-color: $white;
+    box-shadow: $box-shadow;
+    border-radius: 3px;
+    box-sizing: border-box;
+    position: relative;
+    border: $border;
+}
+@mixin dropdownDefault(){
+    @include dropdown(inset 0px 0px 2px 1px $disabledElementColor,1px solid $white);
+}
+
+@mixin dropdownActive(){
+    @include dropdown(0px 0px 2px 2px rgba(123, 97, 255, 0.5),1px solid $primaryColor);
+}
+
+@mixin taskItemType($backgroundImage){
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-image: url($backgroundImage);
+}
+
+@mixin taskItemStatus($backgroundImage){
+    width: 90px;
+    height: 26px;
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url($backgroundImage);
+}
+
+@mixin taskPriority($backgroundImage){
+    width: 80px;
+    height: 25px;
+    margin-left: 35px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url($backgroundImage);
+}
+
+@mixin taskButton($backgroundImage){
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url($backgroundImage);
+    cursor: pointer;
+
+}

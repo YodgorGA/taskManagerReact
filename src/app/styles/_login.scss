@@ -1,0 +1,56 @@
+@import 'mixins';
+@import 'letterals';
+
+.loginPage{
+    z-index: 9;
+    &_container{
+        height: 727px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: $pageWrapperGrayColor;
+    }
+    &_form{
+        width: 300px;
+        height: 288px;
+        margin-top: 150px;
+        background-color: $white;
+        box-shadow: 0px 0px 5px 3px $disabledElementColor;
+        border-radius: 5px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        box-sizing: border-box;
+    }
+}
+
+.formLoginPage{
+    &_title{
+        width: 145px;
+        height: 28px;
+        @include font('Roboto',24px,300,171%);
+        margin-bottom: 30px;
+    }
+    &_items{
+        & label{
+            @include font("Roboto",14px,400,171%);
+            color:$disabledElementTextColor;
+        }
+        & input {
+            width: 100%;
+            &:hover{
+                width: 100%;
+            }
+            margin-bottom: 10px;
+        }
+    }
+    &_button{
+        width: 200px !important;
+        margin-top: 20px;
+    }
+    
+}
+
