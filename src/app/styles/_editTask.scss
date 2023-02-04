@@ -1,0 +1,24 @@
+.editTaskPage{
+    &_container{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #E3E3E3;
+    }
+    &_contentWrapper{
+        width: 1280px;
+        padding-bottom: 28px;
+    }
+    &_card{
+        width: inherit;
+        height: 640px;
+    }
+}
+
+.cardEditTaskPage{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

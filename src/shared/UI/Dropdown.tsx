@@ -1,21 +1,23 @@
 import React,{FC, useEffect, useState} from 'react'
 
-interface UnitDropdownProps{
-  parentState?:string;
+interface DropdownProps{
+  monitorableState?:boolean[]|boolean;
+  dropdownItems:string[];
+  defaultContent:string;
 }
 
-export const UnitDropdown:FC<UnitDropdownProps> = ({parentState,...UnitDropdownProps}) => {
+export const Dropdown:FC<DropdownProps> = ({defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
   const [state,setState] = useState<string>('closed');
   const [arrow,setArrow] = useState<string>('open');
   const [active,setActive] = useState<string>('default');
-  const [content,setContent] = useState<string>('Единица измерения');
+  const [content,setContent] = useState<string>(defaultContent);
   
   const dropdownClickHandler = () =>{
     if(state === 'open')
     { 
         setState('closed');
         setArrow('open');
-        (content !== 'Единица измерения')?setActive('active'):setActive('default');
+        (content !== defaultContent)?setActive('active'):setActive('default');
     }
     else{
         setState('open');
@@ -33,8 +35,8 @@ const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, Mouse
     setState('closed');
     setArrow('open');
     setActive('default');
-    setContent('Единица измерения');
-  },[parentState])
+    (defaultContent && setContent(defaultContent));
+  },[monitorableState])
   return (
     <div className={`addTimeForm__visible_unitDropdown unitDropdown__${active}`}>
           <div className="unitDropdown_form" onMouseDown={dropdownClickHandler}>
@@ -43,12 +45,13 @@ const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, Mouse
             </div>
             {(state === 'open')? 
                 <div className={`unitDropdown_droppedfield droppedFieldUnitDropdown__${state}`}>
-                  <div className="droppedFieldUnitDropdown_item">
-                      <p onMouseDown={dropdownItemClickHandler}>Минуты</p>
-                  </div>
-                  <div className="droppedFieldUnitDropdown_item">
-                      <p onMouseDown={dropdownItemClickHandler}>Часы</p>
-                  </div>
+                  {dropdownItems.map((item)=>{
+                    return(
+                      <div className="droppedFieldUnitDropdown_item">
+                        <p onMouseDown={dropdownItemClickHandler}>{item}</p>
+                      </div>
+                    )
+                  })}
             </div>:<div></div>}
     </div>)
 }

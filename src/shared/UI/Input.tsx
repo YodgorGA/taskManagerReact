@@ -4,10 +4,10 @@ interface InputProps{
     type:string,
     placeholder:string,
     purpose?:string,
-    parentState?:string,
+    monitorableState?:boolean[]|boolean,
 }
 
-export const Input:FC<InputProps> = ({parentState,type,placeholder,...InputProps}) => {
+export const Input:FC<InputProps> = ({monitorableState,type,placeholder,...InputProps}) => {
     const [module,setModule] = useState<string>('');
     const [value,setValue] = useState<string>('');
     const getInputState = (e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -22,7 +22,7 @@ export const Input:FC<InputProps> = ({parentState,type,placeholder,...InputProps
     useEffect(()=>{
         setValue('');
         setModule('');
-    },[parentState])
+    },[monitorableState])
     return (
     <input type={type} className={`_input${module}`} onChange={getInputState} value={value} placeholder={placeholder}/>
   )
