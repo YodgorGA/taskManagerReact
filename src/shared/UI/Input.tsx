@@ -1,14 +1,15 @@
-import React,{FC, useState} from 'react'
+import React,{FC, useEffect, useState} from 'react'
 
 interface InputProps{
     type:string,
     placeholder:string,
     purpose?:string,
+    parentState?:string,
 }
 
-export const Input:FC<InputProps> = ({type,placeholder,...InputProps}) => {
+export const Input:FC<InputProps> = ({parentState,type,placeholder,...InputProps}) => {
     const [module,setModule] = useState<string>('');
-    const [text,setText] = useState<string>('');
+    const [value,setValue] = useState<string>('');
     const getInputState = (e:React.ChangeEvent<HTMLInputElement>)=>{
         if(e.currentTarget.value.length <1){
             setModule('')
@@ -16,10 +17,14 @@ export const Input:FC<InputProps> = ({type,placeholder,...InputProps}) => {
         else{
             setModule('__active');
         }
-        setText(e.currentTarget.value);
+        setValue(e.currentTarget.value);
     }
+    useEffect(()=>{
+        setValue('');
+        setModule('');
+    },[parentState])
     return (
-    <input type={type} className={`_input${module}`}onChange={getInputState} value={text} placeholder={placeholder}/>
+    <input type={type} className={`_input${module}`} onChange={getInputState} value={value} placeholder={placeholder}/>
   )
 }
 

@@ -151,6 +151,26 @@
     @include dropdown(0px 0px 2px 2px rgba(123, 97, 255, 0.5),1px solid $primaryColor);
 }
 
+@mixin unitDropdown($textColor){
+
+}
+
+@mixin unitDropdownDefault(){
+    width: 190px;
+    color:$disabledElementTextColor;
+    @include font('Inter',14px,400,150%);
+    @include dropdownDefault;
+    border: 1px solid $disabledElementColor;
+    box-shadow: none;
+}
+
+@mixin unitDropdownActive(){
+    width: 190px;
+    color:$darkTextColor;
+    @include font('Inter',14px,400,150%);
+    @include dropdownActive;
+}
+
 @mixin taskItemType($backgroundImage){
     width: 24px;
     height: 24px;
