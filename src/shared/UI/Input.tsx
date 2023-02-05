@@ -3,11 +3,11 @@ import React,{FC, useEffect, useState} from 'react'
 interface InputProps{
     type:string,
     placeholder:string,
-    purpose?:string,
     monitorableState?:boolean[]|boolean,
+    parentClass?:string;
 }
 
-export const Input:FC<InputProps> = ({monitorableState,type,placeholder,...InputProps}) => {
+export const Input:FC<InputProps> = ({parentClass,monitorableState,type,placeholder,...InputProps}) => {
     const [module,setModule] = useState<string>('');
     const [value,setValue] = useState<string>('');
     const getInputState = (e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -24,7 +24,7 @@ export const Input:FC<InputProps> = ({monitorableState,type,placeholder,...Input
         setModule('');
     },[monitorableState])
     return (
-    <input type={type} className={`_input${module}`} onChange={getInputState} value={value} placeholder={placeholder}/>
+    <input type={type} className={`${parentClass !== undefined?parentClass:''}_input${module}`} onChange={getInputState} value={value} placeholder={placeholder}/>
   )
 }
 

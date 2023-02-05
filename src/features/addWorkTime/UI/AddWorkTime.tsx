@@ -1,10 +1,11 @@
 import React,{FC, useState} from 'react'
-import { Input,Dropdown as UnitDropdown} from 'shared';
+import { Dropdown as UnitDropdown} from 'shared';
+import { Input } from 'shared';
 import { ApplyEditing, DenyEditing } from 'entities/taskPage';
 
 
 export const AddWorkTime:FC = () => {
-    const [addWorkTimeFormState,setAddWorkTimeFormState] = useState<string>('visible');
+    const [addWorkTimeFormState,setAddWorkTimeFormState] = useState<string>('hidden');
     const [isApplyPressed,setIsApplyPressed] = useState<boolean>(false);
     const [isDenyPressed,setIsDenyPressed] = useState<boolean>(false);
     const addWorkTimeButtonClickHandler = () =>{

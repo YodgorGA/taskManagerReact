@@ -1,12 +1,14 @@
 import React,{FC, useEffect, useState} from 'react'
+import '../styles/dropdown.scss';
 
 interface DropdownProps{
   monitorableState?:boolean[]|boolean;
   dropdownItems:string[];
   defaultContent:string;
+  purpose?:string
 }
 
-export const Dropdown:FC<DropdownProps> = ({defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
+export const Dropdown:FC<DropdownProps> = ({purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
   const [state,setState] = useState<string>('closed');
   const [arrow,setArrow] = useState<string>('open');
   const [active,setActive] = useState<string>('default');
@@ -38,16 +40,16 @@ const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, Mouse
     (defaultContent && setContent(defaultContent));
   },[monitorableState])
   return (
-    <div className={`addTimeForm__visible_unitDropdown unitDropdown__${active}`}>
-          <div className="unitDropdown_form" onMouseDown={dropdownClickHandler}>
-                <div className={`dropdownFilter_text__${active}`}>{content}</div>
-                <div className={`dropdownFilter_arrow__${arrow}`}></div>
+    <div className={`addTimeForm__visible_dropdown _dropdown${purpose !== undefined? '_'+purpose:''}__${active}`}>
+          <div className="_dropdown_form" onMouseDown={dropdownClickHandler}>
+                <div className={`_dropdown_text__${active}`}>{content}</div>
+                <div className={`_dropdown_arrow__${arrow}`}></div>
             </div>
             {(state === 'open')? 
-                <div className={`unitDropdown_droppedfield droppedFieldUnitDropdown__${state}`}>
+                <div className={`_dropdown_droppedfield droppedFieldDropdown__${state}`}>
                   {dropdownItems.map((item)=>{
                     return(
-                      <div className="droppedFieldUnitDropdown_item">
+                      <div className="droppedFieldDropdown_item">
                         <p onMouseDown={dropdownItemClickHandler}>{item}</p>
                       </div>
                     )
