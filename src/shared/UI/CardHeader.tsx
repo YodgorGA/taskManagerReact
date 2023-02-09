@@ -1,4 +1,5 @@
 import React,{FC} from 'react'
+import '../styles/cardHeader.scss'
 
 interface CardHeaderProps{
   parentClass:string,

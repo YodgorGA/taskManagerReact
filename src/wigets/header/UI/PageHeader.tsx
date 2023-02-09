@@ -1,4 +1,5 @@
 import React,{FC} from 'react'
+import '../styles/header.scss'
 
 interface PageHeaderProps{
   navBar: React.ReactNode

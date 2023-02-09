@@ -1,0 +1,50 @@
+@import '/src/app/styles/mixins';
+@import '/src/app/styles/letterals';
+
+._button{
+    &__success{
+        @include button($coloredButtonTextColor,$successColor);
+        &:hover{
+            @include buttonColor($successHoveredButtonBorderBackgroundColor);
+        }
+        &:active{
+            @include buttonColor($successActiveButtonBorderBackgroundColor);
+        }
+    }
+    &__disabled{
+        @include button($disabledElementTextColor,$disabledElementColor);
+        cursor: default;
+    }
+    &__primary{
+        @include button($coloredButtonTextColor,$primaryColor);
+        &:hover{
+            @include buttonColor($primaryHoveredButtonBorderBackgroundColor);
+        }
+        &:active{
+            @include buttonColor($primaryActiveButtonBorderBackgroundColor);
+        }
+    }
+    &__white{
+        @include buttonWhite();
+    }
+    &__danger{
+        @include button($coloredButtonTextColor,$errorColor);
+        &:hover{
+            @include buttonColor($errorHoveredButtonBorderBackgroundColor);
+        }
+        &:active{
+            @include buttonColor($errorActiveButtonBorderBackgroundColor);
+        }
+    }
+    &__delete{
+        @include button($errorColor,$white);
+        display: flex;
+        align-items: flex-end;
+        &:hover{
+            color:$errorHoveredButtonBorderBackgroundColor;
+        }
+        &:active{
+            color:$errorActiveButtonBorderBackgroundColor;
+        }
+    }
+}

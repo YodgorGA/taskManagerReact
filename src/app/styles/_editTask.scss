@@ -21,4 +21,27 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    
+    &_editTaskInfo{
+        margin-right: 20px;
+    }
+    &_editTaskDescription{
+
+    }
+
+}
+
+.editTaskInfo{
+    &_item{
+        margin-bottom: 20px;
+    }
+}
+
+.editTaskDescription{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    &input{
+        width: 100%;
+    }
 }

@@ -38,7 +38,7 @@ export const AddWorkTime:FC = () => {
         <div className={`taskInfoItems_item__addWorkTimeForm addTimeForm__${addWorkTimeFormState}`}>
           <div className="addTimeForm__visible_form">
             <Input monitorableState={[isApplyPressed,isDenyPressed]} placeholder='Количество' type='text' key={1}/>
-            <UnitDropdown defaultContent='Единица измерения' dropdownItems={['Минуты','Часы']} monitorableState={[isApplyPressed,isDenyPressed]}/>
+            <UnitDropdown purpose='unit' defaultContent='Единица измерения' dropdownItems={['Минуты','Часы']} monitorableState={[isApplyPressed,isDenyPressed]}/>
           </div>
           <div className="addTimeForm__visible_buttons">
             <ApplyEditing callback={applyChanges}/>

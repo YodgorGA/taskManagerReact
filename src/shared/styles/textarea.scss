@@ -1,0 +1,26 @@
+@import 'app/styles/mixins';
+@import 'app/styles/letterals';
+
+._textarea{
+    @include textarea();
+    &::placeholder{
+        @include font('Inter',14px,400,171%);
+        color:$disabledElementTextColor;
+    }
+    &:hover{
+        box-shadow: none;
+        border: 1px solid $primaryColor;
+    }
+    &__active{
+        @include textareaActive();
+    }
+
+    &_taskPageComment{
+        height: 76px;
+        width: 100%;
+    }
+    &_editTaskPageDescription{
+        height: 510px;
+        width: 400px;
+    }
+}

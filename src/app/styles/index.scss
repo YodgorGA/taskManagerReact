@@ -9,7 +9,6 @@
 @use 'taskList.scss';
 @use 'user.scss';
 @use 'userList.scss';
-@use 'paginator.scss';
 @use 'filter.scss';
 @import 'mixins';
 @import 'letterals';
@@ -35,170 +34,6 @@ body >*{
     width: 1440px;
 }
 
-.headerPage{
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0px 4px 4px $disabledElementColor;
-    z-index: 10;
-    &_logo{
-        width: 120px;
-        height: 20px;
-        background-image: url('../../../public/img/pageHeader/Logo.svg');
-        background-repeat: no-repeat;
-        box-sizing: border-box;
-        margin: 20px;
-    }
-    &_nav{
-
-    }
-    &_userProfile{
-
-    }
-}
-
-.navHeader{
-    width: 260px;
-    height: inherit;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    & >:first-child{
-        margin-right: 10px;
-    }
-    &_item{
-        @include navHeaderItem($white);
-        &__active{
-            @include navHeaderItem($primaryColor);
-        }
-    }
-}
-
-.headerUserProfile{
-    min-width: 140px;
-    max-width: 250px;
-    height: 42px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    @include font("Roboto",16px,400,172%);
-    margin-right: 20px;
-    position: relative;
-    cursor: pointer;
-    &_name{
-        max-width: 200px;
-        height: 41px;
-        padding-top: 16px;
-    }
-    &_img{
-        @include userProfilePhoto();
-        margin-left: 10px;
-        & img{
-            width: inherit;
-            height: inherit;
-            border-radius: inherit;
-        }
-    }
-    &_dropdown{
-
-    }
-}
-
-.dropdownHeaderUserProfile{
-    position: absolute;
-    width: 136px;
-    height: 40px;
-    border-radius: 5px;
-    background-color: $white;
-    box-shadow: 0px 0px 2px 2px $activeInputTextareaShadowColor;
-    top:45px;
-    right: 0;
-    @include font('Inter',12px,400,117%);
-    padding-top: 4px;
-    box-sizing: border-box;
-    & >*{
-        padding-left: 4px;
-        cursor: pointer;
-    }
-    &_lookProfile{
-        width: 136px;
-        height: 18px;
-        transition: 0.5s;
-        &:hover{
-            color:$primaryColor;
-        }
-    }
-    &_exit{
-        width: 136px;
-        height: 18px;
-        color:$errorColor;
-    }
-}
-
-._button{
-    &__success{
-        @include button($coloredButtonTextColor,$successColor);
-        &:hover{
-            @include buttonColor($successHoveredButtonBorderBackgroundColor);
-        }
-        &:active{
-            @include buttonColor($successActiveButtonBorderBackgroundColor);
-        }
-    }
-    &__disabled{
-        @include button($disabledElementTextColor,$disabledElementColor);
-        cursor: default;
-    }
-    &__primary{
-        @include button($coloredButtonTextColor,$primaryColor);
-        &:hover{
-            @include buttonColor($primaryHoveredButtonBorderBackgroundColor);
-        }
-        &:active{
-            @include buttonColor($primaryActiveButtonBorderBackgroundColor);
-        }
-    }
-    &__white{
-        @include buttonWhite();
-    }
-    &__danger{
-        @include button($coloredButtonTextColor,$errorColor);
-        &:hover{
-            @include buttonColor($errorHoveredButtonBorderBackgroundColor);
-        }
-        &:active{
-            @include buttonColor($errorActiveButtonBorderBackgroundColor);
-        }
-    }
-    &__delete{
-        @include button($errorColor,$white);
-        &:hover{
-            color:$errorHoveredButtonBorderBackgroundColor;
-        }
-        &:active{
-            color:$errorActiveButtonBorderBackgroundColor;
-        }
-    }
-}
-
-._input{
-    @include input;
-    &:hover{
-        @include input($primaryColor);
-    }
-    &__active{
-        @include inputActive($activeInputTextareaShadowColor,$primaryColor);
-    }
-    &::placeholder{
-        @include font('Inter',14px,400,172%);
-        color:$disabledElementTextColor;
-    }
-}
-
-
 ._contentWrapper{
     margin-top: 10px;
     display: flex;
@@ -206,35 +41,8 @@ body >*{
     justify-content: flex-end;
     align-items: center;
     height: inherit;
+    width: 1280px;
     
-}
-._cardHeader{
-    width: inherit;
-    height: 28px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    &_title{
-        min-width: 160px;
-        max-width: 800px;
-        min-height: 30px;
-        overflow-y: hidden;
-        height: inherit;
-        display: flex;
-        align-items: flex-start;
-        @include font("Roboto",24px,300,160%);
-    }
-    &_button{
-        height: 22px;
-    }
-    &_childs{
-        display: flex;
-        flex-direction: row;
-        & :not(:first-child){
-            margin-left: 10px;
-        }
-    }
 }
 
 ._card{
@@ -247,37 +55,3 @@ body >*{
 }
 
 
-
-.textInput{
-    &__formLoginPage{
-        width: 240px;
-        height: 48px;
-        display: flex;
-        flex-direction: column;
-        &_label{
-            color:$labelTextColor;
-            @include font('Roboto',16px,400,171%);
-        }
-    }
-    &__filter{
-        width: 527px;
-        &_usersearch{
-            border: 1px solid $white;
-            box-shadow: inset 0px 0px 2px 1px $disabledElementColor;
-            &:hover{
-                @include input($primaryColor);
-                box-shadow: none;
-            }
-            &__active{
-                @include inputActive($activeInputTextareaShadowColor,$primaryColor);
-            }
-        }
-    }
-}
-
-._divider{
-    width: 1px;
-    height: 600px;
-    background-color: $disabledElementColor;
-    margin-right: 19px;
-}

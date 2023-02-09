@@ -33,6 +33,22 @@
     box-shadow: 0px 0px 2px 2px $shadowColor;
 }
 
+@mixin textarea(){
+    margin-top: 5px;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 2px 1px $disabledElementColor;
+    border: 1px solid $white;
+    resize: none;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    @include font('Inter',14px,400,171%);
+}
+
+@mixin textareaActive(){
+    @include textarea();
+    box-shadow: 0px 0px 2px 2px $activeInputTextareaShadowColor;
+}
+
 @mixin filterInput(){
     @include font('Roboto',14px,400,150%);
     padding: 5px 10px;
@@ -74,6 +90,7 @@
     align-items: center;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 @mixin buttonWhite(){
@@ -119,10 +136,10 @@
     }
 }
 
-@mixin userProfilePhoto($w:39px,$h:$w){
+@mixin userProfilePhoto($w:39px,$h:$w,$border-raduis:20px){
     width: $w;
     height: $h;
-    border-radius: 20px;
+    border-radius: $border-raduis;
     border: 1px solid $primaryColor;
 }
 
@@ -145,31 +162,15 @@
 }
 @mixin dropdownDefault(){
     @include dropdown(inset 0px 0px 2px 1px $disabledElementColor,1px solid $white);
+    &:hover{
+        border: 1px solid $primaryColor;
+    }
 }
 
 @mixin dropdownActive(){
     @include dropdown(0px 0px 2px 2px rgba(123, 97, 255, 0.5),1px solid $primaryColor);
 }
 
-@mixin unitDropdown($textColor){
-
-}
-
-@mixin unitDropdownDefault(){
-    width: 190px;
-    color:$disabledElementTextColor;
-    @include font('Inter',14px,400,150%);
-    @include dropdownDefault;
-    border: 1px solid $disabledElementColor;
-    box-shadow: none;
-}
-
-@mixin unitDropdownActive(){
-    width: 190px;
-    color:$darkTextColor;
-    @include font('Inter',14px,400,150%);
-    @include dropdownActive;
-}
 
 @mixin taskItemType($backgroundImage){
     width: 24px;
@@ -204,4 +205,22 @@
     background-image: url($backgroundImage);
     cursor: pointer;
 
+}
+
+@mixin somePageContainer($fd:column,$jc:space-between,$ai:center){
+    height: 727px;
+    background-color: $pageWrapperGrayColor;
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@mixin somePageCard($fd:column,$jc:space-between,$ai:center){
+    width: inherit;
+    padding: 20px;
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
 }

@@ -1,0 +1,65 @@
+@import '/src/app/styles/mixins';
+@import '/src/app/styles/letterals';
+
+.headerUserProfile{
+    min-width: 140px;
+    max-width: 250px;
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    @include font("Roboto",16px,400,172%);
+    margin-right: 20px;
+    position: relative;
+    cursor: pointer;
+    &_name{
+        max-width: 200px;
+        height: 41px;
+        padding-top: 16px;
+    }
+    &_img{
+        @include userProfilePhoto();
+        margin-left: 10px;
+        & img{
+            width: inherit;
+            height: inherit;
+            border-radius: inherit;
+        }
+    }
+    &_dropdown{
+
+    }
+}
+
+.dropdownHeaderUserProfile{
+    position: absolute;
+    width: 136px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: $white;
+    box-shadow: 0px 0px 2px 2px $activeInputTextareaShadowColor;
+    top:45px;
+    right: 0;
+    @include font('Inter',12px,400,117%);
+    padding-top: 4px;
+    box-sizing: border-box;
+    & >*{
+        padding-left: 4px;
+        cursor: pointer;
+    }
+    &_lookProfile{
+        width: 136px;
+        height: 18px;
+        transition: 0.5s;
+        &:hover{
+            color:$primaryColor;
+        }
+    }
+    &_exit{
+        width: 136px;
+        height: 18px;
+        color:$errorColor;
+        margin-top: 3px;
+    }
+}

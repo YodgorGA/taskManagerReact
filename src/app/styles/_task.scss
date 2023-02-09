@@ -209,22 +209,6 @@
         @include font('Roboto',16px,400,171%);
         color:$disabledElementTextColor;
     }
-    &_textarea{
-        margin-top: 5px;
-        width: 100%;
-        height: 76px;
-        border-radius: 5px;
-        box-shadow: inset 0px 0px 2px 1px $disabledElementColor;
-        resize: none;
-        border: none;
-        box-sizing: border-box;
-        padding: 5px 10px;
-        @include font('Inter',14px,400,171%);
-        &::placeholder{
-            @include font('Inter',14px,400,171%);
-            color:$disabledElementTextColor;
-        }
-    }
     &_button{
         margin: 10px 0px;
     }
@@ -242,7 +226,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        & *{
+        &*{
             min-height: 24px;
             width: 100%;
         }
@@ -259,8 +243,10 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        
         & p{
             max-height: inherit;
+            min-width: 380px;
         }
     }
     &_content{

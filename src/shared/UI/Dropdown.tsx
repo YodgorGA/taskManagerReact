@@ -6,9 +6,10 @@ interface DropdownProps{
   dropdownItems:string[];
   defaultContent:string;
   purpose?:string
+  parentClass?:string;
 }
 
-export const Dropdown:FC<DropdownProps> = ({purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
+export const Dropdown:FC<DropdownProps> = ({parentClass,purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
   const [state,setState] = useState<string>('closed');
   const [arrow,setArrow] = useState<string>('open');
   const [active,setActive] = useState<string>('default');
@@ -40,7 +41,7 @@ const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, Mouse
     (defaultContent && setContent(defaultContent));
   },[monitorableState])
   return (
-    <div className={`addTimeForm__visible_dropdown _dropdown${purpose !== undefined? '_'+purpose:''}__${active}`}>
+    <div className={`${parentClass !== undefined?parentClass+'_dropdown':''} ${purpose !== undefined?'_dropdown_'+purpose:''} _dropdown__${active}`}>
           <div className="_dropdown_form" onMouseDown={dropdownClickHandler}>
                 <div className={`_dropdown_text__${active}`}>{content}</div>
                 <div className={`_dropdown_arrow__${arrow}`}></div>
@@ -49,7 +50,7 @@ const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, Mouse
                 <div className={`_dropdown_droppedfield droppedFieldDropdown__${state}`}>
                   {dropdownItems.map((item)=>{
                     return(
-                      <div className="droppedFieldDropdown_item">
+                      <div key={Math.random() }className="droppedFieldDropdown_item">
                         <p onMouseDown={dropdownItemClickHandler}>{item}</p>
                       </div>
                     )

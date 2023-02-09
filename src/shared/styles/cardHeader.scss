@@ -1,0 +1,31 @@
+@import '/src/app/styles/mixins';
+@import '/src//app//styles/letterals';
+
+._cardHeader{
+    width: inherit;
+    height: 28px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    &_title{
+        min-width: 160px;
+        max-width: 800px;
+        min-height: 30px;
+        overflow-y: hidden;
+        height: inherit;
+        display: flex;
+        align-items: flex-start;
+        @include font("Roboto",24px,300,160%);
+    }
+    &_button{
+        height: 22px;
+    }
+    &_childs{
+        display: flex;
+        flex-direction: row;
+        & :not(:first-child){
+            margin-left: 10px;
+        }
+    }
+}

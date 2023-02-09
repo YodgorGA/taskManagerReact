@@ -1,4 +1,5 @@
 import React,{FC, useEffect, useState} from 'react'
+import '../styles/input.scss'
 
 interface InputProps{
     type:string,

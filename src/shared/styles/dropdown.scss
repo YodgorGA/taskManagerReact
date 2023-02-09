@@ -2,15 +2,11 @@
 @import '/src//app//styles/letterals';
 
 ._dropdown{
-    &__default{
-        @include unitDropdownDefault();
-        &:hover{
-            border: 1px solid $primaryColor;
-        }
-    }
     &__active{
-        @include unitDropdownActive();
-        position: relative;
+        @include dropdownActive;
+    }
+    &__default{
+        @include dropdownDefault;
     }
     &_arrow{
         &__open{
@@ -44,46 +40,24 @@
             @include font('Inter',14px,400,150%);
         }
     }
-    
+
     &_type{
-        &__active{
-            width: 98px;
-            @include dropdownActive;
-        }
-        &__default{
-            width: 98px;
-            @include dropdownDefault;
-        }
+        width: 98px;
     }
     &_priority{
-        &__active{
-            width: 120px;
-            @include dropdownActive;
-        }
-        &__default{
-            width: 120px;
-            @include dropdownDefault;
-        }
+        width: 120px;
     }
     &_status{
-        &__active{
-            width: 120px;
-            @include dropdownActive;
-        }
-        &__default{
-            width: 120px;
-            @include dropdownDefault;
-        }
+        width: 120px;
     }
     &_user{
-        &__active{
-            width: 180px;
-            @include dropdownActive;
-        }
-        &__default{
-            width: 180px;
-            @include dropdownDefault;
-        }
+        width:180px;
+    }
+    &_unit{
+        width: 190px;
+    }
+    &_changeTaskInfo{
+        width: 300px;
     }
 }
 
@@ -98,6 +72,7 @@
         box-shadow: 0px 0px 2px 2px rgba(123, 97, 255, 0.5);
         border-radius: 3px;
         padding: 5px 0px;
+        z-index: 10;
     }
     &_item{
         @include font('Inter',14px,400,100%);

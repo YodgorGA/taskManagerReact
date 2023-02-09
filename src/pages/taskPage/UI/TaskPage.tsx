@@ -1,23 +1,24 @@
 import React,{FC} from 'react'
 import { useLocation } from 'react-router-dom'
-import { Button } from 'shared'
+import { Button, LinkButton } from 'shared'
 import { CardHeader } from 'shared' 
 import { Divider as TaskPageDivider} from 'shared'
 import { TaskInfoWidget } from 'wigets/taskInfo'
 import { TaskDescription } from 'wigets/taskDescription'
 import { TaskCommentsWidget } from 'wigets/taskComments'
+import { getIdFromLocation } from '../index';
 
 export const TaskPage:FC = ({...TaskPageProps}) => {
   const location = useLocation()
+  const id = getIdFromLocation(location);
   const {assignedUser,priority,status,taskName,type} = location.state;
-
   return (
     <div className='taskPage_container _container'>
         <div className="taskPage_contentWrapper _contentWrapper">
             <CardHeader parentClass='taskPage' title={taskName} 
             childButtons={[
                 <Button color='white' content='Взять в работу' parentClass='_cardHeader' key={0}/>,
-                <Button color='primary' content='Редактировать' parentClass='_cardHeader' key={1}/>,
+                <LinkButton to={`${location.pathname}/edit`} state={{id,assignedUser,type,priority,taskName}} color='primary' content='Редактировать' parentClass='_cardHeader' key={1}/>,
                 <Button color='danger' content='Удалить' parentClass='_cardHeader' key={2}/>
             ]}
             />

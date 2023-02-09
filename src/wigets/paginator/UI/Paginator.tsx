@@ -1,21 +1,22 @@
 import React,{FC} from 'react'
-import { Button } from '../../../shared/UI/Button'
-import { ChangeViewButtons } from '../../../features/paginator/UI/ChangeViewButtons'
+import { Button } from 'shared'
+import { ChangeUserListVeiwButton } from 'features/paginator'
+import '../styles/paginator.scss'
+import { useLocation } from 'react-router-dom'
 
 interface PaginatorProps{
 parentClass:string,
 showedItemCountStart:string,
 showedItemCountEnd:string,
 showedItemCountTotal:string,
-childnodes?:React.ReactNode
+userListVeiw?:string
+setView?: ()=>void | undefined
 }
 
 export const Paginator:FC<PaginatorProps> = ({
-    parentClass,showedItemCountStart,
-    showedItemCountEnd,showedItemCountTotal,
-    childnodes,
+    parentClass,showedItemCountStart,showedItemCountEnd,showedItemCountTotal,userListVeiw,setView,
     ...PaginatorProps}) => {
-        
+    const location = useLocation();
     return (
     <div className={`${parentClass}_paginator _paginator`}>
         <div className="_paginator_left leftsidePaginator">
@@ -24,7 +25,7 @@ export const Paginator:FC<PaginatorProps> = ({
             <Button parentClass='leftsidePaginator'color='disabled' additionalClass='leftsidePaginator_nextButton' content='Вперед'/>
         </div>
         <div className={`_paginator_right rightSidePaginator`}>
-            {childnodes}
+            {location.pathname === '/users'?<ChangeUserListVeiwButton setView={setView} userListVeiw={userListVeiw}/>:<div></div>}
             <p>{`Показано ${showedItemCountStart} - ${showedItemCountEnd} из ${showedItemCountTotal}`}</p>
         </div>
 

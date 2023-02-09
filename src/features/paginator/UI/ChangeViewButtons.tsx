@@ -1,12 +1,12 @@
 import React,{FC, useState} from 'react'
 
 interface ChangeViewButtonsProps{
-  userListVeiw:string
-  setView : ()=>void
+  userListVeiw:(string | undefined)
+  setView : (()=>void | undefined) | undefined
 }
 export const ChangeViewButtons:FC<ChangeViewButtonsProps> = ({userListVeiw,setView,...ChangeViewButtonsProps}) => {
     const handleViewChangeButtonClick = () =>{
-      setView();
+      setView && setView();
     }
     if(userListVeiw === 'cards'){
       return (

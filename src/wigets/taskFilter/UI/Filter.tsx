@@ -16,12 +16,12 @@ export const Filter:FC<FilterProps> = ({...FilterProps}) => {
   }
   return (
     <div className="cardTaskList_filter _filter">
-      <TaskFilterDropdown monitorableState={isSeacrhPressed} defaultContent='Тип' dropdownItems={['Создание','Фикс']} purpose='type'/>
-      <TaskFilterInput monitorableState={isSeacrhPressed} placeholder='Введите название задачи' type='text' parentClass='_filter'/>
-      <TaskFilterDropdown monitorableState={isSeacrhPressed} defaultContent='Пользователь' dropdownItems={['Шерлок Хоумс','Шерлок Хоумс','Шерлок Хоумс','Шерлок Хоумс']} purpose={'user'}/>
-      <TaskFilterDropdown monitorableState={isSeacrhPressed} defaultContent='Статус' dropdownItems={['Завершено','Тестирование','В работе','Открыто']} purpose={'status'}/>
-      <TaskFilterDropdown monitorableState={isSeacrhPressed} defaultContent='Приоритет' dropdownItems={['Высокий','Средний','Низкий']} purpose={'priority'}/>
-      <Button callback={buttonClickHanler}color='primary' content='Применить' parentClass='_filter' key={0}/>
+      <TaskFilterDropdown key={0} monitorableState={isSeacrhPressed} parentClass={'_filter'}defaultContent='Тип' dropdownItems={['Создание','Фикс']} purpose='type'/>
+      <TaskFilterInput key={1}monitorableState={isSeacrhPressed} placeholder='Введите название задачи' type='text' parentClass='_filter'/>
+      <TaskFilterDropdown parentClass={'_filter'} key={2} monitorableState={isSeacrhPressed} defaultContent='Пользователь' dropdownItems={['Шерлок Хоумс','Шерлок Хоумс','Шерлок Хоумс','Шерлок Хоумс']} purpose={'user'}/>
+      <TaskFilterDropdown parentClass={'_filter'} key={3} monitorableState={isSeacrhPressed} defaultContent='Статус' dropdownItems={['Завершено','Тестирование','В работе','Открыто']} purpose={'status'}/>
+      <TaskFilterDropdown parentClass={'_filter'} key={4} monitorableState={isSeacrhPressed} defaultContent='Приоритет' dropdownItems={['Высокий','Средний','Низкий']} purpose={'priority'}/>
+      <Button callback={buttonClickHanler}color='primary' content='Применить' parentClass='_filter' key={5}/>
     </div>
   )
 }

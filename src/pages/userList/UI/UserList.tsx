@@ -19,7 +19,8 @@ export const UserList = () => {
           showedItemCountEnd='5' 
           showedItemCountTotal='5' 
           parentClass='cardUserListLV'
-          childnodes={<ChangeUserListVeiwButton setView={changeView} userListVeiw={view}/>}
+          setView={changeView}
+          userListVeiw={view}
           />
       </div>
     )

@@ -1,0 +1,25 @@
+@import '_letterals.scss';
+@import '_mixins.scss';
+
+.userPage{
+    &_container{
+        @include somePageContainer();
+    }
+    &_contentWrapper{
+        justify-content: flex-start !important;
+    }
+    &_card{
+        @include somePageCard(row,flex-start,center);
+    }
+
+    &_userInfo{
+        
+    }
+    &_taskList{
+        
+    }
+}
+
+.cardUserPage{
+
+}

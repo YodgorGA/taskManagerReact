@@ -1,5 +1,6 @@
-@import 'mixins';
-@import 'letterals';
+@import '/src/app/styles/mixins.scss';
+@import '/src/app/styles/letterals.scss';
+
 ._paginator{
     height: 24px;
     display: flex;
