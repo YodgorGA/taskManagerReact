@@ -1,6 +1,5 @@
 import React,{FC, useState} from 'react'
 import { Link, useLocation } from 'react-router-dom';
-import { getStatusName } from '../model/helpers';
 import '../styles/taskListItem.scss';
 
 interface TaskListItemProps{

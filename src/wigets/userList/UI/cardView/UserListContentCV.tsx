@@ -1,9 +1,6 @@
 import React,{FC} from 'react'
-import { Button } from '../../../../shared/UI/Button'
-import { ChangeViewButtons } from '../../../../features/paginator/UI/ChangeViewButtons'
-import { Paginator } from '../../../paginator/UI/Paginator'
-import { UserListContentLVItem } from '../../../../entities/user/UI/userList/listView/UserListContentLVItem'
-import { UserListContentCVItem } from '../../../../entities/user/UI/userList/cardView/UserListContentCVItem'
+import { Button } from 'shared'
+import { UserListContentCVItem } from 'entities/user'
 import { Input } from 'shared/UI/Input'
 
 interface UserListContentCVProps{
@@ -19,14 +16,14 @@ export const UserListContentCV:FC<UserListContentCVProps> = ({callback,userListV
           <Button color='primary' content='Поиск' parentClass='userList'/>
         </div>
         <div className="userList_cards cardsUserList">
-            <UserListContentCVItem/>
-            <UserListContentCVItem/>
-            <UserListContentCVItem/>
-            <UserListContentCVItem/>
-            <UserListContentCVItem/>
-            <UserListContentCVItem/>
-            <UserListContentCVItem/>
-            <UserListContentCVItem/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
         </div>
     </div>
   )

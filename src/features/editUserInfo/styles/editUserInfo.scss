@@ -1,0 +1,60 @@
+@import '/src/app/styles/mixins';
+@import '/src/app/styles/letterals';
+
+.editUserInfo{
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &_form{
+        width: 430px;
+        height: 405px;
+        background-color: $white;
+        border-radius: 5px;
+    }
+}
+
+.editUserInfoForm{
+    &_title{
+        width: inherit;
+        height: 63px;
+        border-bottom: 1px solid $disabledElementColor;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @include font('Roboto',20px,400,171%);
+        & p{
+            text-align: center;
+        }
+    }
+    &_formItems{
+        height: 290px;
+        box-sizing: border-box;
+        padding: 20px 30px;
+        border-bottom: 1px solid $disabledElementColor;
+        & input{
+            width: 100%;
+            &:hover{
+                width: 100%;
+            }
+        }
+        & :not(:last-child){
+            margin-bottom: 20px;
+        }
+    }
+    &_buttons{
+        padding: 10px 30px;
+        box-sizing: border-box;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        & :first-child{
+            margin-right: 10px;
+        }
+    }
+
+}

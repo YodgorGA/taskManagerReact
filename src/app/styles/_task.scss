@@ -218,7 +218,10 @@
     width: 100%;
     max-height: 450px;
     overflow: auto;
-    scrollbar-width: none;
+    &::-webkit-scrollbar{
+        width: 0px;
+        height: 0px;
+    }
     &_item{
         min-height: 50px;
         width: 100%;

@@ -9,7 +9,6 @@ export const TaskComments = () => {
         <TaskCommentItem ownerName='Еще не полученный из api пользователь' commentDate={new Date().toDateString()} content={'Еще не полученный из апи контент, желательно очень длиииииииииииииииииииииииииииииииииииииbbbbbbsagsgasgsgasgasgasииииииинный'} key={Math.random()} />
         <TaskCommentItem ownerName='Еще не полученный из api пользователь' commentDate={new Date().toDateString()} content={'Еще не полученный из апи контент, желательно очень длиииииииииииииииииииииииииииииииииииииbbbbbbsagsgasgsgasgasgasииииииинный'} key={Math.random()} />
         <TaskCommentItem ownerName='Еще не полученный из api пользователь' commentDate={new Date().toDateString()} content={'Еще не полученный из апи контент, желательно очень длиииииииииииииииииииииииииииииииииииииbbbbbbsagsgasgsgasgasgasииииииинный'} key={Math.random()} />
-
     </div>
   )
 }

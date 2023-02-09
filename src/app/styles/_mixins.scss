@@ -42,6 +42,11 @@
     box-sizing: border-box;
     padding: 5px 10px;
     @include font('Inter',14px,400,171%);
+    overflow: auto;
+    &::-webkit-scrollbar{
+        width: 0px;
+        height: 0;
+    }
 }
 
 @mixin textareaActive(){
@@ -140,7 +145,6 @@
     width: $w;
     height: $h;
     border-radius: $border-raduis;
-    border: 1px solid $primaryColor;
 }
 
 @mixin dropdownArrow($url){

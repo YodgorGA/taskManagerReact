@@ -5,7 +5,7 @@ import { UserListCardViewWidget } from 'wigets/userList'
 import { UserListListViewWidget } from 'wigets/userList'
 
 export const UserList = () => {
-  const [view,setView] = useState('list');
+  const [view,setView] = useState('cards');
   const changeView = () =>{
     (view === 'list')?setView('cards'):setView('list');
   }

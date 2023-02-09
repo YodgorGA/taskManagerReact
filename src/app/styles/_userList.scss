@@ -122,10 +122,10 @@
         }
     }
     &_avatar{
-        width: 80px;
-        height: 80px;
-        @include userProfilePhoto(80px,80px);
-        border-radius: 40px;
+        
+        & img{
+            @include userProfilePhoto(79px,79px,40px);
+        }
     }
     &_fullname{
         width: 115px;
