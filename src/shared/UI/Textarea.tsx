@@ -4,9 +4,10 @@ import '../styles/textarea.scss'
 interface TextareaProps{
     purpose:string;
     monitorableState:boolean,
+    placeholder:string
 }
 
-export const Textarea:FC<TextareaProps> = ({purpose,monitorableState,...TextareaProps}) => {
+export const Textarea:FC<TextareaProps> = ({placeholder,purpose,monitorableState,...TextareaProps}) => {
     const [commentValue,setCommentValue] = useState<string>('');
     const [module,setModule] = useState<string>('');
     const textareaChangeHandler = (e:React.ChangeEvent<HTMLTextAreaElement>)=>{
@@ -23,7 +24,7 @@ export const Textarea:FC<TextareaProps> = ({purpose,monitorableState,...Textarea
         setModule('');
     },[monitorableState])
     return (
-        <textarea onChange={textareaChangeHandler} value={commentValue} placeholder={'Текст комментария'} className={`_textarea_${purpose} _textarea${module}`}/>
+        <textarea onChange={textareaChangeHandler} value={commentValue} placeholder={placeholder} className={`_textarea_${purpose} _textarea${module}`}/>
     )
 }
 

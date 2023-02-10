@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import '../styles/divider.scss';
 
-export const Divider = () => {
+interface DividerProps{
+  purpose?:string,
+}
+
+export const Divider:FC<DividerProps> = ({purpose,...DividerProps}) => {
   return (
-    <div className="_divider"></div>
+    <div className={`${purpose !== undefined? purpose+'_divider':''} _divider`}></div>
   )
 }
 

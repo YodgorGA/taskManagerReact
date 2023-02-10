@@ -2,7 +2,7 @@ import React,{FC, useEffect, useState} from 'react'
 import '../styles/dropdown.scss';
 
 interface DropdownProps{
-  monitorableState?:boolean[]|boolean;
+  monitorableState:boolean[]|boolean;
   dropdownItems:string[];
   defaultContent:string;
   purpose?:string

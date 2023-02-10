@@ -11,7 +11,7 @@ export const EditTaskDescription:FC<EditTaskDescriptionProps> = ({monitorableSta
             <Label content='Название'/>
             <EditTaskDesctriptionInput placeholder='Введите название задания' type='text' key={0} monitorableState={monitorableState}/>
             <Label content='Описание'/>
-            <EditTaskTextarea purpose='editTaskPageDescription' monitorableState={monitorableState}/>
+            <EditTaskTextarea placeholder='Введите описание задания' purpose='editTaskPageDescription' monitorableState={monitorableState}/>
         </div>
     )
 }

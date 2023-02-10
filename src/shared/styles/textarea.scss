@@ -20,12 +20,19 @@
         width: 100%;
     }
     &_editTaskPageDescription{
-        height: 510px;
+        height: 515px;
         width: 400px;
     }
     &_editUserInfoForm{
-        margin-top: 0px;
         width: 100%;
         height: 76px;
+    }
+    &_addTaskFormFormDescription{
+        width: 100%;
+        height: 100%;
+    }
+    &_addTaskFormFormTaskName{
+        width: 100%;
+        height: 110px;
     }
 }

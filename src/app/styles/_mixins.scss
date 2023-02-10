@@ -34,7 +34,6 @@
 }
 
 @mixin textarea(){
-    margin-top: 5px;
     border-radius: 5px;
     box-shadow: inset 0px 0px 2px 1px $disabledElementColor;
     border: 1px solid $white;

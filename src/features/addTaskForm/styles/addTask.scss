@@ -1,28 +1,48 @@
 @import '/src/app/styles/mixins';
 @import '/src/app/styles/letterals';
 
-.editUserInfo{
-    width: inherit;
-    height: inherit;
+.addTask{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
     padding-top: 100px;
     box-sizing: border-box;
     &_form{
-        width: 430px;
-        height: 405px;
+        width: 730px;
         background-color: $white;
-        border-radius: 5px;
+        min-height: 405px;
     }
 }
 
-.editUserInfoForm{
+.addTaskForm{
+    &_left{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-self: flex-start;
+        height: inherit;
+        padding: 0px 20px 0px 30px;
+        width: 230px;
+    }
+    &_right{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-self: flex-start;
+        width: 400px;
+        height: inherit;
+    }
+    &_content{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        height: 428px;
+    }
     &_title{
         width: inherit;
-        height: 63px;
-        border-bottom: 1px solid $disabledElementColor;
+        height: 50px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -32,18 +52,14 @@
         }
     }
     &_formItems{
-        height: 290px;
+        min-height: 290px;
         box-sizing: border-box;
-        padding: 20px 30px;
-        border-bottom: 1px solid $disabledElementColor;
+        width: 100%;
         & input{
             width: 100%;
             &:hover{
                 width: 100%;
             }
-        }
-        & :not(:last-child){
-            margin-bottom: 20px;
         }
     }
     &_buttons{
@@ -58,5 +74,13 @@
             margin-right: 10px;
         }
     }
+    &_divider{
+        height: inherit;
+    }
+}
 
+.addTaskFormFormItems{
+    &_dropdown{
+        margin-bottom: 20px;
+    }
 }

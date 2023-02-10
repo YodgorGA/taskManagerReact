@@ -1,5 +1,5 @@
-import { EditUserInfoForm } from 'features/editUserInfo'
 import React,{FC, useState} from 'react'
+import { EditUserInfoForm } from 'features/editUserInfo'
 import { Divider as UserPageDivider,Button, CardHeader } from 'shared'
 import { UserInfo as UserPageUserInfo } from 'wigets/userInfo'
 import { UserTaskListWidget } from 'wigets/userTaskList'
@@ -27,7 +27,7 @@ export const UserPage:FC<UserPageProps> = ({...UserPageProps}) => {
                     <UserTaskListWidget/>
                 </div>
             </div>
-            <div className={`${parentClass}_modal__${modalVisibility}`}>
+            <div className={`${parentClass}_modal _modal__${modalVisibility}`}>
                 <EditUserInfoForm closeFormCallback={toggleModalVisibilityButtonClickHandler}/>
             </div>
         </div>

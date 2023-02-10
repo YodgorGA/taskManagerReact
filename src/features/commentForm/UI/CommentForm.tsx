@@ -12,7 +12,7 @@ export const CommentForm:FC = () => {
   }
   return (
     <>  
-        <TaskPageTextarea monitorableState={isCommentSended} purpose='taskPageComment'/>
+        <TaskPageTextarea placeholder='Введите текст комментария' monitorableState={isCommentSended} purpose='taskPageComment'/>
         <Button callback={buttonClickHandler} color='success' content='Добавить комментарий' parentClass='commentsCardTaskPage'/>
     </>
   )

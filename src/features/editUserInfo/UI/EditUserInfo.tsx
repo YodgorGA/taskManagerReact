@@ -8,10 +8,10 @@ interface EditUserInfoProps{
 }
 
 export const EditUserInfo:FC<EditUserInfoProps> = ({closeFormCallback,...EditUserInfoProps}) => {
-    const [isFormItemsClear,setIsFormItemsClear] = useState<boolean>(false);
+    const [isFormItemsClear,setIsFormItemsClear] = useState<boolean>(true);
     const clearForm = ()=>{
-        setIsFormItemsClear(true)
-        setTimeout(()=>{setIsFormItemsClear(false)},0)
+        setIsFormItemsClear(false)
+        setTimeout(()=>{setIsFormItemsClear(true)},0)
     }
     const saveChangesButtonClickHanler = ()=>{
         closeFormCallback()
@@ -31,7 +31,7 @@ export const EditUserInfo:FC<EditUserInfoProps> = ({closeFormCallback,...EditUse
                     <Label content='URL фотографии'/>
                     <Input placeholder='Введите URL изображения' type='text' monitorableState={isFormItemsClear}/>
                     <Label content='О себе'/>
-                    <Textarea purpose='editUserInfoForm' monitorableState={isFormItemsClear}/>
+                    <Textarea placeholder='Введите описание' purpose='editUserInfoForm' monitorableState={isFormItemsClear}/>
                 </div>
                 <div className="editUserInfoForm_buttons">
                     <Button color='primary' content='Сохранить' callback={saveChangesButtonClickHanler} parentClass={'editUserInfoForm'}/>
