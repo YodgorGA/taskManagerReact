@@ -1,5 +1,5 @@
 import { Provider as StoreProvider } from 'react-redux';
-import { store } from 'app/store/store';
+import { store } from 'app/store';
 
 export const withStore = (component:()=> React.ReactNode) => () =>{
     return (

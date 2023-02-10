@@ -16,6 +16,7 @@ export const Routing = () => {
         <PageHeader navBar={<HeaderNavbar/>} userProfile={<HeaderUserProfile userName='Get from API' userProfilePhoto='/img/pageHeader/userImage.png'/>}/>
 
         <Routes>
+            <Route path='/' element={<TaskListPage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
             <Route path='/tasks' element={<TaskListPage/>}/>
             <Route path='/users' element={<UserListPage/>}/>
