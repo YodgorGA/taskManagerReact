@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom'
 import { Button, LinkButton } from 'shared'
 import { CardHeader } from 'shared' 
 import { Divider as TaskPageDivider} from 'shared'
-import { TaskInfoWidget } from 'wigets/taskInfo'
-import { TaskDescription } from 'wigets/taskDescription'
-import { TaskCommentsWidget } from 'wigets/taskComments'
+import { TaskInfoWidget } from 'wigets/task/taskInfo'
+import { TaskDescription } from 'wigets/task/taskDescription'
+import { TaskCommentsWidget } from 'wigets/task/taskComments'
 import { getIdFromLocation } from '../index';
 
 export const TaskPage:FC = ({...TaskPageProps}) => {

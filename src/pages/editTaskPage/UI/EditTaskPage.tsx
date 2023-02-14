@@ -1,8 +1,7 @@
 import React,{FC, useState} from 'react'
-import { useLocation } from 'react-router-dom'
 import { Button, CardHeader, LinkButton, Divider as EditTaskPageDivider } from 'shared'
-import { EditTaskDescriptionWidget } from 'wigets/editTaskDescription';
-import { EditTaskInfoWidget } from 'wigets/editTaskInfo';
+import { EditTaskDescriptionWidget } from 'wigets/editTask/editTaskDescription';
+import { EditTaskInfoWidget } from 'wigets/editTask/editTaskInfo';
 
 export const EditTaskPage = () => {
     const [isChangesSaved,setIsChangesSaved] = useState<boolean>(false);

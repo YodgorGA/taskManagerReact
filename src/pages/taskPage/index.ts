@@ -1,4 +1,4 @@
 import { TaskPage } from "./UI/TaskPage";
-import { getIdFromLocation } from "./model/helpers/helper";
+import { getIdFromLocation } from "./lib/helpers/helper";
 
 export { TaskPage,getIdFromLocation}

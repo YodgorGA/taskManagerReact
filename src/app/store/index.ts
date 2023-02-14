@@ -1,16 +1,16 @@
 import { configureStore, ThunkAction, Action, } from '@reduxjs/toolkit';
-// import userStore from '../../features/userReducer';
-// import { authAPI } from '../../features/api/authAPI';
-import {authSlice} from './slices/authSlice';
+import { authApi } from 'wigets/loginForm/lib/api/authApi';
+import {userSlice} from 'entities/user/model/userSlice';
 export const store = configureStore({
   reducer: {
     //====================================REDUCER INITIALIZING EXAMPLE====================================
       // user: userStore,
-      // [authAPI.reducerPath]:authAPI.reducer
-      auth:authSlice.reducer
+      [authApi.reducerPath]:authApi.reducer,
+      user:userSlice.reducer,
+
     //====================================REDUCER INITIALIZING EXAMPLE====================================
   },
-    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authAPI.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;

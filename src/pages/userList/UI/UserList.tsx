@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { ChangeUserListVeiwButton } from 'features/paginator'
 import { Paginator } from 'wigets/paginator'
-import { UserListCardViewWidget } from 'wigets/userList'
-import { UserListListViewWidget } from 'wigets/userList'
+import { UserListCardViewWidget } from 'wigets/user/userList'
+import { UserListListViewWidget } from 'wigets/user/userList'
 
 export const UserList = () => {
   const [view,setView] = useState('cards');

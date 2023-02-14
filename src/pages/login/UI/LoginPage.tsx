@@ -1,5 +1,6 @@
 import React,{FC}from 'react'
 import { LoginFormWidget } from 'wigets/loginForm'
+import '../styles/loginPage.scss'
 
 
 export const LoginPage:FC = () => {

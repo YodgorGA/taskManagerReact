@@ -51,7 +51,7 @@
     &_lookProfile{
         width: 136px;
         height: 18px;
-        transition: 0.5s;
+        transition: 0.3s;
         &:hover{
             color:$primaryColor;
         }
@@ -61,5 +61,9 @@
         height: 18px;
         color:$errorColor;
         margin-top: 3px;
+        transition: 0.3s;
+        &:hover{
+            color:$dangerStatusbarTextBorderColor;
+        }
     }
 }

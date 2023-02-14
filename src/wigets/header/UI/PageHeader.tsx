@@ -1,9 +1,10 @@
 import React,{FC} from 'react'
+import { useLocation } from 'react-router-dom'
 import '../styles/header.scss'
 
 interface PageHeaderProps{
-  navBar: React.ReactNode
-  userProfile: React.ReactNode
+  navBar?: React.ReactNode
+  userProfile?: React.ReactNode
 }
 
 export const PageHeader:FC<PageHeaderProps> = ({navBar,userProfile,...PageHeaderProps}) => {

@@ -1,9 +1,9 @@
 import React,{FC, useState} from 'react'
 import { Button } from 'shared'
 import { CardHeader } from 'shared'
-import { TaskFilter } from 'wigets/taskFilter'
+import { TaskFilter } from 'wigets/task/taskFilter'
 import { Paginator } from 'wigets/paginator'
-import { TaskListWidget } from 'wigets/taskList'
+import { TaskListWidget } from 'wigets/task/taskList'
 import { AddTaskForm } from 'features/addTaskForm'
 
 export const TaskList:FC = () => {

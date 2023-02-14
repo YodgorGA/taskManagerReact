@@ -1,8 +1,8 @@
 import React,{FC, useState} from 'react'
 import { EditUserInfoForm } from 'features/editUserInfo'
 import { Divider as UserPageDivider,Button, CardHeader } from 'shared'
-import { UserInfo as UserPageUserInfo } from 'wigets/userInfo'
-import { UserTaskListWidget } from 'wigets/userTaskList'
+import { UserInfo as UserPageUserInfo } from 'wigets/user/userInfo'
+import { UserTaskListWidget } from 'wigets/user/userTaskList'
 
 interface UserPageProps{
     

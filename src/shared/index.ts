@@ -6,5 +6,6 @@ import { Dropdown } from './UI/Dropdown';
 import { LinkButton } from "./UI/LinkButton";
 import { Label } from "./UI/Label";
 import { Textarea } from "./UI/Textarea";
+import { resetInput } from "./lib/helpers/inputHelper";
 
-export {Button,CardHeader,Input,Divider,Dropdown,LinkButton,Label,Textarea}
+export {Button,CardHeader,Input,Divider,Dropdown,LinkButton,Label,Textarea,resetInput}

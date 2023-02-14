@@ -1,5 +1,5 @@
 import React,{FC, useState} from 'react'
-import { UserListContentLVItem } from '../../../../entities/user/UI/userList/listView/UserListContentLVItem'
+import { UserListContentLVItem } from 'entities/user/UI/userList/listView/UserListContentLVItem'
 
 
 interface UserListContentLVProps{

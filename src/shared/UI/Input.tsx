@@ -6,20 +6,18 @@ interface InputProps{
     placeholder:string,
     monitorableState?:boolean[]|boolean,
     parentClass?:string;
-    returnValueCallback?:(value:string)=>string
+    returnValueCallback?:(value:string)=>void
+    purpose?:string
 }
 
-export const Input:FC<InputProps> = ({returnValueCallback,parentClass,monitorableState,type,placeholder,...InputProps}) => {
+export const Input:FC<InputProps> = ({purpose,returnValueCallback,parentClass,monitorableState,type,placeholder,...InputProps}) => {
     const [module,setModule] = useState<string>('');
     const [value,setValue] = useState<string>('');
+    
     const getInputState = (e:React.ChangeEvent<HTMLInputElement>)=>{
-        if(e.currentTarget.value.length <1){
-            setModule('')
-        }
-        else{
-            setModule('__active');
-        }
+        (e.currentTarget.value.length<1)?setModule(''):setModule('__active');
         setValue(e.currentTarget.value);
+        returnValueCallback && returnValueCallback(e.currentTarget.value);
     }
     useEffect(()=>{
         setValue('');
