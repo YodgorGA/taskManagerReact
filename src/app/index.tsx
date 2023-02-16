@@ -5,9 +5,9 @@ import './index.scss';
 
 const App = () => {
   return (
-    <div className='page_wrapper'>
-      <Routing/>
-    </div>
+      <div className='page_wrapper'>
+        <Routing/>
+      </div>
   );
 }
 

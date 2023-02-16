@@ -1,16 +1,18 @@
+import { taskApi } from 'entities/task/model/taskAPI';
 import { configureStore, ThunkAction, Action, } from '@reduxjs/toolkit';
-import { authApi } from 'wigets/loginForm/lib/api/authApi';
-import {userSlice} from 'entities/user/model/userSlice';
+import { authApi } from 'entities/user';
+import { userSlice } from 'entities/user';
 export const store = configureStore({
   reducer: {
     //====================================REDUCER INITIALIZING EXAMPLE====================================
       // user: userStore,
       [authApi.reducerPath]:authApi.reducer,
+      [taskApi.reducerPath]:taskApi.reducer,
       user:userSlice.reducer,
 
     //====================================REDUCER INITIALIZING EXAMPLE====================================
   },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(taskApi.middleware,authApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;

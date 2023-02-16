@@ -1,20 +1,17 @@
 import React,{FC, useState} from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Input, Label,Button,resetInput, locationState } from 'shared'
 import { useAppDispatch} from 'app/store/hooks'
-import { Input, Label,Button } from 'shared'
-import { resetInput } from 'shared'
-import { useGetUserAuthDataMutation } from '../lib/api/authApi' 
-import {setUser} from 'entities/user/model/userSlice'
-import { useNavigate } from 'react-router-dom'
-// import {authInfo} from 'app/types/index'
+import { useGetUserAuthDataMutation,setUser } from 'entities/user' 
 import '../styles/loginForm.scss'
-// import { UserSet } from 'entities/user/model/selectors'
 
-export const LoginForm:FC = () => {
+export const LoginForm = () => {
   const navigate = useNavigate()
+  const locationState:locationState = useLocation().state;
   const dispatch = useAppDispatch();
 
-  const [login,setLogin] = useState<string | null>();  
-  const [password,setPassword] = useState<string | null>();
+  const [login,setLogin] = useState<string|null>(null);
+  const [password,setPassword] = useState<string|null>(null);
   const [isDataSended,setIsDataSended] = useState<boolean>(false);
 
   const [getUserInfo,{isSuccess}] = useGetUserAuthDataMutation();
@@ -29,13 +26,15 @@ export const LoginForm:FC = () => {
     await getUserInfo({login,password}).unwrap().then((resp) =>{
       const {about,id,photoUrl,username} = resp
       dispatch(setUser({about,id,photoUrl,username}));
-      navigate('/')
+      if(locationState.from === '/login'){return navigate('/')}
+      navigate(''+locationState.from)
     });
     resetInput(setIsDataSended)
-    
   }
-
-
+  if(locationState !== null){
+    console.log(locationState);
+  }
+  
   return (
     <div className="loginPage_form formLoginPage">
           <div className="formLoginPage_title">Авторизация</div>

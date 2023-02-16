@@ -1,7 +1,7 @@
 import React,{FC, useState} from 'react'
 import { Dropdown as UnitDropdown} from 'shared';
 import { Input } from 'shared';
-import { ApplyEditing, DenyEditing } from 'entities/taskPage';
+import { ApplyEditing, DenyEditing } from 'entities/task';
 
 
 export const AddWorkTime:FC = () => {

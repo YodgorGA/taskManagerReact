@@ -6,9 +6,9 @@ export interface UserInfo{
 
 }
 
-export interface authInfo{
-    login:string,
-    password:string
+export interface AuthInfo{
+    login:string | null,
+    password:string | null
 }
 
 export {}

@@ -1,5 +1,5 @@
 import React,{FC} from 'react'
-import 'entities/taskList//styles/taskListItem.scss';
+import 'entities/task/taskList/styles/taskListItem.scss';
 
 interface UserPageTaskItemProps{
     type:string,

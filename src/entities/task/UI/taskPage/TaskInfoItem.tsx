@@ -1,6 +1,6 @@
 import React,{FC} from 'react'
-import {getPriorityName} from 'entities/taskPage'
-import { getStatusName } from 'entities/taskList/'
+import { getPriorityName } from '../../lib/helpers/helpers'
+import { getStatusName } from '../../lib/helpers/helpers'
 
 interface TaskInfoItemProps{
 label:string,

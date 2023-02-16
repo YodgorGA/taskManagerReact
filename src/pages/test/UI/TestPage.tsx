@@ -9,7 +9,7 @@ export const TestPage = () => {
     <>
         <Button color='primary' content='Test button' parentClass='testPage'/>
         <CardHeader parentClass='testPage' title='Test Card Header Title'/>
-        <UserProfile userName='Получу из апишки' userProfilePhoto='/img/pageHeader/userImage.png'/>
+        <UserProfile userProfilePhoto='/img/pageHeader/userImage.png'/>
         <Input placeholder='Введите что-нибудь' type='text'/>
     </>
   )

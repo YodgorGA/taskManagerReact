@@ -2,6 +2,7 @@ import React,{FC, useState} from 'react'
 import { Button } from 'shared'
 import { Dropdown as TaskFilterDropdown} from 'shared'
 import { Input as TaskFilterInput } from 'shared'
+import '../styles/filter.scss'
 
 interface FilterProps{
 }

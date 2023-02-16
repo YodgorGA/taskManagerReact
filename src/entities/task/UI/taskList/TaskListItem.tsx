@@ -1,6 +1,6 @@
 import React,{FC, useState} from 'react'
 import { Link, useLocation } from 'react-router-dom';
-import '../styles/taskListItem.scss';
+import '../../styles/taskListItem.scss';
 
 interface TaskListItemProps{
   type:string,

@@ -41,7 +41,7 @@ const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, Mouse
     (defaultContent && setContent(defaultContent));
   },[monitorableState])
   return (
-    <div className={`${parentClass !== undefined?parentClass+'_dropdown':''} ${purpose !== undefined?'_dropdown_'+purpose:''} _dropdown__${active}`}>
+    <div className={`${parentClass !== undefined?'_dropdown_'+parentClass:''} ${purpose !== undefined?'_dropdown_'+purpose:''} _dropdown__${active}`}>
           <div className="_dropdown_form" onMouseDown={dropdownClickHandler}>
                 <div className={`_dropdown_text__${active}`}>{content}</div>
                 <div className={`_dropdown_arrow__${arrow}`}></div>

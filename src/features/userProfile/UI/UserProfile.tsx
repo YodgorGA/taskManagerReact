@@ -1,21 +1,22 @@
-import { useAppDispatch, useAppSelector } from 'app/store/hooks';
-import { removeLoggedUser, selectuserInfo } from 'entities/user/model/userSlice';
-import React,{FC, useState} from 'react'
+import React,{FC, useEffect, useState} from 'react'
+import { useAppDispatch} from 'app/store/hooks';
+import { removeLoggedUser,useUser, useUserIsAuth } from 'entities/user';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/userProfile.scss'
+import { locationState } from 'shared';
 
 interface UserProfileProps{
-    userName:string,
     userProfilePhoto:string,
 }
 
-export const UserProfile:FC<UserProfileProps> = ({userName,userProfilePhoto,...UserProfileProps}) => {
+export const UserProfile:FC<UserProfileProps> = ({userProfilePhoto,...UserProfileProps}) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const userSelector = useAppSelector(selectuserInfo);
     const dispatch = useAppDispatch();
+    const user = useUser();
 
     const [dropdownState, setDropdownState] = useState<string>('closed');
+
     const profileclickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if(e.currentTarget.childNodes.length > 2){
             dropdownState === 'closed' ? setDropdownState('open') : setDropdownState('closed');
@@ -27,12 +28,13 @@ export const UserProfile:FC<UserProfileProps> = ({userName,userProfilePhoto,...U
         (location.pathname.includes('/users/'))? setDropdownState('closed') : setDropdownState('open');  
     }
     const logOutButtonClickHandler = () =>{
+        console.log(user);
         dispatch(removeLoggedUser());
-        console.log(userSelector);
+        navigate('/login',{state:{from:location.pathname} as locationState});
     }
     return (
         <div className="headerPage_userProfile headerUserProfile" onMouseDown={profileclickHandler}>
-            <div className="headerUserProfile_name">{userName}</div>
+            <div className="headerUserProfile_name">{user.username}</div>
             <div className="headerUserProfile_img"><img alt='Фото профиля' src={userProfilePhoto}></img></div>
             {
                 (dropdownState === "closed")? <div></div> 

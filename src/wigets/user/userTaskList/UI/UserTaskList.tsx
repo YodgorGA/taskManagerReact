@@ -1,6 +1,5 @@
-import { TaskListItem } from 'entities/taskList';
-import { UserPageTaskListItem } from 'entities/userPage';
 import React,{FC} from 'react'
+import { UserPageTaskListItem } from 'entities/user';
 import { Label } from 'shared';
 import { Paginator } from 'wigets/paginator'
 import '../styles/userTaskList.scss';

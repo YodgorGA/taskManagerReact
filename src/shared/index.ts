@@ -7,5 +7,17 @@ import { LinkButton } from "./UI/LinkButton";
 import { Label } from "./UI/Label";
 import { Textarea } from "./UI/Textarea";
 import { resetInput } from "./lib/helpers/inputHelper";
+import type { locationState } from "./lib/types/types";
 
-export {Button,CardHeader,Input,Divider,Dropdown,LinkButton,Label,Textarea,resetInput}
+export {
+    Button,
+    CardHeader,
+    Input,
+    Divider,
+    Dropdown,
+    LinkButton,
+    Label,
+    Textarea,
+    resetInput,
+    locationState,
+}

@@ -9,11 +9,9 @@ import { TestPage } from 'pages/test';
 import { UserListPage } from 'pages/userList';
 import { EditTaskPage } from 'pages/editTaskPage';
 import { UserPage } from 'pages/userPage';
-import { useUser } from 'entities/user/model/selectors';
 
 export const Routing = () => {
     const location = useLocation();
-    const {id} = useUser();
     return (
         <>
         
@@ -22,7 +20,6 @@ export const Routing = () => {
             <PageHeader 
                 navBar={<HeaderNavbar/>} 
                 userProfile={<HeaderUserProfile 
-                userName='Get from API' 
                 userProfilePhoto='/img/pageHeader/userImage.png'/>}
             />
             :<PageHeader/>
@@ -43,3 +40,4 @@ export const Routing = () => {
 
     )
 }
+

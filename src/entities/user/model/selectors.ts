@@ -1,22 +1,11 @@
-import { UserInfo } from './../lib/types';
-import { useAppSelector, useAppDispatch } from 'app/store/hooks';
-import { removeLoggedUser, selectuserInfo,setUser } from './userSlice';
+import { useAppSelector} from 'app/store/hooks';
+import { selectUserInfo } from './userSlice';
 
-export const useUser = () => useAppSelector(selectuserInfo);
+export const useUser = () => useAppSelector(selectUserInfo);
 
 export const useUserIsAuth = () => {
-    const isAuth = useUser();
-    return !!isAuth
+    const isAuth = useUser().id;
+    return !isAuth === null
 }
-
-// export const UserSet = (data:UserInfo) => {
-//     const dispatch = useAppDispatch();
-//     dispatch(setUser(data));
-// }
-
-// export const UserRemove = () =>{
-//     const dispatch = useAppDispatch();
-//     dispatch(removeLoggedUser());
-// }
 
 export {}

@@ -1,5 +1,5 @@
 import React,{FC} from 'react'
-import { TaskInfoItem } from 'entities/taskPage'
+import { TaskInfoItem } from 'entities/task'
 import { TaskInfoAddWorkTime } from 'features/addWorkTime'
 
 interface TaskInfoProps{
