@@ -1,9 +1,21 @@
 import { TaskInfoItem } from './UI/taskPage/TaskInfoItem' 
 import { ApplyEditing } from "./UI/taskPage/ApplyEditing";
 import { DenyEditing } from "./UI/taskPage/DenyEditing";
+
 import { TaskListItem } from './UI/taskList/TaskListItem';
 
+import { taskSlice } from './model/taskSlice';
+import { taskApi } from './model/taskAPI';
 
-export { TaskInfoItem,ApplyEditing,DenyEditing,TaskListItem }
+import { useTasks } from './model/selectors';
 
-export {}
+
+export { 
+    TaskInfoItem,
+    ApplyEditing,
+    DenyEditing,
+    TaskListItem,
+    taskApi,
+    taskSlice,
+    useTasks,
+}

@@ -3,12 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import '../../styles/taskListItem.scss';
 
 interface TaskListItemProps{
-  type:string,
-  taskName:string,
-  assignedUser:string,
-  status:string,
-  priority:string,
-  id:number
+  type?:string,
+  taskName?:string,
+  assignedUser?:string,
+  status?:string,
+  priority?:string,
+  id?:string
 }
 
 export const TaskListItem:FC<TaskListItemProps> = ({id,assignedUser,priority,status,type,taskName,...TaskListItemProps}) => {

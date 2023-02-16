@@ -1,7 +1,9 @@
-import { taskApi } from 'entities/task/model/taskAPI';
 import { configureStore, ThunkAction, Action, } from '@reduxjs/toolkit';
 import { authApi } from 'entities/user';
 import { userSlice } from 'entities/user';
+import { taskSlice } from 'entities/task';
+import { taskApi } from 'entities/task';
+
 export const store = configureStore({
   reducer: {
     //====================================REDUCER INITIALIZING EXAMPLE====================================
@@ -9,6 +11,7 @@ export const store = configureStore({
       [authApi.reducerPath]:authApi.reducer,
       [taskApi.reducerPath]:taskApi.reducer,
       user:userSlice.reducer,
+      task:taskSlice.reducer,
 
     //====================================REDUCER INITIALIZING EXAMPLE====================================
   },

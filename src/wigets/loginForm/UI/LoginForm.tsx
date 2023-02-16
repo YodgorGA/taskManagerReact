@@ -1,6 +1,6 @@
 import React,{FC, useState} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Input, Label,Button,resetInput, locationState } from 'shared'
+import { Input, Label,Button,locationState } from 'shared'
 import { useAppDispatch} from 'app/store/hooks'
 import { useGetUserAuthDataMutation,setUser } from 'entities/user' 
 import '../styles/loginForm.scss'
@@ -12,7 +12,6 @@ export const LoginForm = () => {
 
   const [login,setLogin] = useState<string|null>(null);
   const [password,setPassword] = useState<string|null>(null);
-  const [isDataSended,setIsDataSended] = useState<boolean>(false);
 
   const [getUserInfo,{isSuccess}] = useGetUserAuthDataMutation();
   
@@ -29,10 +28,6 @@ export const LoginForm = () => {
       if(locationState.from === '/login'){return navigate('/')}
       navigate(''+locationState.from)
     });
-    resetInput(setIsDataSended)
-  }
-  if(locationState !== null){
-    console.log(locationState);
   }
   
   return (
@@ -40,9 +35,9 @@ export const LoginForm = () => {
           <div className="formLoginPage_title">Авторизация</div>
           <div className="formLoginPage_items">
               <Label content='Логин'/>
-              <Input monitorableState={isDataSended} returnValueCallback={loginInputChangeHanler} type='text' placeholder='Введите логин'/>
+              <Input returnValueCallback={loginInputChangeHanler} type='text' placeholder='Введите логин'/>
               <Label content='Пароль'/>
-              <Input monitorableState={isDataSended} returnValueCallback={passwordInputChangeHandler} type='password' placeholder='Введите пароль'/>
+              <Input returnValueCallback={passwordInputChangeHandler} type='password' placeholder='Введите пароль'/>
           </div>
           <Button callback={buttonClickHandler} parentClass='formLoginPage' color='success' content='Вход' />
       </div>
