@@ -61,16 +61,16 @@
         margin-left: 13px;
         height: 40px;
         .taskStatus{
-            &__open{
+            &__opened{
                 @include taskItemStatus('../.././../public/img/taskList/taskOpen.svg')
             }
-            &__process{
+            &__inWork{
                 @include taskItemStatus('../.././../public/img/taskList/taskProcess.svg')
             }
-            &__test{
+            &__testing{
                 @include taskItemStatus('../.././../public/img/taskList/taskTest.svg')
             }
-            &__done{
+            &__complete{
                 @include taskItemStatus('../.././../public/img/taskList/taskDone.svg')
             }
         }

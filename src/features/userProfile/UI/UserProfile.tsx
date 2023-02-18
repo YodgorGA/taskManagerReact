@@ -1,19 +1,21 @@
 import React,{FC, useEffect, useState} from 'react'
 import { useAppDispatch} from 'app/store/hooks';
-import { removeLoggedUser,useUser, useUserIsAuth } from 'entities/user';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/userProfile.scss'
 import { locationState } from 'shared';
-
+import { useUserIsAuth, useUserState } from 'entities/user';
+import { removeCurrentUser } from 'entities/user';
 interface UserProfileProps{
     userProfilePhoto:string,
 }
 
-export const UserProfile:FC<UserProfileProps> = ({userProfilePhoto,...UserProfileProps}) => {
+export const UserProfile:FC<UserProfileProps> = ({...UserProfileProps}) => {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const user = useUser();
+    const isAuth = useUserIsAuth();
+    const currentUser = useUserState().currentUser;
+    const userProfilePhoto = (currentUser?.photoUrl)? currentUser.photoUrl : 'img/pageHeader/userProfile.png';
 
     const [dropdownState, setDropdownState] = useState<string>('closed');
 
@@ -28,13 +30,14 @@ export const UserProfile:FC<UserProfileProps> = ({userProfilePhoto,...UserProfil
         (location.pathname.includes('/users/'))? setDropdownState('closed') : setDropdownState('open');  
     }
     const logOutButtonClickHandler = () =>{
-        console.log(user);
-        dispatch(removeLoggedUser());
-        navigate('/login',{state:{from:location.pathname} as locationState});
+        dispatch(removeCurrentUser());
+        if(isAuth === false){
+            navigate('/login',{state:{from:location.pathname} as locationState});
+        }
     }
     return (
         <div className="headerPage_userProfile headerUserProfile" onMouseDown={profileclickHandler}>
-            <div className="headerUserProfile_name">{user.username}</div>
+            <div className="headerUserProfile_name">{currentUser?.username}</div>
             <div className="headerUserProfile_img"><img alt='Фото профиля' src={userProfilePhoto}></img></div>
             {
                 (dropdownState === "closed")? <div></div> 

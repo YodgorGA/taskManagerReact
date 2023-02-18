@@ -1,41 +1,32 @@
-import { createSlice,PayloadAction} from "@reduxjs/toolkit";
-import type {RootState} from 'app/store';
+import { RootState } from './../../../app/store/index';
+import { createSlice,PayloadAction } from "@reduxjs/toolkit";
+import { UserInfo } from "../lib/types";
 
-interface userSliceProps{
-    username:string | null,
-    about:string | null,
-    id:string | null,
-    photoUrl:string | null
+export interface userSliceProps{
+    currentUser: UserInfo | null,
+    allUsers: [
+        UserInfo
+    ] | null
 }
 
 const initialState:userSliceProps = {
-    username:null,
-    about:null,
-    id:null,
-    photoUrl:null
+    currentUser:null,
+    allUsers: null
 }
-
 
 export const userSlice = createSlice({
     name:'user',
     initialState,
     reducers:{
-        setUser: (state,action:PayloadAction<userSliceProps>)=>{
-            state.username = action.payload.username
-            state.about = action.payload.about
-            state.photoUrl = action.payload.photoUrl
-            state.id = action.payload.id
+        setCurrentUser:(state,action:PayloadAction<UserInfo>)=>{
+            state.currentUser = action.payload
         },
-        removeLoggedUser: (state)=>{
-            state.username = null
-            state.about = null
-            state.photoUrl = null
-            state.id = null
+        removeCurrentUser:(state)=>{
+            state.currentUser = null
         }
-        
     }
 })
 
-export const {setUser,removeLoggedUser} = userSlice.actions
+export const {removeCurrentUser,setCurrentUser,} = userSlice.actions
 
-export const selectUserInfo = (state:RootState) => state.user
+export const selectUser = (state:RootState) =>state.user

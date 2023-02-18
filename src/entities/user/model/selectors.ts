@@ -1,11 +1,10 @@
 import { useAppSelector} from 'app/store/hooks';
-import { selectUserInfo } from './userSlice';
+import { selectUser, userSliceProps } from './userSlice';
 
-export const useUser = () => useAppSelector(selectUserInfo);
-
-export const useUserIsAuth = () => {
-    const isAuth = useUser().id;
-    return !isAuth === null
+export const useUserState = () => useAppSelector<userSliceProps>(selectUser)
+export const useUserIsAuth = () =>{
+    const isAuth = useUserState().currentUser?.id !== null
+    return !isAuth
 }
 
 export {}

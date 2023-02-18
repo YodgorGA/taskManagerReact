@@ -10,12 +10,17 @@ import { taskApi } from './model/taskAPI';
 import { useTasks } from './model/selectors';
 
 
-export { 
+export {
+    //UI
     TaskInfoItem,
     ApplyEditing,
     DenyEditing,
     TaskListItem,
-    taskApi,
-    taskSlice,
-    useTasks,
+    //model
+        //api
+        taskApi,
+        //slices
+        taskSlice,
+        //selector
+        useTasks,
 }

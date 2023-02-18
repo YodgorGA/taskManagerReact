@@ -21,14 +21,14 @@ export const UserListContentCV:FC<UserListContentCVProps> = ({callback,userListV
           <Button callback={findUserButtonClickHandler} color='primary' content='Поиск' parentClass='userList'/>
         </div>
         <div className="userList_cards cardsUserList">
-            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
-            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
-            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
-            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
-            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
-            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
-            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
-            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userImage.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>
+            <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>
         </div>
     </div>
   )

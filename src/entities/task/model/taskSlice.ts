@@ -4,14 +4,12 @@ import { ITask } from "../lib/types/types"
 
 interface taskSliceProps{
     tasks:[
-        ITask | null
-    ]
+        ITask
+    ] | null
 }
 
 const initialState:taskSliceProps = {
-    tasks:[
-        null
-    ]
+    tasks:null
 }
 
 export const taskSlice = createSlice({

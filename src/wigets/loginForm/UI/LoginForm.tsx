@@ -1,8 +1,9 @@
 import React,{FC, useState} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Input, Label,Button,locationState } from 'shared'
-import { useAppDispatch} from 'app/store/hooks'
-import { useGetUserAuthDataMutation,setUser } from 'entities/user' 
+import { useGetUserAuthDataMutation } from 'entities/user' 
+import { useAppDispatch } from 'app/store/hooks'
+import { setCurrentUser } from 'entities/user'
 import '../styles/loginForm.scss'
 
 export const LoginForm = () => {
@@ -24,7 +25,7 @@ export const LoginForm = () => {
   const buttonClickHandler = async ()=>{
     await getUserInfo({login,password}).unwrap().then((resp) =>{
       const {about,id,photoUrl,username} = resp
-      dispatch(setUser({about,id,photoUrl,username}));
+      dispatch(setCurrentUser({about,id,photoUrl,username}));
       if(locationState.from === '/login'){return navigate('/')}
       navigate(''+locationState.from)
     });

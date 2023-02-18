@@ -2,20 +2,32 @@ import {UserListContentLVItem} from './UI/userList/listView/UserListContentLVIte
 import {UserListContentCVItem} from './UI/userList/cardView/UserListContentCVItem';
 import { UserPageTaskItem as UserPageTaskListItem } from './UI/userPage/UserPageTaskItem';
 
-import {useUser,useUserIsAuth} from './model/selectors';
-import { useGetUserAuthDataMutation,authApi } from './model/authAPI';
-import {setUser,removeLoggedUser,userSlice} from './model/userSlice';
+import {useGetUserAuthDataMutation,useGetUserByIdQuery,useGetUsersAllQuery,userApi} from './model/userApi';
+
+import { userSlice,setCurrentUser,removeCurrentUser} from './model/userSlice';
+
+import { useUserIsAuth,useUserState } from './model/selectors';
 
 import type {UserInfo,AuthInfo} from './lib/types'
 
 export {
+    //UI
     UserListContentCVItem,
     UserListContentLVItem,
     UserPageTaskListItem,
-    removeLoggedUser,
-    setUser,
-    authApi,
-    userSlice,
-    useGetUserAuthDataMutation,useUser,useUserIsAuth,
-    UserInfo,AuthInfo,
+    //model
+        //userApi
+        useGetUserAuthDataMutation,useGetUserByIdQuery,useGetUsersAllQuery,
+        //types
+        UserInfo,AuthInfo,
+        //api
+        userApi,
+        //slice
+        userSlice,
+        //slice actions,
+        removeCurrentUser,setCurrentUser,
+        //selectors
+        useUserIsAuth,useUserState,
+
+
 } 

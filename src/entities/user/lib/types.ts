@@ -1,9 +1,8 @@
 export interface UserInfo{
-    username:string | null
-    about:string | null,
-    id:string | null,
-    photoUrl:string | null
-
+    username:string | undefined
+    about:string |  undefined,
+    id:string | undefined,
+    photoUrl:string | undefined
 }
 
 export interface AuthInfo{

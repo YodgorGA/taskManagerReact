@@ -1,20 +1,22 @@
-import React,{FC, useState} from 'react'
+import React,{FC, useEffect, useState} from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/taskListItem.scss';
 
 interface TaskListItemProps{
-  type?:string,
-  taskName?:string,
-  assignedUser?:string,
-  status?:string,
-  priority?:string,
-  id?:string
+  type:string,
+  taskName:string,
+  assignedUser:string,
+  status:string,
+  priority:string,
+  id:string
 }
 
 export const TaskListItem:FC<TaskListItemProps> = ({id,assignedUser,priority,status,type,taskName,...TaskListItemProps}) => {
   const location = useLocation();
   const [dropdownState,setDropdownState] = useState('closed');
   const [dropdownButtonState,setDropdownButtonState] = useState('stayed');
+  
+
   const handleDropdownState = () =>{
     if (dropdownButtonState === 'stayed'){
       setDropdownButtonState('active');
@@ -25,6 +27,7 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedUser,priority,sta
       setDropdownState('closed'); 
     }
   }
+
   return (
     <div className="tasksCardTaskList_item taskListItem">
       <div className={`taskListItem_type__${type}`}></div>
