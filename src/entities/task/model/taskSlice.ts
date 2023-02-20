@@ -1,14 +1,14 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit"
 import type { RootState } from "app/store"
-import { ITask } from "../lib/types/types"
+import { Task } from "../lib/types"
 
-interface taskSliceProps{
+interface taskSliceState{
     tasks:[
-        ITask
+        Task
     ] | null
 }
 
-const initialState:taskSliceProps = {
+const initialState:taskSliceState = {
     tasks:null
 }
 
@@ -16,7 +16,7 @@ export const taskSlice = createSlice({
     name:'task',
     initialState,
     reducers:{
-        setAllTasks: (state,action:PayloadAction<[ITask]>) =>{
+        setAllTasks: (state,action:PayloadAction<[Task]>) =>{
             state.tasks = action.payload
         },
     }

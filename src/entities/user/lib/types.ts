@@ -1,13 +1,13 @@
-export interface UserInfo{
-    username:string | undefined
-    about:string |  undefined,
-    id:string | undefined,
-    photoUrl:string | undefined
+export type UserInfo = {
+    username:string
+    about:string,
+    id:string,
+    photoUrl:string
 }
 
-export interface AuthInfo{
-    login:string | null,
-    password:string | null
+export type AuthInfo = {
+    login:string,
+    password:string
 }
 
 export {}

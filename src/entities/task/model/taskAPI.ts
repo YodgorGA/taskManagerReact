@@ -1,10 +1,8 @@
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { ITask } from "../lib/types/types";
+import { Task } from "../lib/types";
 
-interface Tasks{
-    data: [
-        ITask
-    ]
+type Tasks = {
+    data: [Task]
 }
 
 export const taskApi = createApi({

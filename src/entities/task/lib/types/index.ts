@@ -1,4 +1,4 @@
-export interface ITask{
+export type Task = {
     id: string
     userId: string,
     assignedId: string,
