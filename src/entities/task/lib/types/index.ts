@@ -11,3 +11,18 @@ export type Task = {
     status: string,
     rank: string
 }
+
+export type changeTaskStatusQuery = {
+    id:string,
+    status:string
+}
+
+export type taskFilterParams = {
+        type?:string,
+        title?:string,
+        assignedId?:string,
+        status?:string,
+        rank?:string
+}
+
+

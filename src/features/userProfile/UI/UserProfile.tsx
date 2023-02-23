@@ -19,7 +19,7 @@ export const UserProfile:FC<UserProfileProps> = ({...UserProfileProps}) => {
 
     const [dropdownState, setDropdownState] = useState<string>('closed');
 
-    const profileclickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const profileClickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if(e.currentTarget.childNodes.length > 2){
             dropdownState === 'closed' ? setDropdownState('open') : setDropdownState('closed');
         }
@@ -36,7 +36,7 @@ export const UserProfile:FC<UserProfileProps> = ({...UserProfileProps}) => {
         }
     }
     return (
-        <div className="headerPage_userProfile headerUserProfile" onMouseDown={profileclickHandler}>
+        <div className="headerPage_userProfile headerUserProfile" onMouseDown={profileClickHandler}>
             <div className="headerUserProfile_name">{currentUser?.username}</div>
             <div className="headerUserProfile_img"><img alt='Фото профиля' src={userProfilePhoto}></img></div>
             {

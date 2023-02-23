@@ -1,26 +1,33 @@
-import React,{FC, useEffect} from 'react'
-import { TaskListItem, useTasks } from 'entities/task'
-import { useGetTasksAllMutation } from 'entities/task/model/taskAPI'
+import React,{FC, useEffect, useState} from 'react'
+import { Task, TaskListItem, useTasks } from 'entities/task'
+import { Tasks, useGetTasksAllMutation } from 'entities/task'
 import { useAppDispatch } from 'app/store/hooks'
-import { setAllTasks } from 'entities/task/model/taskSlice'
 
-export const TaskList:FC = () => {
+interface TaskListWidgetProps{
+  filteredData?:Tasks,
+}
+
+export const TaskList:FC<TaskListWidgetProps> = ({filteredData,...TaskListWidgetProps}) => {
   const dispatch = useAppDispatch();
-  const getTasks = useTasks();
-
+  const [taskList,setTaskList] = useState<Tasks>();
   const [getAllTasks,isSuccess] = useGetTasksAllMutation();
-
+  
   useEffect(()=>{
-    getAllTasks({page:0}).unwrap().then((resp)=>{
-      dispatch(setAllTasks(resp.data))
-    })
-  },[])
-  if(getTasks.tasks !== null){
+    if(filteredData !== undefined && filteredData.data.length >0){
+      setTaskList(filteredData)
+    }
+    else{
+      getAllTasks({page:0}).unwrap().then((resp)=>{
+        setTaskList(resp)
+      })
+    }
+  },[filteredData])
+  if(taskList?.data !== null){
     return (
       <div className="cardTaskList_tasks tasksCardTaskList">
         {
-          getTasks.tasks.map((task)=>{
-            return <TaskListItem id={task.id} type={task.type} key={task.id} assignedUser={task.assignedId} priority={task.rank} status={task.status} taskName={task.title}/>
+          taskList?.data.map((task:Task)=>{
+            return <TaskListItem assignedId={task.assignedId} id={task.id} key={task.id}/>
           })
         }
       </div>

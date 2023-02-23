@@ -1,6 +1,6 @@
 import { useAppSelector } from "app/store/hooks";
-import { selectTaskInfo } from "./taskSlice";
+import { selectTaskInfo, taskSliceState } from "./taskSlice";
 
-export const useTasks = () =>useAppSelector(selectTaskInfo);
+export const useTasks = () =>useAppSelector<taskSliceState>(selectTaskInfo);
 
 export{}

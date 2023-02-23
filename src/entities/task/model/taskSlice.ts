@@ -2,7 +2,7 @@ import { createSlice,PayloadAction } from "@reduxjs/toolkit"
 import type { RootState } from "app/store"
 import { Task } from "../lib/types"
 
-interface taskSliceState{
+export interface taskSliceState{
     tasks:[
         Task
     ] | null
@@ -23,6 +23,6 @@ export const taskSlice = createSlice({
 })
 
 
-export const {setAllTasks,} = taskSlice.actions
+export const {setAllTasks} = taskSlice.actions
 
 export const selectTaskInfo = (state:RootState) => state.task

@@ -1,23 +1,24 @@
 import React,{FC, useEffect, useState} from 'react'
+import { getTaskFilterStaticArgument } from 'entities/task'
 import '../styles/dropdown.scss';
 
 interface DropdownProps{
-  monitorableState:boolean[]|boolean;
-  dropdownItems:string[];
-  defaultContent:string;
-  purpose?:string
-  parentClass?:string;
+  monitorableState:boolean[]|boolean,
+  dropdownItems:string[],
+  defaultContent:string,
+  purpose?:string,
+  parentClass?:string,
+  returnValue:(arg:string,value:string)=>void;
 }
 
-export const Dropdown:FC<DropdownProps> = ({parentClass,purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
+export const Dropdown:FC<DropdownProps> = ({returnValue,parentClass,purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
   const [state,setState] = useState<string>('closed');
   const [arrow,setArrow] = useState<string>('open');
   const [active,setActive] = useState<string>('default');
   const [content,setContent] = useState<string>(defaultContent);
   
   const dropdownClickHandler = () =>{
-    if(state === 'open')
-    { 
+    if(state === 'open'){ 
         setState('closed');
         setArrow('open');
         (content !== defaultContent)?setActive('active'):setActive('default');
@@ -30,6 +31,11 @@ export const Dropdown:FC<DropdownProps> = ({parentClass,purpose,defaultContent,d
 }
 const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, MouseEvent>) =>{
   e.currentTarget.textContent && setContent(e.currentTarget.textContent);
+  if(parentClass !== undefined && e.currentTarget.textContent !== null){
+    if(purpose === '_filter' && parentClass !== 'user'){
+      returnValue(parentClass,getTaskFilterStaticArgument(parentClass,e.currentTarget.textContent));
+    }
+  }
   setState('closed');
   setArrow('open');
   setActive('active');

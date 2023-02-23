@@ -7,7 +7,7 @@ import { useGetUsersAllQuery, useUserIsAuth } from 'entities/user'
 
 export const UserList = () => {
   const [view,setView] = useState('cards');
-  const getAllUsers = useGetUsersAllQuery('');
+  const getAllUsers = useGetUsersAllQuery();
   
   const changeView = () =>{
     (view === 'list')?setView('cards'):setView('list');

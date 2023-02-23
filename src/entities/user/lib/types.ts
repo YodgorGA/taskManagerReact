@@ -10,4 +10,7 @@ export type AuthInfo = {
     password:string
 }
 
+
+
+
 export {}

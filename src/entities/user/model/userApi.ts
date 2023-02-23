@@ -1,18 +1,19 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { UserInfo } from '../lib/types';
 
-interface userData{
-    username:string,
+interface IUserInfo{
+    username:string
+    about:string,
     id:string,
-    photoUrl:string,
-    about:string
-}
+    photoUrl:string
+} 
 
 export const userApi = createApi({
     reducerPath:'userApi',
     baseQuery: fetchBaseQuery ({baseUrl:'http://localhost:3000/api/users/'}),
     tagTypes: ['User','Users'],
     endpoints: (build) =>({
-        getUserAuthData:build.mutation<userData,{}>({
+        getUserAuthData:build.mutation<UserInfo,{}>({
             query: (body) =>({
                 url:'login',
                 method:"POST",
@@ -20,10 +21,11 @@ export const userApi = createApi({
             }),
             invalidatesTags: [{ type: 'User', id: 'CURRENT_USER' }],
         }),
-        getUserById:build.query<userData,string>({
-            query: (id) => ''+id
+        getUserById:build.query<UserInfo,string>({
+            query: (id) => id,
+            providesTags: ['User']
         }),
-        getUsersAll:build.query<userData[],string>({
+        getUsersAll:build.query<UserInfo[],void>({
             query: () => 'all',
             providesTags: (result) =>
             result

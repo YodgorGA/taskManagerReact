@@ -4,7 +4,7 @@ import { UserPageTaskItem as UserPageTaskListItem } from './UI/userPage/UserPage
 
 import {useGetUserAuthDataMutation,useGetUserByIdQuery,useGetUsersAllQuery,userApi} from './model/userApi';
 
-import { userSlice,setCurrentUser,removeCurrentUser} from './model/userSlice';
+import { userSlice,setCurrentUser,removeCurrentUser, type userSliceState} from './model/userSlice';
 
 import { useUserIsAuth,useUserState } from './model/selectors';
 
@@ -19,7 +19,7 @@ export {
         //userApi
         useGetUserAuthDataMutation,useGetUserByIdQuery,useGetUsersAllQuery,
         //types
-        UserInfo,AuthInfo,
+        UserInfo,AuthInfo,userSliceState,
         //api
         userApi,
         //slice

@@ -42,7 +42,6 @@
     &_assignedUser{
         width: 180px;
         margin-left: 20px;
-        
         & p{
             width: 100%;
             height: 27px;
@@ -64,7 +63,7 @@
             &__opened{
                 @include taskItemStatus('../.././../public/img/taskList/taskOpen.svg')
             }
-            &__inWork{
+            &__inProgress{
                 @include taskItemStatus('../.././../public/img/taskList/taskProcess.svg')
             }
             &__testing{
@@ -107,7 +106,6 @@
         }
         &__active{
             @include taskButton('../../../public/img/taskList/taskDropdownActive.svg');
-            
         }
     }
     &_droppedField{
@@ -154,10 +152,22 @@
         }
     }
     &_sendToTest{
-
+        &__disabled{
+            color:$disabledElementTextColor;
+            &:hover{
+                cursor: default;
+                color:$disabledElementTextColor;
+            }
+        }
     }
     &_reopen{
-
+        &__disabled{
+            color:$disabledElementTextColor;
+            &:hover{
+                cursor: default;
+                color:$disabledElementTextColor;
+            }
+        }
     }
 
     & a{

@@ -1,15 +1,16 @@
 import { RootState } from './../../../app/store/index';
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 import { UserInfo } from "../lib/types";
+import { REHYDRATE } from 'reduxjs-toolkit-persist';
 
-export interface userSliceProps{
+export interface userSliceState{
     currentUser: UserInfo | null,
     allUsers: [
         UserInfo
     ] | null
 }
 
-const initialState:userSliceProps = {
+const initialState:userSliceState = {
     currentUser:null,
     allUsers: null
 }
@@ -24,7 +25,7 @@ export const userSlice = createSlice({
         removeCurrentUser:(state)=>{
             state.currentUser = null
         }
-    }
+    },
 })
 
 export const {removeCurrentUser,setCurrentUser,} = userSlice.actions

@@ -20,6 +20,9 @@ export const AddTaskForm:FC<AddTaskFormProps> = ({closeFormCallback,...AddTaskFo
         closeFormCallback()
         clearForm()
     }
+    const getDropdownValue = (arg:string,value:string) =>{
+
+    }
     return (
         <div className='taskList_addTask addTask'>
             <div className="addTask_form addTaskForm">
@@ -30,13 +33,13 @@ export const AddTaskForm:FC<AddTaskFormProps> = ({closeFormCallback,...AddTaskFo
                     <div className="addTaskForm_left">
                         <div className="addTaskForm_formItems addTaskFormFormItems">
                             <Label content='Тип'/>
-                            <AddTaskDropdown monitorableState={isFormItemsClear} parentClass='addTaskFormFormItems' defaultContent='Выберите тип' dropdownItems={['Создание','Фикс'] }/>
+                            <AddTaskDropdown returnValue={getDropdownValue}monitorableState={isFormItemsClear} parentClass='addTaskFormFormItems' defaultContent='Выберите тип' dropdownItems={['Создание','Фикс'] }/>
                             <Label content='Пользователь'/>
-                            <AddTaskDropdown monitorableState={isFormItemsClear} parentClass='addTaskFormFormItems' defaultContent='Выберите исполнителя' dropdownItems={['Шерлок Хоумс','Шерлок Хоумс','Шерлок Хоумс','Шерлок Хоумс']}/>
+                            <AddTaskDropdown returnValue={getDropdownValue}monitorableState={isFormItemsClear} parentClass='addTaskFormFormItems' defaultContent='Выберите исполнителя' dropdownItems={['Шерлок Хоумс','Шерлок Хоумс','Шерлок Хоумс','Шерлок Хоумс']}/>
                             <Label content='Статус'/>
-                            <AddTaskDropdown monitorableState={isFormItemsClear} parentClass='addTaskFormFormItems' defaultContent='Выберите статус' dropdownItems={['Открыто','В работе','Тестирование','Завершено']}/>
+                            <AddTaskDropdown returnValue={getDropdownValue}monitorableState={isFormItemsClear} parentClass='addTaskFormFormItems' defaultContent='Выберите статус' dropdownItems={['Открыто','В работе','Тестирование','Завершено']}/>
                             <Label content='Приоритет'/>
-                            <AddTaskDropdown monitorableState={isFormItemsClear} parentClass='addTaskFormFormItems' defaultContent='Выберите приоритет' dropdownItems={['Низкий','Средний','Высокий']}/>
+                            <AddTaskDropdown returnValue={getDropdownValue}monitorableState={isFormItemsClear} parentClass='addTaskFormFormItems' defaultContent='Выберите приоритет' dropdownItems={['Низкий','Средний','Высокий']}/>
                             <Label content='Название задачи'/>
                             <AddTaskTextarea placeholder='Введите название задачи' purpose='addTaskFormFormTaskName' monitorableState={isFormItemsClear}/>
                         </div>

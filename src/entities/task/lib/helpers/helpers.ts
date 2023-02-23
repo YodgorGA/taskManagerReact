@@ -27,4 +27,77 @@ export const getStatusName = (engName:string) =>{
 }
 
 
+export const getListItemButtonItemsState = (propStatus:string|undefined) => {
+  switch (propStatus){
+    case 'opened':
+      return {
+        test:'disabled',
+        reopen:'disabled',
+      }
+    case 'testing':
+      return{
+        test:'disabled',
+        reopen:'',
+      }
+    case 'inProgress':
+      return {
+        test:'',
+        reopen:'',
+      }
+    case 'complete':
+      return {
+        test:'disabled',
+        reopen:'',
+      } 
+  }
+}
+
+export const getTaskFilterInitialState = () => {
+  const initialTaskFilterState ={
+    type:undefined,
+    title:undefined,
+    assignedId:undefined,
+    status:undefined,
+    rank:undefined
+  }
+  return initialTaskFilterState;
+}
+
+export const getTaskFilterStaticArgument = (parentClass:string,value:string) =>{
+  switch (parentClass){
+    case 'type':
+      if(value === 'Фикс'){
+        return 'bug'
+      }
+      else{ 
+        return 'task';
+      }
+    case 'status':
+      if(value === 'Завершено'){
+        return 'complete'
+      }
+      else if(value === 'Тестирование'){ 
+        return 'testing';
+      }
+      else if(value === 'В работе'){
+        return 'inProgress'
+      }
+      else{
+        return 'opened'
+      }
+    case 'rank':
+      if(value === 'Высокий'){
+        return 'high'
+      }
+      else if(value === 'Средний'){
+        return 'medium'
+      }
+      else{
+        return 'low'
+      }
+    default:
+      return 'Ошибка'
+  }
+}
+
 export {}
