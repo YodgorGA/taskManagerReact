@@ -6,7 +6,7 @@ import { useAppDispatch } from 'app/store/hooks'
 import { setCurrentUser } from 'entities/user'
 import '../styles/loginForm.scss'
 
-export const LoginForm = () => {
+export const LoginForm:FC = () => {
   const navigate = useNavigate()
   const locationState:locationState = useLocation().state;
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export const LoginForm = () => {
   const [login,setLogin] = useState<string|null>(null);
   const [password,setPassword] = useState<string|null>(null);
 
-  const [getUserInfo,{isSuccess}] = useGetUserAuthDataMutation();
+  const [getUserInfo] = useGetUserAuthDataMutation();
   
   const loginInputChangeHanler = (value:string)=>{
     setLogin(value)

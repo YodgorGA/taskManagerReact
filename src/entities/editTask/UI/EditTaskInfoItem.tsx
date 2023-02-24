@@ -10,7 +10,7 @@ interface EditTaskInfoItemProps{
 }
 
 export const EditTaskInfoItem:FC<EditTaskInfoItemProps> = ({defaultContent,monitorableState,dropdownItems,dropdownPurpose,label,...EditTaskInfoItemProps}) => {
-    const getDropdownValue = (arg:string,value:string) =>{
+    const getDropdownValue = (dataSource:string,arg:string,value:string) =>{
 
     }
     return (
@@ -18,7 +18,7 @@ export const EditTaskInfoItem:FC<EditTaskInfoItemProps> = ({defaultContent,monit
         <label className='_label'>
             {label}
         </label>
-        <EditTaskInfoDropdown returnValue={getDropdownValue} monitorableState={monitorableState} purpose={dropdownPurpose} defaultContent={defaultContent} dropdownItems={dropdownItems}/>
+        <EditTaskInfoDropdown dataSource='props' returnValue={getDropdownValue} monitorableState={monitorableState} purpose={dropdownPurpose} defaultContent={defaultContent} dropdownItems={dropdownItems}/>
         </div>
     )
 }

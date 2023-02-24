@@ -21,7 +21,7 @@ export const AddWorkTime:FC = () => {
       setAddWorkTimeFormState('hidden');
       setIsApplyPressed(false);
     }
-    const getDropdownValue = (arg:string,value:string) =>{
+    const getDropdownValue = (dataSource:string,arg:string,value:string) =>{
 
     }
     return (
@@ -39,7 +39,7 @@ export const AddWorkTime:FC = () => {
         <div className={`taskInfoItems_item__addWorkTimeForm addTimeForm__${addWorkTimeFormState}`}>
           <div className="addTimeForm__visible_form">
             <Input monitorableState={[isApplyPressed,isDenyPressed]} placeholder='Количество' type='text' key={1}/>
-            <UnitDropdown returnValue={getDropdownValue} purpose='unit' defaultContent='Единица измерения' dropdownItems={['Минуты','Часы']} monitorableState={[isApplyPressed,isDenyPressed]}/>
+            <UnitDropdown dataSource='props' returnValue={getDropdownValue} purpose='unit' defaultContent='Единица измерения' dropdownItems={['Минуты','Часы']} monitorableState={[isApplyPressed,isDenyPressed]}/>
           </div>
           <div className="addTimeForm__visible_buttons">
             <ApplyEditing callback={applyChanges}/>

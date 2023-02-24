@@ -25,4 +25,7 @@ export type taskFilterParams = {
         rank?:string
 }
 
+export type taskFilterPurpose = (isDataStatic:boolean,key:string,value:string) => void
+export type anotherPurpose = (value:string) =>void
 
+export type getValueFromChild<T extends taskFilterPurpose | anotherPurpose> = T extends taskFilterPurpose? taskFilterPurpose:anotherPurpose; 

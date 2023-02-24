@@ -1,6 +1,6 @@
 import React,{FC, useEffect, useState} from 'react'
-import { useGetUserByIdQuery, UserInfo } from 'entities/user';
-import { Task, useChangeTaskStausMutation, useGetTaskByIdQuery } from 'entities/task';
+import { useGetUserByIdQuery } from 'entities/user';
+import { useChangeTaskStausMutation, useGetTaskByIdQuery } from 'entities/task';
 import { Link } from 'react-router-dom';
 import { getListItemButtonItemsState } from 'entities/task';
 import '../../styles/taskListItem.scss';
@@ -17,9 +17,9 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListIte
 
   
   const {data:taskData,isFetching:isTaskFetching} = useGetTaskByIdQuery(id);
-  const {data:userData,isFetching:isUserFetching} = useGetUserByIdQuery(assignedId);
+  const {data:userData} = useGetUserByIdQuery(assignedId);
 
-  const [changeTaskStatus,{isError}] = useChangeTaskStausMutation();
+  const [changeTaskStatus] = useChangeTaskStausMutation();
   
   const dropdownStateHandler = () =>{
     if (dropdownButtonState === 'stayed'){
@@ -42,7 +42,7 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListIte
     if(isTaskFetching === false){
       setButtonItemState(getListItemButtonItemsState(taskData?.status))
     }
-  },[taskData?.status])
+  },[taskData?.status,isTaskFetching])
   return (
     <div className="tasksCardTaskList_item taskListItem">
       <div className={`taskListItem_type__${taskData?.type}`}></div>
@@ -61,7 +61,7 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListIte
             }`}
             onClick={toTestButtonClickHandler}>На тестирование</div>
             <Link 
-              to={`/tasks/${id}`} state={{id:taskData?.id}}
+              to={`/tasks/${id}`} state={{id:taskData?.id}} 
               className="droppedFieldTaskDropdown_edit"
               >Редактировать</Link>
             <div className={`droppedFieldTaskDropdown_reopen${

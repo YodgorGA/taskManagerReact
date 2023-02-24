@@ -1,4 +1,3 @@
-import type { Task, taskFilterParams } from './lib/types';
 import { TaskInfoItem } from './UI/taskPage/TaskInfoItem' 
 import { ApplyEditing } from "./UI/taskPage/ApplyEditing";
 import { DenyEditing } from "./UI/taskPage/DenyEditing";
@@ -6,6 +5,7 @@ import { DenyEditing } from "./UI/taskPage/DenyEditing";
 import { TaskListItem } from './UI/taskList/TaskListItem';
 
 import { taskSlice, type taskSliceState } from './model/taskSlice';
+import type { Task, taskFilterParams,getValueFromChild,anotherPurpose,taskFilterPurpose} from './lib/types';
 import { taskApi,useChangeTaskStausMutation,useGetTasksAllMutation,useGetTaskByIdQuery,type Tasks, useGetTaskListByFilterMutation} from './model/taskAPI';
 
 import { getListItemButtonItemsState, getTaskFilterInitialState, getTaskFilterStaticArgument } from './lib/helpers/helpers';
@@ -32,7 +32,7 @@ export {
         //interfaces
         taskSliceState,
         //types
-        Task,Tasks,taskFilterParams,
+        Task,Tasks,taskFilterParams,getValueFromChild,anotherPurpose,taskFilterPurpose,
         //heplers
         getListItemButtonItemsState,getTaskFilterInitialState,getTaskFilterStaticArgument,
 

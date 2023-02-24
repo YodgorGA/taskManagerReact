@@ -1,9 +1,9 @@
 import React,{FC, useEffect, useState} from 'react'
-import { useGetUsersAllQuery } from 'entities/user'
+import { useGetUserByNicknameMutation, useGetUsersAllQuery } from 'entities/user'
 import { Button } from 'shared'
 import { Dropdown as TaskFilterDropdown} from 'shared'
 import { Input as TaskFilterInput } from 'shared'
-import { Tasks, useGetTaskListByFilterMutation } from 'entities/task'
+import { getTaskFilterStaticArgument, Tasks, useGetTaskListByFilterMutation } from 'entities/task'
 import '../styles/filter.scss'
 
 interface FilterProps{
@@ -14,13 +14,31 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
   const [isSeacrhPressed,setIsSearchPressed] = useState<boolean>(false);
   const {data:userAllData} = useGetUsersAllQuery();
   const [filterParams,setFilterParams] = useState({});
-  const [filteredTaskList,{isError}] = useGetTaskListByFilterMutation();
-
-  const setParamByFilter = (arg:string,value:string) =>{
-    setFilterParams({
-      ...filterParams,
-      [arg]:value
-    })
+  const [filteredTaskList] = useGetTaskListByFilterMutation();
+  const [userData] = useGetUserByNicknameMutation<{data:[]}>();
+  
+  const setParamByFilter = (dataSource:string,arg:string,value:string) =>{
+    if(dataSource === 'props'){
+      setFilterParams({
+        ...filterParams,
+        [arg]:getTaskFilterStaticArgument(arg,value)
+      })
+    }
+    else if(dataSource === 'api'){
+      userData(value).unwrap().then((result)=>{
+        setFilterParams({
+          ...filterParams,
+          arg:result.data[0].id});
+      });
+    }
+    else if(dataSource === 'user'){
+      setFilterParams({
+        ...filterParams,
+        [arg]:value
+      })
+    }
+    //Декомпозировать при помощи этой функции, передавая пропсом в дропдауе
+    //только ключ, который будет использоваться этой функцией
   }
 
   const buttonClickHanler = () =>{
@@ -38,7 +56,8 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
   },[filterParams,isSeacrhPressed])
   return (
     <div className="cardTaskList_filter _filter">
-      <TaskFilterDropdown 
+      <TaskFilterDropdown
+        dataSource={'props'}
         parentClass={'type'}
         returnValue={setParamByFilter} 
         purpose={'_filter'} 
@@ -47,16 +66,18 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
         defaultContent='Тип' 
         dropdownItems={['Создание','Фикс']} 
       />
-      <TaskFilterInput 
-        parentClass={'title'}
-        returnValueCallback={setParamByFilter} 
-        purpose={'filter'} 
-        key={1} 
-        monitorableState={isSeacrhPressed} 
-        placeholder='Введите название задачи' 
-        type='text' 
+      <TaskFilterInput
+        dataSource={'user'}
+        parentClass='title'
+        returnDataForFilterCallback={setParamByFilter}
+        purpose='filter'
+        key={1}
+        monitorableState={isSeacrhPressed}
+        type='text'
+        placeholder='Введите название задачи'
       />
       <TaskFilterDropdown 
+        dataSource={'api'}
         parentClass={'assignedUser'}
         returnValue={setParamByFilter}
         purpose={'_filter'} 
@@ -67,6 +88,7 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
         relatedData = {userAllData !== undefined?userAllData.map((user)=>{return user.id}):[]}
       />
       <TaskFilterDropdown 
+        dataSource={'props'}
         parentClass={'status'}
         returnValue={setParamByFilter}
         purpose={'_filter'} 
@@ -76,6 +98,7 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
         dropdownItems={['Завершено','Тестирование','В работе','Открыто']} 
       />
       <TaskFilterDropdown 
+        dataSource={'props'}
         parentClass={'rank'}
         returnValue={setParamByFilter}
         purpose={'_filter'} 

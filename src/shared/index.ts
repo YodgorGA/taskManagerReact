@@ -10,6 +10,7 @@ import { resetInput } from "./lib/helpers/inputHelper";
 import type { locationState } from "./lib/types/types";
 
 export {
+    //UI
     Button,
     CardHeader,
     Input,
@@ -18,6 +19,8 @@ export {
     LinkButton,
     Label,
     Textarea,
+    //helpers
     resetInput,
+    //types
     locationState,
 }

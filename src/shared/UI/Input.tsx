@@ -5,20 +5,24 @@ interface InputProps{
     type:string,
     placeholder:string,
     monitorableState?:boolean[]|boolean,
-    parentClass?:string;
-    returnValueCallback?:(key:string,value:string)=>void
-    purpose?:string
+    parentClass?:string,
+    purpose?:string,
+    returnValueCallback?:(value:string)=>void,
+    returnDataForFilterCallback?:(dataSource:string,key:string,value:string)=>void,
+    dataSource?:string
 }
 
-export const Input:FC<InputProps> = ({purpose,returnValueCallback,parentClass,monitorableState,type,placeholder,...InputProps}) => {
+
+export const Input:FC<InputProps> = ({dataSource,returnDataForFilterCallback,placeholder,returnValueCallback,type,monitorableState,parentClass,purpose})=>{
     const [module,setModule] = useState<string>('');
     const [value,setValue] = useState<string>('');
     
     const getInputState = (e:React.ChangeEvent<HTMLInputElement>)=>{
         (e.currentTarget.value.length<1)?setModule(''):setModule('__active');
         setValue(e.currentTarget.value);
-        if(parentClass !== undefined){
-            returnValueCallback && returnValueCallback(parentClass,e.currentTarget.value);
+        returnValueCallback && returnValueCallback(e.currentTarget.value);
+        if(dataSource && parentClass && returnDataForFilterCallback){
+            returnDataForFilterCallback(dataSource,parentClass,e.currentTarget.value);
         }
     }
     useEffect(()=>{

@@ -1,16 +1,14 @@
 import React,{FC, useEffect, useState} from 'react'
-import { Task, TaskListItem, useTasks } from 'entities/task'
+import { Task, TaskListItem } from 'entities/task'
 import { Tasks, useGetTasksAllMutation } from 'entities/task'
-import { useAppDispatch } from 'app/store/hooks'
 
 interface TaskListWidgetProps{
   filteredData?:Tasks,
 }
 
 export const TaskList:FC<TaskListWidgetProps> = ({filteredData,...TaskListWidgetProps}) => {
-  const dispatch = useAppDispatch();
   const [taskList,setTaskList] = useState<Tasks>();
-  const [getAllTasks,isSuccess] = useGetTasksAllMutation();
+  const [getAllTasks] = useGetTasksAllMutation();
   
   useEffect(()=>{
     if(filteredData !== undefined && filteredData.data.length >0){
@@ -21,7 +19,7 @@ export const TaskList:FC<TaskListWidgetProps> = ({filteredData,...TaskListWidget
         setTaskList(resp)
       })
     }
-  },[filteredData])
+  },[filteredData,getAllTasks])
   if(taskList?.data !== null){
     return (
       <div className="cardTaskList_tasks tasksCardTaskList">
