@@ -17,8 +17,8 @@ export const Input:FC<InputProps> = ({purpose,returnValueCallback,parentClass,mo
     const getInputState = (e:React.ChangeEvent<HTMLInputElement>)=>{
         (e.currentTarget.value.length<1)?setModule(''):setModule('__active');
         setValue(e.currentTarget.value);
-        if(purpose !== undefined){
-            returnValueCallback && returnValueCallback(purpose,e.currentTarget.value);
+        if(parentClass !== undefined){
+            returnValueCallback && returnValueCallback(parentClass,e.currentTarget.value);
         }
     }
     useEffect(()=>{
@@ -26,7 +26,7 @@ export const Input:FC<InputProps> = ({purpose,returnValueCallback,parentClass,mo
         setModule('');
     },[monitorableState])
     return (
-    <input type={type} className={`${parentClass !== undefined?parentClass:''}_input${module}`} onChange={getInputState} value={value} placeholder={placeholder}/>
+    <input type={type} className={`_input_${purpose}${module}`} onChange={getInputState} value={value} placeholder={placeholder}/>
   )
 }
 

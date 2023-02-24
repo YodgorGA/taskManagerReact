@@ -2,7 +2,7 @@ import {UserListContentLVItem} from './UI/userList/listView/UserListContentLVIte
 import {UserListContentCVItem} from './UI/userList/cardView/UserListContentCVItem';
 import { UserPageTaskItem as UserPageTaskListItem } from './UI/userPage/UserPageTaskItem';
 
-import {useGetUserAuthDataMutation,useGetUserByIdQuery,useGetUsersAllQuery,userApi} from './model/userApi';
+import {useGetUserAuthDataMutation,useGetUserByIdQuery,useGetUsersAllQuery,userApi,useGetUserByNicknameMutation} from './model/userApi';
 
 import { userSlice,setCurrentUser,removeCurrentUser, type userSliceState} from './model/userSlice';
 
@@ -17,7 +17,7 @@ export {
     UserPageTaskListItem,
     //model
         //userApi
-        useGetUserAuthDataMutation,useGetUserByIdQuery,useGetUsersAllQuery,
+        useGetUserAuthDataMutation,useGetUserByIdQuery,useGetUsersAllQuery,useGetUserByNicknameMutation,
         //types
         UserInfo,AuthInfo,userSliceState,
         //api

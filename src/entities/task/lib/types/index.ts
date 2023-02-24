@@ -20,7 +20,7 @@ export type changeTaskStatusQuery = {
 export type taskFilterParams = {
         type?:string,
         title?:string,
-        assignedId?:string,
+        assignedUser?:string,
         status?:string,
         rank?:string
 }

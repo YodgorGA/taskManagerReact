@@ -18,14 +18,14 @@ export const TaskList:FC = () => {
         setVisibleTasks(tasks);
     }
     useEffect(()=>{
-        console.log(visibleTasks);
+        
     },[visibleTasks])
     return (
     <div className='taskList_container _container'>
         <div className="taskList_contentWrapper _contentWrapper">
             <CardHeader parentClass={parentClass} title='Задачи' childButtons={<Button callback={toggleModalVisibilityButtonClickHandler} color='primary' content='Добавить задачу' parentClass='_cardHeader' key={0}/>}/>
             <div className="taskList_card _card cardTaskList">
-                <TaskFilter returnDataCallback={returnFilteredData}/>
+                <TaskFilter returnDataToTaskList={returnFilteredData}/>
                 <TaskListWidget filteredData={visibleTasks}/>
             </div>
             <Paginator parentClass={parentClass} showedItemCountEnd='10' showedItemCountTotal='10' showedItemCountStart='1'/>

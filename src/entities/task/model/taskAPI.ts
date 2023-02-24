@@ -36,7 +36,7 @@ export const taskApi = createApi({
                 body:{
                     filter:{
                         query:args.title,
-                        assignedUsers:args.assignedId,
+                        assignedUsers:args.assignedUser,
                         type:args.type,
                         status:args.status,
                         rank:args.rank

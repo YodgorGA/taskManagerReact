@@ -15,12 +15,6 @@
        height: 22px;
     }
     &_input{
-        @include filterInput();
-        &:hover{
-            box-shadow: inset 0px 0px 2px 1px $primaryColor;
-        }
-        &__active{
-            @include filterInputActive();
-        }
+        
     }
 }

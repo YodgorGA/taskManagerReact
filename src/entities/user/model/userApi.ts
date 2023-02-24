@@ -1,12 +1,11 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import { UserInfo } from '../lib/types';
 
-interface IUserInfo{
-    username:string
-    about:string,
-    id:string,
-    photoUrl:string
-} 
+interface Users extends Array<UserInfo>{
+    data:[
+        UserInfo
+    ]
+}
 
 export const userApi = createApi({
     reducerPath:'userApi',
@@ -34,6 +33,20 @@ export const userApi = createApi({
               { type: 'Users', id: 'LIST' },
             ]
             : [{ type: 'Users', id: 'LIST' }],
+        }),
+        getUserByNickname:build.mutation<Users,string>({
+            query: (username)=>({
+                url:'',
+                method:"POST",
+                body:{
+                    filter:{
+                        query:username
+                    },
+                    page:0,
+                    limit:1
+                }
+            }),
+            invalidatesTags:['User']
         })
     })
 })
@@ -41,5 +54,6 @@ export const userApi = createApi({
 export const {
     useGetUserAuthDataMutation,
     useGetUserByIdQuery,
-    useGetUsersAllQuery
+    useGetUsersAllQuery,
+    useGetUserByNicknameMutation,
 } = userApi
