@@ -1,8 +1,11 @@
+import { taskFilterBody } from './../lib/types/index';
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { Task,changeTaskStatusQuery, taskFilterParams } from "../lib/types";
 
 export type Tasks = {
-    data: [Task]
+    data: [Task],
+    page: number,
+    total: number
 }
 
 export const taskApi = createApi({
@@ -10,13 +13,13 @@ export const taskApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl:'http://localhost:3000/api/tasks'}),
     tagTypes: ['Tasks','Task'],
     endpoints: (build) =>({
-        getTasksAll:build.mutation<Tasks,object>({
-            query: () =>({
+        getTasksAll:build.mutation<Tasks,number>({
+            query: (page) =>({
                 url:'',
                 method:"POST",
                 body:{
                     filter: {},
-                    page: 0,
+                    page: page,
                     limit: 8
                 },
                 providesTags: (result:Task[]) =>
@@ -29,23 +32,13 @@ export const taskApi = createApi({
             query: (id) => id,
             providesTags: ['Task']
         }),
-        getTaskListByFilter:build.mutation<Tasks,taskFilterParams>({
-            query: (args)=>({
+        getTaskList:build.mutation<Tasks,taskFilterBody>({
+            query:(body)=>({
                 url:'',
                 method:'POST',
-                body:{
-                    filter:{
-                        query:args.title,
-                        assignedUsers:args.assignedUser,
-                        type:args.type,
-                        status:args.status,
-                        rank:args.rank
-                    },
-                    page:0,
-                    limit:8
-                }
+                body
             }),
-            invalidatesTags: ['Task'],
+            invalidatesTags: ['Tasks'],
         }),
         changeTaskStaus:build.mutation<Task | Object,changeTaskStatusQuery>({
             query: (query:changeTaskStatusQuery) =>({
@@ -60,6 +53,6 @@ export const taskApi = createApi({
 export const {
     useGetTasksAllMutation,
     useGetTaskByIdQuery,
-    useGetTaskListByFilterMutation,
     useChangeTaskStausMutation,
+    useGetTaskListMutation,
 } = taskApi

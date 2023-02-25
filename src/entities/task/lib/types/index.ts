@@ -19,13 +19,14 @@ export type changeTaskStatusQuery = {
 
 export type taskFilterParams = {
         type?:string,
-        title?:string,
-        assignedUser?:string,
+        query?:string,
+        assignedUsers?:string,
         status?:string,
         rank?:string
 }
 
-export type taskFilterPurpose = (isDataStatic:boolean,key:string,value:string) => void
-export type anotherPurpose = (value:string) =>void
-
-export type getValueFromChild<T extends taskFilterPurpose | anotherPurpose> = T extends taskFilterPurpose? taskFilterPurpose:anotherPurpose; 
+export type taskFilterBody = {
+    filter:taskFilterParams,
+    page:number,
+    limit:number,
+}

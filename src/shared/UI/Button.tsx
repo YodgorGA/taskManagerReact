@@ -6,13 +6,15 @@ interface ButtonProps{
     color:string
     parentClass:string
     additionalClass?:string
-    callback?:()=>void
+    callback?:(e:React.MouseEvent<HTMLDivElement, MouseEvent>)=>void
 }
 
 export const Button:FC<ButtonProps> = ({callback,additionalClass,parentClass,content,color,...ButtonProps}) => {
-    
+    const clickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
+        callback && callback(e)
+    }
     return (
-    <div onMouseDown={callback}className={`${parentClass}_button ${(additionalClass)?additionalClass:''} _button__${color}`}>
+    <div onMouseDown={clickHandler}className={`${parentClass}_button ${(additionalClass)?additionalClass:''} _button__${color}`}>
         {content}
     </div>
   )

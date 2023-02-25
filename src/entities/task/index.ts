@@ -4,11 +4,12 @@ import { DenyEditing } from "./UI/taskPage/DenyEditing";
 
 import { TaskListItem } from './UI/taskList/TaskListItem';
 
-import { taskSlice, type taskSliceState } from './model/taskSlice';
-import type { Task, taskFilterParams,getValueFromChild,anotherPurpose,taskFilterPurpose} from './lib/types';
-import { taskApi,useChangeTaskStausMutation,useGetTasksAllMutation,useGetTaskByIdQuery,type Tasks, useGetTaskListByFilterMutation} from './model/taskAPI';
+import { taskSlice, type taskSliceState, setTaskFilterParams } from './model/taskSlice';
+import { taskApi,useChangeTaskStausMutation,useGetTaskByIdQuery,type Tasks, useGetTaskListMutation} from './model/taskAPI';
 
 import { getListItemButtonItemsState, getTaskFilterInitialState, getTaskFilterStaticArgument } from './lib/helpers/helpers';
+
+import type { Task, taskFilterParams,taskFilterBody} from './lib/types';
 
 import { useTasks } from './model/selectors';
 
@@ -24,15 +25,17 @@ export {
         //api
         taskApi,
         //apiReducers
-        useChangeTaskStausMutation,useGetTasksAllMutation,useGetTaskByIdQuery,useGetTaskListByFilterMutation,
-        //slices
+        useChangeTaskStausMutation,useGetTaskByIdQuery,useGetTaskListMutation,
+        //slice
         taskSlice,
+        //sliceReducers
+        setTaskFilterParams,
         //selector
         useTasks,
         //interfaces
         taskSliceState,
         //types
-        Task,Tasks,taskFilterParams,getValueFromChild,anotherPurpose,taskFilterPurpose,
+        Task,Tasks,taskFilterParams,taskFilterBody,
         //heplers
         getListItemButtonItemsState,getTaskFilterInitialState,getTaskFilterStaticArgument,
 

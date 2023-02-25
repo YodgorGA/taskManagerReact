@@ -9,6 +9,9 @@ interface UserTaskListProps{
 }
 
 export const UserTaskList:FC<UserTaskListProps> = ({...UserTaskListProps}) => {
+    const fillerFunction = (page:number) =>{
+        
+    }
     return (
         <div className='userPage_taskList userPageTaskList'>
             <Label content='Задачи'/>
@@ -24,9 +27,9 @@ export const UserTaskList:FC<UserTaskListProps> = ({...UserTaskListProps}) => {
             </div>
             <Paginator 
                 parentClass={'userPageTaskList'} 
-                showedItemCountEnd='5' 
-                showedItemCountStart='1' 
-                showedItemCountTotal='5'
+                showedItemCountEnd={5} 
+                showedItemCountStart={1} 
+                showedItemCountTotal={5}
             />
         </div>
     )

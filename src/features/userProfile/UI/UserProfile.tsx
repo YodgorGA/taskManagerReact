@@ -40,7 +40,7 @@ export const UserProfile:FC<UserProfileProps> = ({...UserProfileProps}) => {
             <div className="headerUserProfile_name">{currentUser?.username}</div>
             <div className="headerUserProfile_img"><img alt='Фото профиля' src={userProfilePhoto}></img></div>
             {
-                (dropdownState === "closed")? <div></div> 
+                (dropdownState === "closed")? <div style={{position:"absolute"}}></div> 
                 : 
                 <div className="headerUserProfile_dropdown dropdownHeaderUserProfile">
                     <div onMouseDown={goToProfileClickHandler}  className="dropdownHeaderUserProfile_lookProfile">Посмотреть профиль</div>

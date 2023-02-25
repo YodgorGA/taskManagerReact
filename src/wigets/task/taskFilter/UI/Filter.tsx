@@ -1,21 +1,22 @@
 import React,{FC, useEffect, useState} from 'react'
 import { useGetUserByNicknameMutation, useGetUsersAllQuery } from 'entities/user'
-import { Button } from 'shared'
-import { Dropdown as TaskFilterDropdown} from 'shared'
-import { Input as TaskFilterInput } from 'shared'
-import { getTaskFilterStaticArgument, Tasks, useGetTaskListByFilterMutation } from 'entities/task'
+import { Dropdown as TaskFilterDropdown,Button,Input as TaskFilterInput} from 'shared'
+import { getTaskFilterStaticArgument, setTaskFilterParams, taskFilterParams } from 'entities/task'
+import { useAppDispatch } from 'app/store/hooks'
 import '../styles/filter.scss'
 
 interface FilterProps{
-  returnDataToTaskList:(tasks:Tasks) =>void
+  returnFilterParams:(filter:taskFilterParams)=>void,
 }
 
-export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) => {
-  const [isSeacrhPressed,setIsSearchPressed] = useState<boolean>(false);
-  const {data:userAllData} = useGetUsersAllQuery();
+export const Filter:FC<FilterProps> = ({returnFilterParams,...FilterProps}) => {
+  const [isResetPressed,setIsResetPressed] = useState<boolean>(false);
   const [filterParams,setFilterParams] = useState({});
-  const [filteredTaskList] = useGetTaskListByFilterMutation();
+
+  const {data:userAllData} = useGetUsersAllQuery();
   const [userData] = useGetUserByNicknameMutation<{data:[]}>();
+
+  const dispath = useAppDispatch();
   
   const setParamByFilter = (dataSource:string,arg:string,value:string) =>{
     if(dataSource === 'props'){
@@ -28,32 +29,33 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
       userData(value).unwrap().then((result)=>{
         setFilterParams({
           ...filterParams,
-          arg:result.data[0].id});
+          assignedUsers:result.data[0].id});
       });
     }
-    else if(dataSource === 'user'){
+    else if(dataSource === 'input'){
       setFilterParams({
         ...filterParams,
-        [arg]:value
+        query:value
       })
     }
-    //Декомпозировать при помощи этой функции, передавая пропсом в дропдауе
-    //только ключ, который будет использоваться этой функцией
   }
 
   const buttonClickHanler = () =>{
-    filteredTaskList(filterParams).unwrap().then((tasks) =>{
-      returnDataToTaskList(tasks)
-    });
-    setIsSearchPressed(true);
+    returnFilterParams(filterParams);
+    dispath(setTaskFilterParams(filterParams));
+  }
+
+  const resetParamsClickHandler = ()=>{
+    setIsResetPressed(true);
     setTimeout(()=>{
       setFilterParams({})
-      setIsSearchPressed(false)
+      returnFilterParams({});
+      setIsResetPressed(false)
     },0)
   }
   useEffect(()=>{
-    console.log(filterParams)
-  },[filterParams,isSeacrhPressed])
+    
+  },[filterParams,isResetPressed])
   return (
     <div className="cardTaskList_filter _filter">
       <TaskFilterDropdown
@@ -62,17 +64,17 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
         returnValue={setParamByFilter} 
         purpose={'_filter'} 
         key={0} 
-        monitorableState={isSeacrhPressed} 
+        monitorableState={isResetPressed} 
         defaultContent='Тип' 
         dropdownItems={['Создание','Фикс']} 
       />
       <TaskFilterInput
-        dataSource={'user'}
+        dataSource={'input'}
         parentClass='title'
         returnDataForFilterCallback={setParamByFilter}
         purpose='filter'
         key={1}
-        monitorableState={isSeacrhPressed}
+        monitorableState={isResetPressed}
         type='text'
         placeholder='Введите название задачи'
       />
@@ -82,7 +84,7 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
         returnValue={setParamByFilter}
         purpose={'_filter'} 
         key={2} 
-        monitorableState={isSeacrhPressed} 
+        monitorableState={isResetPressed} 
         defaultContent='Пользователь' 
         dropdownItems={userAllData !== undefined?userAllData.map((user)=>{return user.username}):[]}
         relatedData = {userAllData !== undefined?userAllData.map((user)=>{return user.id}):[]}
@@ -93,7 +95,7 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
         returnValue={setParamByFilter}
         purpose={'_filter'} 
         key={3} 
-        monitorableState={isSeacrhPressed} 
+        monitorableState={isResetPressed} 
         defaultContent='Статус' 
         dropdownItems={['Завершено','Тестирование','В работе','Открыто']} 
       />
@@ -103,17 +105,18 @@ export const Filter:FC<FilterProps> = ({returnDataToTaskList,...FilterProps}) =>
         returnValue={setParamByFilter}
         purpose={'_filter'} 
         key={4} 
-        monitorableState={isSeacrhPressed} 
+        monitorableState={isResetPressed} 
         defaultContent='Приоритет' 
         dropdownItems={['Высокий','Средний','Низкий']} 
       />
       <Button 
         callback={buttonClickHanler}
         color='primary' 
-        content='Применить' 
+        content='Поиск' 
         parentClass={'_filter'} 
         key={5}
       />
+      <div onMouseDown={resetParamsClickHandler} className='_filter_reset'></div>
     </div>
   )
 }
