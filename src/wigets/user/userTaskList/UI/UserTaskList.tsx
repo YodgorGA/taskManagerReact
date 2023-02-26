@@ -27,8 +27,6 @@ export const UserTaskList:FC<UserTaskListProps> = ({...UserTaskListProps}) => {
             </div>
             <Paginator 
                 parentClass={'userPageTaskList'} 
-                showedItemCountEnd={5} 
-                showedItemCountStart={1} 
                 showedItemCountTotal={5}
             />
         </div>

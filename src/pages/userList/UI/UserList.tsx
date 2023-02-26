@@ -22,8 +22,6 @@ export const UserList = () => {
           view === 'list'?<UserListListViewWidget callback={changeView} userListView={view}/>:<UserListCardViewWidget callback={changeView} userListView={view}/>
         }
         <Paginator 
-          showedItemCountStart={1}
-          showedItemCountEnd={5}
           showedItemCountTotal={5}
           parentClass='cardUserListLV'
           setView={changeView}

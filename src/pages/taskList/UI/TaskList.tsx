@@ -46,7 +46,7 @@ export const TaskList:FC = () => {
                 <TaskFilter returnFilterParams={returnFilterParams}/>
                 <TaskListWidget filteredData={visibleTasks}/>
             </div>
-            <Paginator handlePageChangeFetchCallback={returnPageNumber} parentClass={parentClass} showedItemCountEnd={fetchTaskListDataBody.limit} showedItemCountTotal={taskListTotal} showedItemCountStart={1}/>
+            <Paginator handlePageChangeFetchCallback={returnPageNumber} parentClass={parentClass} showedItemCountTotal={taskListTotal}/>
         </div>
         <div className={`${parentClass}_modal _modal__${modalVisibility}`}>
             <AddTaskForm closeFormCallback={toggleModalVisibilityButtonClickHandler}/>
