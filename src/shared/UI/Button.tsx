@@ -11,7 +11,9 @@ interface ButtonProps{
 
 export const Button:FC<ButtonProps> = ({callback,additionalClass,parentClass,content,color,...ButtonProps}) => {
     const clickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
-        callback && callback(e)
+        if(color !== 'disabled'){
+            callback && callback(e)
+        }
     }
     return (
     <div onMouseDown={clickHandler}className={`${parentClass}_button ${(additionalClass)?additionalClass:''} _button__${color}`}>

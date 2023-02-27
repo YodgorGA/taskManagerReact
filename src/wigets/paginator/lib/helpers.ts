@@ -22,20 +22,23 @@ export const getPageItemsCount = (limit:number,total:number,page:number) =>{
     return {first,last}
 }
 
-export const getCountOfButtons = (total:number) =>{
-    let buttons = [];
+export const getCountOfActiveButtons = (total:number) =>{
+    let activeButtonsCount = 0 ;
     
     if(total % 8 !== 0){
-        for(let i = 0 ; i <= (total / 8); i++){
-            buttons.push(i)
+        for(let i = 1 ; i <= (total / 8)+1; i++){
+            activeButtonsCount = i
+            console.log(activeButtonsCount);
         }
     }
     else{
-        for(let i = 0; i <= (total / 8) -1 ;i ++){
-            buttons.push(i)
+        for(let i = 1; i <= (total / 8) ;i ++){
+            activeButtonsCount = i
+            console.log(activeButtonsCount);
+        
         }
         
     }
-    return buttons
+    return activeButtonsCount + 1
 }
 export {}
