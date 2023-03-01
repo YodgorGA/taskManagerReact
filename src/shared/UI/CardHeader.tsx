@@ -4,7 +4,7 @@ import '../styles/cardHeader.scss'
 interface CardHeaderProps{
   parentClass:string,
   childButtons?:React.ReactNode,
-  title:string,
+  title:string | undefined,
 }
 
 export const CardHeader:FC<CardHeaderProps> = ({title,parentClass,childButtons,...CardHeaderProps}) => {

@@ -1,6 +1,7 @@
-import { taskFilterBody } from './../lib/types/index';
+import { addWorkTimeBody } from './../lib/types/index';
+import { dataForTaskCreation, taskFilterBody, addWorkTimeResponce, addWorkTimeQueryParams } from './../lib/types';
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Task,changeTaskStatusQuery, taskFilterParams } from "../lib/types";
+import { Task,changeTaskStatusQuery } from "../lib/types";
 
 export type Tasks = {
     data: [Task],
@@ -13,21 +14,6 @@ export const taskApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl:'http://localhost:3000/api/tasks'}),
     tagTypes: ['Tasks','Task'],
     endpoints: (build) =>({
-        getTasksAll:build.mutation<Tasks,number>({
-            query: (page) =>({
-                url:'',
-                method:"POST",
-                body:{
-                    filter: {},
-                    page: page,
-                    limit: 8
-                },
-                providesTags: (result:Task[]) =>
-                result
-                ? [...result.map(({ id }) => ({ type: 'Task' as const, id })), 'Task']
-                : ['Task'],
-            }),
-        }),
         getTaskById:build.query<Task,string>({
             query: (id) => id,
             providesTags: ['Task']
@@ -47,12 +33,29 @@ export const taskApi = createApi({
             }),
             invalidatesTags: ['Task'],
         }),
+        addTask:build.mutation<Task,dataForTaskCreation>({
+            query:(body:dataForTaskCreation) =>({
+                url:`createOrEdit`,
+                method:"PUT",
+                body
+            }),
+            invalidatesTags: ['Task'],
+        }),
+        addWorkTime:build.mutation<addWorkTimeResponce,addWorkTimeQueryParams>({
+            query:(req:addWorkTimeQueryParams) =>({
+                url:`/${req.id}/worktime`,
+                method:"PATCH",
+                body: req.body,
+            }),
+            invalidatesTags : ['Task']
+        })
     })
 })
 
 export const {
-    useGetTasksAllMutation,
     useGetTaskByIdQuery,
     useChangeTaskStausMutation,
     useGetTaskListMutation,
+    useAddTaskMutation,
+    useAddWorkTimeMutation,
 } = taskApi

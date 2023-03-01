@@ -6,7 +6,6 @@ interface ApplyEditingProps{
 
 export const ApplyEditing:FC<ApplyEditingProps> = ({callback}) => {
     const applyButtonClickHandler = () =>{
-        console.log('Some workTime logic worked');
         callback()
     }
     return (

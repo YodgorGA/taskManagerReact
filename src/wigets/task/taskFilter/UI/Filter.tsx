@@ -14,7 +14,7 @@ export const Filter:FC<FilterProps> = ({returnFilterParams,...FilterProps}) => {
   const [filterParams,setFilterParams] = useState({});
 
   const {data:userAllData} = useGetUsersAllQuery();
-  const [userData] = useGetUserByNicknameMutation<{data:[]}>();
+  const [userData] = useGetUserByNicknameMutation();
 
   const dispath = useAppDispatch();
   
@@ -71,7 +71,7 @@ export const Filter:FC<FilterProps> = ({returnFilterParams,...FilterProps}) => {
       <TaskFilterInput
         dataSource={'input'}
         parentClass='title'
-        returnDataForFilterCallback={setParamByFilter}
+        returnDataForApiCallback={setParamByFilter}
         purpose='filter'
         key={1}
         monitorableState={isResetPressed}

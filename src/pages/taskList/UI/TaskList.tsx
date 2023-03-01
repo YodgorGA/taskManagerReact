@@ -13,6 +13,7 @@ export const TaskList:FC = () => {
     const [fetchTaskListDataBody,setFetchTaskListDataBody] = useState({filter:{},page:0,limit:8})
     const [taskListTotal,setTaskListTotal] = useState<number>(0);
     const [getTaskList] = useGetTaskListMutation();
+    const [isAddTaskButtonClicked,setIsAddTaskButtonClicked] = useState(false);
 
     const toggleModalVisibilityButtonClickHandler = () =>{
         modalVisibility === 'hidden'?setModalVisibility('visible'):setModalVisibility('hidden');
@@ -32,12 +33,19 @@ export const TaskList:FC = () => {
         })
     }
 
+    const fetchData = () =>{
+        setIsAddTaskButtonClicked(true);
+        setTimeout(()=>{
+            setIsAddTaskButtonClicked(false);
+        },0)
+    }
+
     useEffect(()=>{
         getTaskList(fetchTaskListDataBody).unwrap().then((response)=>{
             setVisibleTasks(response);
             setTaskListTotal(response.total)            
         })
-    },[fetchTaskListDataBody])
+    },[fetchTaskListDataBody,isAddTaskButtonClicked])
     return (
     <div className='taskList_container _container'>
         <div className="taskList_contentWrapper _contentWrapper">
@@ -49,7 +57,7 @@ export const TaskList:FC = () => {
             <Paginator handlePageChangeFetchCallback={returnPageNumber} parentClass={parentClass} showedItemCountTotal={taskListTotal}/>
         </div>
         <div className={`${parentClass}_modal _modal__${modalVisibility}`}>
-            <AddTaskForm closeFormCallback={toggleModalVisibilityButtonClickHandler}/>
+            <AddTaskForm addTaskButtonClickHandler={fetchData} closeFormCallback={toggleModalVisibilityButtonClickHandler}/>
         </div>
     </div>
 

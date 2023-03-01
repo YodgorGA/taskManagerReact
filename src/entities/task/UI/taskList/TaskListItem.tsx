@@ -42,6 +42,7 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListIte
     if(isTaskFetching === false){
       setButtonItemState(getListItemButtonItemsState(taskData?.status))
     }
+    
   },[taskData?.status,isTaskFetching])
   return (
     <div className="tasksCardTaskList_item taskListItem">
@@ -60,10 +61,7 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListIte
               (buttonItemState?.test !== '')?'__'+buttonItemState?.test:buttonItemState.test
             }`}
             onClick={toTestButtonClickHandler}>На тестирование</div>
-            <Link 
-              to={`/tasks/${id}`} state={{id:taskData?.id}} 
-              className="droppedFieldTaskDropdown_edit"
-              >Редактировать</Link>
+            <Link to={`/tasks/${id}`} className="droppedFieldTaskDropdown_edit">Редактировать</Link>
             <div className={`droppedFieldTaskDropdown_reopen${
               (buttonItemState?.reopen !=='')?'__'+buttonItemState?.reopen:buttonItemState.reopen
             }`}

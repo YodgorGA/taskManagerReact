@@ -36,9 +36,9 @@ export const LoginForm:FC = () => {
           <div className="formLoginPage_title">Авторизация</div>
           <div className="formLoginPage_items">
               <Label content='Логин'/>
-              <Input returnValueCallback={loginInputChangeHanler} type='text' placeholder='Введите логин'/>
+              <Input parentClass='_input' returnValueCallback={loginInputChangeHanler} type='text' placeholder='Введите логин'/>
               <Label content='Пароль'/>
-              <Input returnValueCallback={passwordInputChangeHandler} type='password' placeholder='Введите пароль'/>
+              <Input parentClass='_input' returnValueCallback={passwordInputChangeHandler} type='password' placeholder='Введите пароль'/>
           </div>
           <Button callback={buttonClickHandler} parentClass='formLoginPage' color='success' content='Вход' />
       </div>

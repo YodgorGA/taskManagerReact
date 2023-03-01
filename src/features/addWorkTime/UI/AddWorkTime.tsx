@@ -1,29 +1,60 @@
-import React,{FC, useState} from 'react'
-import { Dropdown as UnitDropdown} from 'shared';
-import { Input } from 'shared';
-import { ApplyEditing, DenyEditing } from 'entities/task';
+import React,{FC, useEffect, useState} from 'react'
+import { Input, Dropdown as UnitDropdown} from 'shared';
+import { ApplyEditing, DenyEditing, useAddWorkTimeMutation,addWorkTimeBody } from 'entities/task';
+import { convertWorkTimeToMinutes } from '../lib/helpers/hepler';
+
+interface AddWorkTimeProps{
+  elapsedTimeForView:string,
+  elapsedTimeForLib:number,
+  currentUser:string,
+  taskId:string
+}
 
 
-export const AddWorkTime:FC = () => {
+export const AddWorkTime:FC<AddWorkTimeProps> = ({taskId,currentUser,elapsedTimeForLib,elapsedTimeForView,...AddWorkTimeProps}) => {
     const [addWorkTimeFormState,setAddWorkTimeFormState] = useState<string>('hidden');
-    const [isApplyPressed,setIsApplyPressed] = useState<boolean>(false);
-    const [isDenyPressed,setIsDenyPressed] = useState<boolean>(false);
+    const [isFormClear,setIsFormClear] = useState<boolean>(false);
+    const [duration,setDuration] = useState('0');
+    const [unit,setUnit] = useState('Минуты');
+
+    const [changeWorkTime] = useAddWorkTimeMutation();
+
+    const clearForm = () =>{
+      setIsFormClear(true);
+      setTimeout(()=>{
+        setIsFormClear(false);
+      },0)
+    }
+
+    const denyChanges = () =>{
+      clearForm();
+      setAddWorkTimeFormState('hidden');
+    }
+
     const addWorkTimeButtonClickHandler = () =>{
       (addWorkTimeFormState !== "hidden")?setAddWorkTimeFormState("hidden"):setAddWorkTimeFormState("visible")
     }
-    const applyChanges = () =>{
-      setIsApplyPressed(true);
-      setAddWorkTimeFormState('hidden');
-      setIsApplyPressed(false);
-    }
-    const denyChanges = () =>{
-      setIsDenyPressed(true);
-      setAddWorkTimeFormState('hidden');
-      setIsApplyPressed(false);
-    }
-    const getDropdownValue = (dataSource:string,arg:string,value:string) =>{
 
+    const getDuration = (value:string) =>{
+      setDuration(value)
     }
+
+    const getUnit = (dataSource:string,arg:string,value:string) =>{
+      setUnit(value)
+    }
+
+    const applyChanges = () =>{
+      changeWorkTime({
+        id:taskId,
+        body:{
+          currentUser:currentUser,
+          timeInMinutes:convertWorkTimeToMinutes(Number(duration),unit)
+        }
+      })
+      clearForm();
+      setAddWorkTimeFormState('hidden');
+    }
+    
     return (
     <>
         <div className="taskInfoItems_item__inWorkTime workTimeItem">
@@ -34,12 +65,25 @@ export const AddWorkTime:FC = () => {
                   Добавить
                 </div>
             </label>
-            <p>С апишки получу</p>
+            <p>{elapsedTimeForView}</p>
         </div>
         <div className={`taskInfoItems_item__addWorkTimeForm addTimeForm__${addWorkTimeFormState}`}>
           <div className="addTimeForm__visible_form">
-            <Input monitorableState={[isApplyPressed,isDenyPressed]} placeholder='Количество' type='text' key={1}/>
-            <UnitDropdown dataSource='props' returnValue={getDropdownValue} purpose='unit' defaultContent='Единица измерения' dropdownItems={['Минуты','Часы']} monitorableState={[isApplyPressed,isDenyPressed]}/>
+            <Input 
+              dataSource='input'
+              returnValueCallback={getDuration}
+              monitorableState={isFormClear} 
+              parentClass='minutes'
+              placeholder='Количество'
+              type='text' 
+              key={1}/>
+            <UnitDropdown 
+              dataSource='props' 
+              returnValue={getUnit}
+              parentClass='unit' 
+              defaultContent='Единица измерения' 
+              dropdownItems={['Минуты','Часы']} 
+              monitorableState={isFormClear}/>
           </div>
           <div className="addTimeForm__visible_buttons">
             <ApplyEditing callback={applyChanges}/>

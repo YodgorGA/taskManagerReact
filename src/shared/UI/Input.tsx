@@ -8,12 +8,12 @@ interface InputProps{
     parentClass?:string,
     purpose?:string,
     returnValueCallback?:(value:string)=>void,
-    returnDataForFilterCallback?:(dataSource:string,key:string,value:string)=>void,
+    returnDataForApiCallback?:(dataSource:string,key:string,value:string)=>void,
     dataSource?:string
 }
 
 
-export const Input:FC<InputProps> = ({dataSource,returnDataForFilterCallback,placeholder,returnValueCallback,type,monitorableState,parentClass,purpose})=>{
+export const Input:FC<InputProps> = ({dataSource,returnDataForApiCallback,placeholder,returnValueCallback,type,monitorableState,parentClass,purpose})=>{
     const [module,setModule] = useState<string>('');
     const [value,setValue] = useState<string>('');
     
@@ -21,8 +21,8 @@ export const Input:FC<InputProps> = ({dataSource,returnDataForFilterCallback,pla
         (e.currentTarget.value.length<1)?setModule(''):setModule('__active');
         setValue(e.currentTarget.value);
         returnValueCallback && returnValueCallback(e.currentTarget.value);
-        if(dataSource && parentClass && returnDataForFilterCallback){
-            returnDataForFilterCallback(dataSource,parentClass,e.currentTarget.value);
+        if(dataSource && parentClass && returnDataForApiCallback){
+            returnDataForApiCallback(dataSource,parentClass,e.currentTarget.value);
         }
     }
     useEffect(()=>{
@@ -30,7 +30,7 @@ export const Input:FC<InputProps> = ({dataSource,returnDataForFilterCallback,pla
         setModule('');
     },[monitorableState])
     return (
-    <input type={type} className={`_input_${purpose}${module}`} onChange={getInputState} value={value} placeholder={placeholder}/>
+    <input type={type} className={`_input${purpose !== undefined?'_'+purpose:''}${module}`} onChange={getInputState} value={value} placeholder={placeholder}/>
   )
 }
 

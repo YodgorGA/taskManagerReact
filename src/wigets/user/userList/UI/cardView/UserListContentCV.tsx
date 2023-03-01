@@ -17,7 +17,7 @@ export const UserListContentCV:FC<UserListContentCVProps> = ({callback,userListV
   return (
     <div className="userList_contentWrapper _contentWrapper">
         <div className={`userList_searchBar`}>
-          <Input monitorableState={isInputClear} placeholder='Имя пользователя' type='text'/>
+          <Input parentClass='_input' monitorableState={isInputClear} placeholder='Имя пользователя' type='text'/>
           <Button callback={findUserButtonClickHandler} color='primary' content='Поиск' parentClass='userList'/>
         </div>
         <div className="userList_cards cardsUserList">

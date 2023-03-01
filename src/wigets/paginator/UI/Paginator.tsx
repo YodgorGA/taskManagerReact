@@ -37,7 +37,20 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
             handlePageChangeFetchCallback(eText-1);
         }
     }
-
+    useEffect(()=>{
+        if(showedItemCountTotal < 8){
+            setPageInfo({
+                first:1,
+                last:showedItemCountTotal
+            });
+        }
+        else if(showedItemCountTotal > 8){
+            setPageInfo({
+                first:1,
+                last:8
+            });
+        }
+    },[showedItemCountTotal])
     return (
     <div className={`${parentClass}_paginator _paginator`}>
         <div className="_paginator_left leftsidePaginator">

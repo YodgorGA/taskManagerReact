@@ -5,11 +5,11 @@ import { DenyEditing } from "./UI/taskPage/DenyEditing";
 import { TaskListItem } from './UI/taskList/TaskListItem';
 
 import { taskSlice, type taskSliceState, setTaskFilterParams } from './model/taskSlice';
-import { taskApi,useChangeTaskStausMutation,useGetTaskByIdQuery,type Tasks, useGetTaskListMutation} from './model/taskAPI';
+import { taskApi,useChangeTaskStausMutation,useGetTaskByIdQuery,type Tasks, useGetTaskListMutation,useAddTaskMutation, useAddWorkTimeMutation} from './model/taskAPI';
 
 import { getListItemButtonItemsState, getTaskFilterInitialState, getTaskFilterStaticArgument } from './lib/helpers/helpers';
 
-import type { Task, taskFilterParams,taskFilterBody} from './lib/types';
+import type { Task, taskFilterParams,taskFilterBody, dataForTaskCreation, addWorkTimeResponce, addWorkTimeQueryParams, addWorkTimeBody} from './lib/types';
 
 import { useTasks } from './model/selectors';
 
@@ -25,7 +25,7 @@ export {
         //api
         taskApi,
         //apiReducers
-        useChangeTaskStausMutation,useGetTaskByIdQuery,useGetTaskListMutation,
+        useChangeTaskStausMutation,useGetTaskByIdQuery,useGetTaskListMutation,useAddTaskMutation,useAddWorkTimeMutation,
         //slice
         taskSlice,
         //sliceReducers
@@ -35,7 +35,7 @@ export {
         //interfaces
         taskSliceState,
         //types
-        Task,Tasks,taskFilterParams,taskFilterBody,
+        Task,Tasks,taskFilterParams,taskFilterBody,dataForTaskCreation,addWorkTimeResponce,addWorkTimeQueryParams,addWorkTimeBody,
         //heplers
         getListItemButtonItemsState,getTaskFilterInitialState,getTaskFilterStaticArgument,
 
