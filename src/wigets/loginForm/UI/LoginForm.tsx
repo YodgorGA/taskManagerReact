@@ -4,7 +4,7 @@ import { Input, Label,Button,locationState } from 'shared'
 import { useGetUserAuthDataMutation } from 'entities/user' 
 import { useAppDispatch } from 'app/store/hooks'
 import { setCurrentUser } from 'entities/user'
-import '../styles/loginForm.scss'
+import 'wigets/loginForm/styles/loginForm.scss'
 
 export const LoginForm:FC = () => {
   const navigate = useNavigate()

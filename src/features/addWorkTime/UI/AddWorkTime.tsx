@@ -1,5 +1,5 @@
 import React,{FC, useEffect, useState} from 'react'
-import { Input, Dropdown as UnitDropdown} from 'shared';
+import { Input, Dropdown as UnitDropdown, resetField} from 'shared';
 import { ApplyEditing, DenyEditing, useAddWorkTimeMutation,addWorkTimeBody } from 'entities/task';
 import { convertWorkTimeToMinutes } from '../lib/helpers/hepler';
 
@@ -19,15 +19,8 @@ export const AddWorkTime:FC<AddWorkTimeProps> = ({taskId,currentUser,elapsedTime
 
     const [changeWorkTime] = useAddWorkTimeMutation();
 
-    const clearForm = () =>{
-      setIsFormClear(true);
-      setTimeout(()=>{
-        setIsFormClear(false);
-      },0)
-    }
-
     const denyChanges = () =>{
-      clearForm();
+      resetField(setIsFormClear);
       setAddWorkTimeFormState('hidden');
     }
 
@@ -51,7 +44,7 @@ export const AddWorkTime:FC<AddWorkTimeProps> = ({taskId,currentUser,elapsedTime
           timeInMinutes:convertWorkTimeToMinutes(Number(duration),unit)
         }
       })
-      clearForm();
+      resetField(setIsFormClear);
       setAddWorkTimeFormState('hidden');
     }
     

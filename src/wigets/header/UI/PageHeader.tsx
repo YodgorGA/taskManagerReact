@@ -1,7 +1,5 @@
 import React,{FC} from 'react'
-import { useLocation } from 'react-router-dom'
-import '../styles/header.scss'
-
+import 'wigets/header/styles/header.scss'
 interface PageHeaderProps{
   navBar?: React.ReactNode
   userProfile?: React.ReactNode

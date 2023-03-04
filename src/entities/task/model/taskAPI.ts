@@ -1,7 +1,6 @@
-import { addWorkTimeBody } from './../lib/types/index';
-import { dataForTaskCreation, taskFilterBody, addWorkTimeResponce, addWorkTimeQueryParams } from './../lib/types';
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { Task,changeTaskStatusQuery } from "../lib/types";
+import { dataForTaskCreation, taskFilterBody, addWorkTimeResponce, addWorkTimeQueryParams, dataForTaskEdit} from './../lib/types';
 
 export type Tasks = {
     data: [Task],
@@ -48,6 +47,19 @@ export const taskApi = createApi({
                 body: req.body,
             }),
             invalidatesTags : ['Task']
+        }),
+        editTask:build.mutation<Task,dataForTaskEdit>({
+            query:(body)=>({
+                url:'/createOrEdit',
+                method: "PUT",
+                body
+            })
+        }),
+        removeTask:build.mutation<string,string>({
+            query:(taskId)=>({
+                url:`/${taskId}`,
+                method:'DELETE',
+            })
         })
     })
 })
@@ -58,4 +70,6 @@ export const {
     useGetTaskListMutation,
     useAddTaskMutation,
     useAddWorkTimeMutation,
+    useEditTaskMutation,
+    useRemoveTaskMutation,
 } = taskApi

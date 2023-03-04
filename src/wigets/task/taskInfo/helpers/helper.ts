@@ -37,11 +37,6 @@ export const getTaskRank = (rank:string) =>{
     }
 }
 
-export const transformDate = (date:string) =>{
-    const newDate = new Date(date);
-    return newDate.toLocaleDateString();
-}
-
 
 export const convertTimeToHoursMinutes  = (minutes:number) =>{
     const hours = Math.floor(minutes / 60);

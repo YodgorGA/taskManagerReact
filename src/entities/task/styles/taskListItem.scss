@@ -95,6 +95,19 @@
         justify-content: flex-start;
         align-items: flex-end;
     }
+
+    &:last-child {
+        & .taskDropdown_droppedField__open
+        {
+            top:-80px;
+        }
+    }
+    &:nth-child(odd){
+        & .taskDropdown_droppedField__open
+        {
+            top:20px;
+        }
+    }
     
 }
 

@@ -1,22 +1,21 @@
-import React,{FC, useEffect, useState} from 'react'
-import { dataForTaskCreation, getTaskFilterStaticArgument, useAddTaskMutation } from 'entities/task'
+import React,{FC, useState} from 'react'
+import { dataForTaskCreation, getTaskDropdownStaticArgument, useAddTaskMutation } from 'entities/task'
 import { useGetUserByNicknameMutation, useGetUsersAllQuery, useUserState } from 'entities/user'
 import { Button, Dropdown as AddTaskDropdown, Label, Textarea as AddTaskTextarea, Divider as AddTaskDivider } from 'shared'
-import '../styles/addTask.scss'
-import { useAppSelector } from 'app/store/hooks'
+import 'features/addTaskForm/styles/addTask.scss';
 
 interface AddTaskFormProps{
     closeFormCallback:()=>void,
-    addTaskButtonClickHandler:()=>void,
+    fetchData:()=>void,
 }
 
-export const AddTaskForm:FC<AddTaskFormProps> = ({addTaskButtonClickHandler,closeFormCallback,...AddTaskFormProps}) => {
+export const AddTaskForm:FC<AddTaskFormProps> = ({fetchData,closeFormCallback,...AddTaskFormProps}) => {
     const [isFormItemsClear,setIsFormItemsClear] = useState<boolean>(true);
     const [addTask] = useAddTaskMutation();
     const userState = useUserState()
     const [addedData,setAddedData] = useState<dataForTaskCreation>({
         userId:userState.currentUser?.id,
-        assignedId:undefined,
+        assignedId:'',
         description:undefined,
         rank:undefined,
         title:undefined,
@@ -39,19 +38,19 @@ export const AddTaskForm:FC<AddTaskFormProps> = ({addTaskButtonClickHandler,clos
             title:addedData.title,
             type:addedData.type 
         })
-        addTaskButtonClickHandler()
-        closeFormCallback()
+        fetchData()
         clearForm()
+        closeFormCallback()
     }
     const denyChangesButtonClickHanler = ()=>{
-        closeFormCallback()
         clearForm()
+        closeFormCallback()
     }
     const getFieldValue = (dataSource:string,arg:string,value:string) =>{
         if(dataSource === 'props'){
             setAddedData({
               ...addedData,
-              [arg]:getTaskFilterStaticArgument(arg,value)
+              [arg]:getTaskDropdownStaticArgument(arg,value)
             })
             }
             else if(dataSource === 'api'){
@@ -86,7 +85,7 @@ export const AddTaskForm:FC<AddTaskFormProps> = ({addTaskButtonClickHandler,clos
                                 returnValue={getFieldValue}
                                 monitorableState={isFormItemsClear} 
                                 defaultContent='Выберите тип' 
-                                dropdownItems={['Создание','Фикс'] }
+                                dropdownItems={['Создание','Фикс']}
                             />
                             <Label content='Пользователь'/>
                             <AddTaskDropdown 

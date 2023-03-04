@@ -4,9 +4,10 @@ import { Tasks } from 'entities/task'
 
 interface TaskListWidgetProps{
   filteredData?:Tasks,
+  fetchData:()=>void,
 }
 
-export const TaskList:FC<TaskListWidgetProps> = ({filteredData,...TaskListWidgetProps}) => {
+export const TaskList:FC<TaskListWidgetProps> = ({fetchData,filteredData,...TaskListWidgetProps}) => {
   const [taskList,setTaskList] = useState<Tasks>();
   
   useEffect(()=>{
@@ -17,7 +18,7 @@ export const TaskList:FC<TaskListWidgetProps> = ({filteredData,...TaskListWidget
       <div className="cardTaskList_tasks tasksCardTaskList">
         {
           taskList?.data.map((task:Task)=>{
-            return <TaskListItem assignedId={task.assignedId} id={task.id} key={task.id}/>
+            return <TaskListItem fetchData={fetchData} assignedId={task.assignedId} id={task.id} key={task.id}/>
           })
         }
       </div>

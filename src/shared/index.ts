@@ -6,8 +6,9 @@ import { Dropdown } from './UI/Dropdown';
 import { LinkButton } from "./UI/LinkButton";
 import { Label } from "./UI/Label";
 import { Textarea } from "./UI/Textarea";
-import { resetInput } from "./lib/helpers/inputHelper";
+import { resetField } from "./lib/helpers/inputHelper";
 import type { locationState } from "./lib/types/types";
+import { getIdFromLocation, transformDate } from "./lib/helpers/dataTransformation";
 
 export {
     //UI
@@ -20,7 +21,8 @@ export {
     Label,
     Textarea,
     //helpers
-    resetInput,
+    resetField,transformDate,getIdFromLocation,
     //types
     locationState,
+    //sharedHelpers
 }

@@ -81,8 +81,6 @@
             @include font('Roboto',16px,400,171%);
             
         }
-        &:not(:last-child){
-        }
         &__inWorkTime{
             
         }
@@ -258,7 +256,7 @@
         & p{
             @include font('Roboto',16px,400,171%);
             color:$darkTextColor;
-            word-break: break-all;
+            word-break: normal;
             
         }
     }

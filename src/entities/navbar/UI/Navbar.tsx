@@ -1,6 +1,6 @@
 import React,{FC}from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import '../styles/navbar.scss'
+import 'entities/navbar/styles/navbar.scss'
 
 export const Navbar:FC = () => {
     const location = useLocation().pathname; 

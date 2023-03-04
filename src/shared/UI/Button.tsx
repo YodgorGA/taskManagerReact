@@ -6,17 +6,25 @@ interface ButtonProps{
     color:string
     parentClass:string
     additionalClass?:string
-    callback?:(e:React.MouseEvent<HTMLDivElement, MouseEvent>)=>void
+    purpose?:string
+    pagintationCallback?:(e:React.MouseEvent<HTMLDivElement, MouseEvent>)=>void
+    callback?:()=>void;
 }
 
-export const Button:FC<ButtonProps> = ({callback,additionalClass,parentClass,content,color,...ButtonProps}) => {
+export const Button:FC<ButtonProps> = ({pagintationCallback,purpose,callback,additionalClass,parentClass,content,color,...ButtonProps}) => {
     const clickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
         if(color !== 'disabled'){
-            callback && callback(e)
+            if(purpose === 'paginationNubmer'){
+                pagintationCallback && pagintationCallback(e)
+            }
+            else{
+                callback && callback()
+            }
+            
         }
     }
     return (
-    <div onMouseDown={clickHandler}className={`${parentClass}_button ${(additionalClass)?additionalClass:''} _button__${color}`}>
+    <div onMouseDown={clickHandler} className={`${parentClass}_button ${(additionalClass)?additionalClass:''} _button__${color}`}>
         {content}
     </div>
   )

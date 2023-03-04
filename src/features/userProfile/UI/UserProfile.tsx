@@ -1,10 +1,10 @@
-import React,{FC, useEffect, useState} from 'react'
-import { useAppDispatch} from 'app/store/hooks';
-import { useLocation, useNavigate } from 'react-router-dom';
-import '../styles/userProfile.scss'
+import React,{FC, useState} from 'react'
 import { locationState } from 'shared';
-import { useUserIsAuth, useUserState } from 'entities/user';
-import { removeCurrentUser } from 'entities/user';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch} from 'app/store/hooks';
+import { useUserIsAuth, useUserState,removeCurrentUser } from 'entities/user';
+import 'features/userProfile/styles/userProfile.scss'
+
 interface UserProfileProps{
     userProfilePhoto:string,
 }
@@ -15,7 +15,7 @@ export const UserProfile:FC<UserProfileProps> = ({...UserProfileProps}) => {
     const dispatch = useAppDispatch();
     const isAuth = useUserIsAuth();
     const currentUser = useUserState().currentUser;
-    const userProfilePhoto = (currentUser?.photoUrl)? currentUser.photoUrl : 'img/pageHeader/userProfile.png';
+    const userProfilePhoto = (currentUser?.photoUrl)? currentUser.photoUrl : '/img/pageHeader/userProfile.png';
 
     const [dropdownState, setDropdownState] = useState<string>('closed');
 

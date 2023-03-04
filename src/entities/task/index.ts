@@ -5,11 +5,11 @@ import { DenyEditing } from "./UI/taskPage/DenyEditing";
 import { TaskListItem } from './UI/taskList/TaskListItem';
 
 import { taskSlice, type taskSliceState, setTaskFilterParams } from './model/taskSlice';
-import { taskApi,useChangeTaskStausMutation,useGetTaskByIdQuery,type Tasks, useGetTaskListMutation,useAddTaskMutation, useAddWorkTimeMutation} from './model/taskAPI';
+import { taskApi,useChangeTaskStausMutation,useGetTaskByIdQuery,type Tasks, useGetTaskListMutation,useAddTaskMutation, useAddWorkTimeMutation, useEditTaskMutation,useRemoveTaskMutation} from './model/taskAPI';
 
-import { getListItemButtonItemsState, getTaskFilterInitialState, getTaskFilterStaticArgument } from './lib/helpers/helpers';
+import { getListItemButtonItemsState, getTaskFilterInitialState, getTaskDropdownStaticArgument } from './lib/helpers/helpers';
 
-import type { Task, taskFilterParams,taskFilterBody, dataForTaskCreation, addWorkTimeResponce, addWorkTimeQueryParams, addWorkTimeBody} from './lib/types';
+import type { Task, taskFilterParams,taskFilterBody, dataForTaskCreation, addWorkTimeResponce, addWorkTimeQueryParams, addWorkTimeBody, dataForTaskEdit} from './lib/types';
 
 import { useTasks } from './model/selectors';
 
@@ -25,7 +25,7 @@ export {
         //api
         taskApi,
         //apiReducers
-        useChangeTaskStausMutation,useGetTaskByIdQuery,useGetTaskListMutation,useAddTaskMutation,useAddWorkTimeMutation,
+        useChangeTaskStausMutation,useGetTaskByIdQuery,useGetTaskListMutation,useAddTaskMutation,useAddWorkTimeMutation,useEditTaskMutation,useRemoveTaskMutation,
         //slice
         taskSlice,
         //sliceReducers
@@ -35,8 +35,8 @@ export {
         //interfaces
         taskSliceState,
         //types
-        Task,Tasks,taskFilterParams,taskFilterBody,dataForTaskCreation,addWorkTimeResponce,addWorkTimeQueryParams,addWorkTimeBody,
+        Task,Tasks,taskFilterParams,taskFilterBody,dataForTaskCreation,addWorkTimeResponce,addWorkTimeQueryParams,addWorkTimeBody,dataForTaskEdit,
         //heplers
-        getListItemButtonItemsState,getTaskFilterInitialState,getTaskFilterStaticArgument,
+        getListItemButtonItemsState,getTaskFilterInitialState,getTaskDropdownStaticArgument,
 
 }

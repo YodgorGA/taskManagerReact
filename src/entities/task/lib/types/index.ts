@@ -54,3 +54,14 @@ export type addWorkTimeQueryParams = {
     id:string,
     body:addWorkTimeBody
 }
+
+export type dataForTaskEdit = {
+    id:string| undefined,
+    userId:string | undefined,
+    assignedId:string | undefined,
+    title:string | undefined,
+    description:string | undefined,
+    type:string | undefined,
+    rank:string | undefined,
+    status:string | undefined
+}

@@ -2,17 +2,18 @@ import React,{FC} from 'react'
 import { Task, TaskInfoItem } from 'entities/task'
 import { TaskInfoAddWorkTime } from 'features/addWorkTime'
 import { useGetUserByIdQuery, useUserState } from 'entities/user'
-import { convertTimeToHoursMinutes, getTaskRank, getTaskStatus, getTaskType, transformDate } from '../helpers/helper'
+import { transformDate } from 'shared'
+import { convertTimeToHoursMinutes, getTaskRank, getTaskStatus, getTaskType } from '../helpers/helper'
 
 interface TaskInfoProps{
   taskData:Task
 }
-
 export const TaskInfo:FC<TaskInfoProps> = ({taskData,...TaskInfoProps}) => {
   const {status,type,rank,userId,assignedId,dateOfCreation,dateOfUpdate,timeInMinutes,id} = taskData;
   const {data:assignedUserData} = useGetUserByIdQuery(assignedId);
   const {data:taskCreatorUser} = useGetUserByIdQuery(userId);
   const currentUser = useUserState().currentUser?.id
+
   return (
     <div className="cardTaskPage_taskInfo taskInfoItems">
     <TaskInfoItem content={getTaskStatus(status)} label='Статус' key={1}/>

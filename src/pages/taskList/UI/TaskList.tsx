@@ -13,7 +13,7 @@ export const TaskList:FC = () => {
     const [fetchTaskListDataBody,setFetchTaskListDataBody] = useState({filter:{},page:0,limit:8})
     const [taskListTotal,setTaskListTotal] = useState<number>(0);
     const [getTaskList] = useGetTaskListMutation();
-    const [isAddTaskButtonClicked,setIsAddTaskButtonClicked] = useState(false);
+    const [isDataChangedFromButton,setIsDataChangedFromButton] = useState(false);
 
     const toggleModalVisibilityButtonClickHandler = () =>{
         modalVisibility === 'hidden'?setModalVisibility('visible'):setModalVisibility('hidden');
@@ -34,30 +34,33 @@ export const TaskList:FC = () => {
     }
 
     const fetchData = () =>{
-        setIsAddTaskButtonClicked(true);
+        setIsDataChangedFromButton(true);
         setTimeout(()=>{
-            setIsAddTaskButtonClicked(false);
+            setIsDataChangedFromButton(false);
         },0)
     }
 
     useEffect(()=>{
         getTaskList(fetchTaskListDataBody).unwrap().then((response)=>{
             setVisibleTasks(response);
-            setTaskListTotal(response.total)            
+            setTaskListTotal(response.total);     
         })
-    },[fetchTaskListDataBody,isAddTaskButtonClicked])
+        
+         
+    },[fetchTaskListDataBody,isDataChangedFromButton,getTaskList])
+
     return (
     <div className='taskList_container _container'>
         <div className="taskList_contentWrapper _contentWrapper">
             <CardHeader parentClass={parentClass} title='Задачи' childButtons={<Button callback={toggleModalVisibilityButtonClickHandler} color='primary' content='Добавить задачу' parentClass='_cardHeader' key={0}/>}/>
             <div className="taskList_card _card cardTaskList">
                 <TaskFilter returnFilterParams={returnFilterParams}/>
-                <TaskListWidget filteredData={visibleTasks}/>
+                <TaskListWidget fetchData={fetchData} filteredData={visibleTasks}/>
             </div>
             <Paginator handlePageChangeFetchCallback={returnPageNumber} parentClass={parentClass} showedItemCountTotal={taskListTotal}/>
         </div>
         <div className={`${parentClass}_modal _modal__${modalVisibility}`}>
-            <AddTaskForm addTaskButtonClickHandler={fetchData} closeFormCallback={toggleModalVisibilityButtonClickHandler}/>
+            <AddTaskForm fetchData={fetchData} closeFormCallback={toggleModalVisibilityButtonClickHandler}/>
         </div>
     </div>
 

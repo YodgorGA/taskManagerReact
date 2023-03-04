@@ -1,16 +1,17 @@
 import React,{FC, useEffect, useState} from 'react'
 import { useGetUserByIdQuery } from 'entities/user';
-import { useChangeTaskStausMutation, useGetTaskByIdQuery } from 'entities/task';
+import { useChangeTaskStausMutation, useGetTaskByIdQuery, useRemoveTaskMutation } from 'entities/task';
 import { Link } from 'react-router-dom';
 import { getListItemButtonItemsState } from 'entities/task';
-import '../../styles/taskListItem.scss';
+import 'entities/task/styles/taskListItem.scss';
 
 interface TaskListItemProps{
   id:string,
   assignedId:string,
+  fetchData:()=>void
 }
 
-export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListItemProps}) => {
+export const TaskListItem:FC<TaskListItemProps> = ({fetchData,id,assignedId,...TaskListItemProps}) => {
   const [dropdownState,setDropdownState] = useState('closed');
   const [dropdownButtonState,setDropdownButtonState] = useState('stayed');
   const [buttonItemState,setButtonItemState] = useState<{test:string,reopen:string}>()
@@ -18,6 +19,7 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListIte
   
   const {data:taskData,isFetching:isTaskFetching} = useGetTaskByIdQuery(id);
   const {data:userData} = useGetUserByIdQuery(assignedId);
+  const [removeTask] = useRemoveTaskMutation();
 
   const [changeTaskStatus] = useChangeTaskStausMutation();
   
@@ -37,12 +39,16 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListIte
   const reopenButtonClickHandler = () =>{
     changeTaskStatus({id:id,status:'opened'})
   }
+  const removeButtonClickHandler = () =>{
+    removeTask(id).then(()=>{
+      fetchData()
+    })
+  }
 
   useEffect(()=>{
     if(isTaskFetching === false){
       setButtonItemState(getListItemButtonItemsState(taskData?.status))
     }
-    
   },[taskData?.status,isTaskFetching])
   return (
     <div className="tasksCardTaskList_item taskListItem">
@@ -66,7 +72,7 @@ export const TaskListItem:FC<TaskListItemProps> = ({id,assignedId,...TaskListIte
               (buttonItemState?.reopen !=='')?'__'+buttonItemState?.reopen:buttonItemState.reopen
             }`}
             onClick={reopenButtonClickHandler}>Переоткрыть</div>
-            <div className="droppedFieldTaskDropdown_delete">Удалить</div>
+            <div onMouseDown={removeButtonClickHandler} className="droppedFieldTaskDropdown_delete">Удалить</div>
         </div>
       </div>
     </div>

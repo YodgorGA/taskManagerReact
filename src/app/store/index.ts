@@ -6,6 +6,7 @@ import { userApi, userSlice } from 'entities/user';
 import { taskSlice, taskSliceState } from 'entities/task';
 import { taskApi } from 'entities/task';
 import { userSliceState } from 'entities/user/model/userSlice';
+import { commentApi } from 'entities/comment';
 
 const persistConfig = {
   key:'root',
@@ -16,6 +17,7 @@ const persistConfig = {
 
 export const store = configureStore({
   reducer: {
+    [commentApi.reducerPath]:commentApi.reducer,
     [userApi.reducerPath]:userApi.reducer,
     [taskApi.reducerPath]:taskApi.reducer,
     task: taskSlice.reducer,
@@ -32,7 +34,7 @@ export const store = configureStore({
           REGISTER
         ],
       },
-    }).concat(taskApi.middleware,userApi.middleware)
+    }).concat(taskApi.middleware,userApi.middleware,commentApi.middleware)
 });
 
 export const persistedStore = persistStore(store);

@@ -1,5 +1,5 @@
 import React,{FC, useEffect, useState} from 'react'
-import '../styles/dropdown.scss';
+import 'shared/styles/dropdown.scss';
 
 interface DropdownProps{
   monitorableState:boolean[]|boolean,
@@ -9,14 +9,15 @@ interface DropdownProps{
   purpose?:string,
   parentClass?:string,
   returnValue:(dataSource:string,arg:string,value:string)=>void;
-  dataSource:string
+  dataSource:string,
+  propsValue?:string
 }
 
-export const Dropdown:FC<DropdownProps> = ({dataSource,relatedData,returnValue,parentClass,purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
+export const Dropdown:FC<DropdownProps> = ({propsValue,dataSource,relatedData,returnValue,parentClass,purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
   const [state,setState] = useState<string>('closed');
   const [arrow,setArrow] = useState<string>('open');
   const [active,setActive] = useState<string>('default');
-  const [content,setContent] = useState<string>(defaultContent);
+  const [content,setContent] = useState<string>(propsValue !== undefined?propsValue:defaultContent);
   
   
   const dropdownClickHandler = () =>{
@@ -31,7 +32,7 @@ export const Dropdown:FC<DropdownProps> = ({dataSource,relatedData,returnValue,p
         setActive('active');
     }
 }
-const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, MouseEvent>) =>{
+  const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, MouseEvent>) =>{
   e.currentTarget.textContent && setContent(e.currentTarget.textContent);
   if(parentClass !== undefined && e.currentTarget.textContent !== null){
     returnValue(dataSource,parentClass,e.currentTarget.textContent);
@@ -39,13 +40,21 @@ const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, Mouse
   setState('closed');
   setArrow('open');
   setActive('active');
-}
+  }
   useEffect(()=>{
-    setState('closed');
-    setArrow('open');
-    setActive('default');
-    (defaultContent && setContent(defaultContent));
-  },[monitorableState,defaultContent])
+    if(propsValue !== undefined){
+      setContent(propsValue)
+      setState('closed');
+      setArrow('open');
+      setActive('active');
+    }
+    else{
+      setContent(defaultContent);
+      setState('closed');
+      setArrow('open');
+      setActive('default')
+    }
+  },[propsValue,monitorableState])
   return (
     <div className={`${parentClass !== undefined?'_dropdown_'+parentClass:''} ${purpose !== undefined?'_dropdown_'+purpose:''} _dropdown__${active}`}>
           <div className="_dropdown_form" onMouseDown={dropdownClickHandler}>

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { Button } from 'shared'
 import { ChangeUserListVeiwButton } from 'features/paginator'
 import { getCountOfActiveButtons, getPageItemsCount } from '../lib/helpers'
-import '../styles/paginator.scss'
+import 'wigets/paginator/styles/paginator.scss'
 
 interface PaginatorProps{
     parentClass:string,
@@ -61,8 +61,9 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
                 additionalClass='leftsidePaginator_prevButton' 
                 content='Назад'
             />
-            <Button 
-                callback={numberButtonClickHandler} 
+            <Button
+                purpose='paginationNubmer'
+                pagintationCallback={numberButtonClickHandler} 
                 parentClass='leftsidePaginator' 
                 color={(countOfButtons > visibleButtonsNumber[0])?'primary':'disabled'}
                 additionalClass='leftsidePaginator_numberButton' 
@@ -70,7 +71,8 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
                 content={String(visibleButtonsNumber[0])}
             />
             <Button 
-                callback={numberButtonClickHandler} 
+                purpose='paginationNubmer'
+                pagintationCallback={numberButtonClickHandler} 
                 parentClass='leftsidePaginator' 
                 color={(countOfButtons > visibleButtonsNumber[1])?'primary':'disabled'}
                 additionalClass='leftsidePaginator_numberButton' 
@@ -78,7 +80,8 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
                 content={String(visibleButtonsNumber[1])}
             />
             <Button 
-                callback={numberButtonClickHandler} 
+                purpose='paginationNubmer'
+                pagintationCallback={numberButtonClickHandler} 
                 parentClass='leftsidePaginator' 
                 color={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'}
                 additionalClass='leftsidePaginator_numberButton' 
@@ -88,7 +91,7 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
             <Button 
                 callback={nextButtonClickHandler} 
                 parentClass='leftsidePaginator' 
-                color={(countOfButtons > 3)?'primary':'disabled'} 
+                color={(countOfButtons < showedItemCountTotal / 8)?'primary':'disabled'} 
                 additionalClass='leftsidePaginator_nextButton' 
                 content='Вперед'
             />

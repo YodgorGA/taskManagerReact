@@ -1,9 +1,9 @@
 import React,{FC, useEffect, useState} from 'react'
 import { useGetUserByNicknameMutation, useGetUsersAllQuery } from 'entities/user'
 import { Dropdown as TaskFilterDropdown,Button,Input as TaskFilterInput} from 'shared'
-import { getTaskFilterStaticArgument, setTaskFilterParams, taskFilterParams } from 'entities/task'
+import { getTaskDropdownStaticArgument, setTaskFilterParams, taskFilterParams } from 'entities/task'
 import { useAppDispatch } from 'app/store/hooks'
-import '../styles/filter.scss'
+import 'wigets/task/taskFilter/styles/filter.scss'
 
 interface FilterProps{
   returnFilterParams:(filter:taskFilterParams)=>void,
@@ -22,7 +22,7 @@ export const Filter:FC<FilterProps> = ({returnFilterParams,...FilterProps}) => {
     if(dataSource === 'props'){
       setFilterParams({
         ...filterParams,
-        [arg]:getTaskFilterStaticArgument(arg,value)
+        [arg]:getTaskDropdownStaticArgument(arg,value)
       })
     }
     else if(dataSource === 'api'){

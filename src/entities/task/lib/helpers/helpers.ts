@@ -63,7 +63,7 @@ export const getTaskFilterInitialState = () => {
   return initialTaskFilterState;
 }
 
-export const getTaskFilterStaticArgument = (parentClass:string,value:string) =>{
+export const getTaskDropdownStaticArgument = (parentClass:string,value:string) =>{
   switch (parentClass){
     case 'type':
       if(value === 'Фикс'){
