@@ -91,7 +91,7 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
             <Button 
                 callback={nextButtonClickHandler} 
                 parentClass='leftsidePaginator' 
-                color={(countOfButtons < showedItemCountTotal / 8)?'primary':'disabled'} 
+                color={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'} 
                 additionalClass='leftsidePaginator_nextButton' 
                 content='Вперед'
             />

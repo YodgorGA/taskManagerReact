@@ -23,6 +23,7 @@ export const TaskList:FC = () => {
         setFetchTaskListDataBody({
             ...fetchTaskListDataBody,
             filter:params,
+            page:0
         })
     }
 
@@ -45,9 +46,15 @@ export const TaskList:FC = () => {
             setVisibleTasks(response);
             setTaskListTotal(response.total);     
         })
-        
-         
     },[fetchTaskListDataBody,isDataChangedFromButton,getTaskList])
+
+    useEffect(()=>{
+        setFetchTaskListDataBody({
+            ...fetchTaskListDataBody,
+            page:(taskListTotal % 8 > 0)? Math.floor(taskListTotal / 8):taskListTotal/8 -1
+        })
+        console.log(fetchTaskListDataBody.page)
+    },[modalVisibility])
 
     return (
     <div className='taskList_container _container'>
