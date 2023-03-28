@@ -1,25 +1,26 @@
 import React,{FC, useEffect, useState} from 'react'
 import 'shared/styles/textarea.scss'
+import {ValueDataKeyFunc,ValueFunc} from 'shared'
 
 interface TextareaProps{
     purpose:string;
     monitorableState?:boolean,
-    placeholder:string
-    returnDataForApiCallback?:(dataSource:string,key:string,value:string)=>void,
-    dataSource?:string
-    parentClass?:string,
+    placeholder:string,
+    callback?:ValueDataKeyFunc,
+    dataKey?:string;
     propsValue?:string,
 }
 
 
-export const Textarea:FC<TextareaProps> = ({propsValue,parentClass,dataSource,returnDataForApiCallback,placeholder,purpose,monitorableState,...TextareaProps}) => {
+export const Textarea:FC<TextareaProps> = ({propsValue,dataKey,callback,placeholder,purpose,monitorableState,...TextareaProps}) => {
     const [textareaValue,setTextareaValue] = useState<string>(propsValue !==undefined?propsValue:'');
     const [module,setModule] = useState<string>('');
+    
     const textareaChangeHandler = (e:React.ChangeEvent<HTMLTextAreaElement>)=>{
         (e.currentTarget.value.length <1)?setModule(''):setModule('__active');
         setTextareaValue(e.currentTarget.value);
-        if(dataSource && parentClass && returnDataForApiCallback){
-            returnDataForApiCallback(dataSource,parentClass,e.currentTarget.value);
+        if(dataKey !== undefined && callback !== undefined){
+            callback(e.currentTarget.value,dataKey)
         }
     }
 

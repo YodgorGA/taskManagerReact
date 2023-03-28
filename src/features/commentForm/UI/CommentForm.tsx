@@ -2,6 +2,7 @@ import React,{FC, useState} from 'react'
 import { useAddNewCommentMutation } from 'entities/comment';
 import { Button } from 'shared'
 import { Textarea as TaskPageTextarea } from 'shared/UI/Textarea'
+import { Textarea } from 'pages/test/UI/Textarea';
 
 interface CommentFormProps{
   currentUser:string,
@@ -20,7 +21,7 @@ export const CommentForm:FC<CommentFormProps> = ({taskId,currentUser,...CommentF
     },0)
   }
 
-  const getTextareaData = (dataSource:string,key:string,value:string) =>{
+  const getTextareaData = (value:string) =>{
     setText(value)
   }
 
@@ -34,16 +35,14 @@ export const CommentForm:FC<CommentFormProps> = ({taskId,currentUser,...CommentF
   }
   return (
     <>  
-        <TaskPageTextarea 
+        <Textarea 
           placeholder='Введите текст комментария' 
           monitorableState={isCommentSended} 
-          purpose='taskPageComment'
-          dataSource='input'
-          parentClass='text'
-          returnDataForApiCallback={getTextareaData}
+          dataKey='text'
+          callback={getTextareaData}
           />
 
-        <Button callback={buttonClickHandler} color='success' content='Добавить комментарий' parentClass='commentsCardTaskPage'/>
+        <Button callback={buttonClickHandler} color='success' content='Добавить' parentClass='commentsCardTaskPage'/>
     </>
   )
 }

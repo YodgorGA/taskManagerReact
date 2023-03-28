@@ -1,4 +1,5 @@
 import React,{FC, useEffect, useState} from 'react'
+import { ValueDataKeyFunc, ValueFunc } from 'shared';
 import 'shared/styles/dropdown.scss';
 
 interface DropdownProps{
@@ -7,13 +8,12 @@ interface DropdownProps{
   relatedData?:string[],
   defaultContent:string,
   purpose?:string,
-  parentClass?:string,
-  returnValue:(dataSource:string,arg:string,value:string)=>void;
-  dataSource:string,
+  dataKey?:string,
+  returnValue?: ValueDataKeyFunc | ValueFunc;
   propsValue?:string
 }
 
-export const Dropdown:FC<DropdownProps> = ({propsValue,dataSource,relatedData,returnValue,parentClass,purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
+export const Dropdown:FC<DropdownProps> = ({propsValue,relatedData,returnValue,dataKey,purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
   const [state,setState] = useState<string>('closed');
   const [arrow,setArrow] = useState<string>('open');
   const [active,setActive] = useState<string>('default');
@@ -34,8 +34,8 @@ export const Dropdown:FC<DropdownProps> = ({propsValue,dataSource,relatedData,re
 }
   const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, MouseEvent>) =>{
   e.currentTarget.textContent && setContent(e.currentTarget.textContent);
-  if(parentClass !== undefined && e.currentTarget.textContent !== null){
-    returnValue(dataSource,parentClass,e.currentTarget.textContent);
+  if(dataKey !== undefined && e.currentTarget.textContent !== null && returnValue){
+    returnValue(e.currentTarget.textContent,dataKey);
   }
   setState('closed');
   setArrow('open');
@@ -56,12 +56,12 @@ export const Dropdown:FC<DropdownProps> = ({propsValue,dataSource,relatedData,re
     }
   },[propsValue,monitorableState])
   return (
-    <div className={`${parentClass !== undefined?'_dropdown_'+parentClass:''} ${purpose !== undefined?'_dropdown_'+purpose:''} _dropdown__${active}`}>
+    <div className={`${dataKey !== undefined?'_dropdown_'+dataKey:''} ${purpose !== undefined?'_dropdown_'+purpose:''} _dropdown__${active}`}>
           <div className="_dropdown_form" onMouseDown={dropdownClickHandler}>
                 <div className={`_dropdown_text__${active}`}>{content}</div>
                 <div className={`_dropdown_arrow__${arrow}`}></div>
             </div>
-            {(state === 'open')? 
+            {state === 'open' && ( 
                 <div className={`_dropdown_droppedfield droppedFieldDropdown__${state}`}>
                   {dropdownItems.map((item)=>{
                     return(
@@ -70,7 +70,7 @@ export const Dropdown:FC<DropdownProps> = ({propsValue,dataSource,relatedData,re
                       </div>
                     )
                   })}
-            </div>:<div></div>}
+            </div>)}
     </div>)
 }
 

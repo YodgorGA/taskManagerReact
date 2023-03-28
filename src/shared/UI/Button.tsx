@@ -14,13 +14,7 @@ interface ButtonProps{
 export const Button:FC<ButtonProps> = ({pagintationCallback,purpose,callback,additionalClass,parentClass,content,color,...ButtonProps}) => {
     const clickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
         if(color !== 'disabled'){
-            if(purpose === 'paginationNubmer'){
-                pagintationCallback && pagintationCallback(e)
-            }
-            else{
-                callback && callback()
-            }
-            
+            (purpose === 'paginationNubmer')?pagintationCallback && pagintationCallback(e):callback && callback()
         }
     }
     return (

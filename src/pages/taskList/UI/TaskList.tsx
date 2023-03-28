@@ -4,19 +4,24 @@ import { TaskFilter } from 'wigets/task/taskFilter'
 import { Paginator } from 'wigets/paginator'
 import { AddTaskForm } from 'features/addTaskForm'
 import { taskFilterParams, Tasks, useGetTaskListMutation } from 'entities/task'
-import { Button,CardHeader } from 'shared'
+import { PageContainer } from 'pages/test/UI/PageContainer'
+import { ContentWrapper } from 'pages/test/UI/ContentWrapper'
+import { CardHeader as TestCardHeader } from 'pages/test/UI/CardHeader'
+import { PageCard } from 'pages/test/UI/PageCard'
+import { Button as TestButton } from 'pages/test/UI/Button'
+import { PageModal } from 'pages/test/UI/PageModal'
 
 export const TaskList:FC = () => {
     const parentClass = 'taskList'
-    const [modalVisibility,setModalVisibility] = useState<string>('hidden');
+    const [modalVisibility,setModalVisibility] = useState<boolean>(false);
     const [visibleTasks,setVisibleTasks] = useState<Tasks>();
     const [fetchTaskListDataBody,setFetchTaskListDataBody] = useState({filter:{},page:0,limit:8})
     const [taskListTotal,setTaskListTotal] = useState<number>(0);
     const [getTaskList] = useGetTaskListMutation();
     const [isDataChangedFromButton,setIsDataChangedFromButton] = useState(false);
 
-    const toggleModalVisibilityButtonClickHandler = () =>{
-        modalVisibility === 'hidden'?setModalVisibility('visible'):setModalVisibility('hidden');
+    const toggleModalVisability = () =>{
+        modalVisibility === false?setModalVisibility(true):setModalVisibility(false);
     }
 
     const returnFilterParams = (params:taskFilterParams) =>{
@@ -49,27 +54,33 @@ export const TaskList:FC = () => {
     },[fetchTaskListDataBody,isDataChangedFromButton,getTaskList])
 
     useEffect(()=>{
-        setFetchTaskListDataBody({
-            ...fetchTaskListDataBody,
-            page:(taskListTotal % 8 > 0)? Math.floor(taskListTotal / 8):taskListTotal/8 -1
-        })
+        if(fetchTaskListDataBody.page > 0){
+            setFetchTaskListDataBody({
+                ...fetchTaskListDataBody,
+                page:(taskListTotal % 8 > 0)? Math.floor(taskListTotal / 8):taskListTotal/8 -1
+            })
+        }
         console.log(fetchTaskListDataBody.page)
     },[modalVisibility])
 
     return (
-    <div className='taskList_container _container'>
-        <div className="taskList_contentWrapper _contentWrapper">
-            <CardHeader parentClass={parentClass} title='Задачи' childButtons={<Button callback={toggleModalVisibilityButtonClickHandler} color='primary' content='Добавить задачу' parentClass='_cardHeader' key={0}/>}/>
-            <div className="taskList_card _card cardTaskList">
+    <PageContainer>
+        <ContentWrapper padding='24px 0px 0px 0px' width='1280px' flexDirection='column' alignItems='flex-start'>
+            <TestCardHeader title='Задачи' 
+                childButtons={
+                    <TestButton callback={toggleModalVisability} variant='primary' content='Добавить задачу' key={0}/>
+                }
+            />
+            <PageCard>
                 <TaskFilter returnFilterParams={returnFilterParams}/>
                 <TaskListWidget fetchData={fetchData} filteredData={visibleTasks}/>
-            </div>
+            </PageCard>
             <Paginator handlePageChangeFetchCallback={returnPageNumber} parentClass={parentClass} showedItemCountTotal={taskListTotal}/>
-        </div>
-        <div className={`${parentClass}_modal _modal__${modalVisibility}`}>
-            <AddTaskForm fetchData={fetchData} closeFormCallback={toggleModalVisibilityButtonClickHandler}/>
-        </div>
-    </div>
+        </ContentWrapper>
+        <PageModal visible={modalVisibility}>
+            <AddTaskForm fetchData={fetchData} closeFormCallback={toggleModalVisability}/>
+        </PageModal>
+    </PageContainer>
 
   )
 }

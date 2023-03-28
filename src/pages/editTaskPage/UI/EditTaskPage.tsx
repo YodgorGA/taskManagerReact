@@ -42,30 +42,29 @@ export const EditTaskPage = () => {
         navigate(location.pathname.substring(0,location.pathname.length -5), {state:{isUpdated:false}})
     }
 
-    const getEditParams = (dataSource:string,arg:string,value:string) =>{
-      if(dataSource === 'props'){
-        if(arg === 'status'){
-            changeTaskStatus({id:id,status:getTaskDropdownStaticArgument(arg,value)})
-        }
+    const setParamsByApi = (value:string)=>{
+      userData(value).unwrap().then((result)=>{
         setEditParams({
           ...editParams,
-          [arg]:getTaskDropdownStaticArgument(arg,value)
-        })
+          assignedId:result.data[0].id,
+          });
+      });
+    }
+    const setParamsByProps = (value:string,arg:string)=>{
+      if(arg === 'status'){
+        changeTaskStatus({id:id,status:getTaskDropdownStaticArgument(arg,value)})
       }
-      else if(dataSource === 'api'){
-        userData(value).unwrap().then((result)=>{
-          setEditParams({
-            ...editParams,
-            assignedId:result.data[0].id,
-            });
-        });
-      }
-      else if(dataSource === 'input'){
-        setEditParams({
-          ...editParams,
-          [arg]:value
-        })
-      }
+      setEditParams({
+        ...editParams,
+        [arg]:getTaskDropdownStaticArgument(arg,value)
+      })
+    }
+  
+    const setParamsByInput = (value:string,arg:string)=>{
+      setEditParams({
+        ...editParams,
+        [arg]:value
+      })
     }
     
     useEffect(()=>{
@@ -95,13 +94,15 @@ export const EditTaskPage = () => {
                     taskData={taskData !== undefined? taskData:taskFiller}
                     assignedUserDropdownData={userAllData !== undefined?userAllData.map((user)=>{return user.username}):[]}
                     assignedUserDropdownRelatedData={userAllData !== undefined?userAllData.map((user)=>{return user.id}):[]}
-                    returnEditParams={getEditParams} 
+                    returnEditParamsByApi={setParamsByApi}
+                    returnEditParamsByInput={setParamsByInput}
+                    returnEditParamsByProps={setParamsByProps} 
                     monitorableState={isChangesSaved}
                 />
                 <EditTaskPageDivider/>
                 <EditTaskDescriptionWidget 
                     taskData={taskData !== undefined?taskData:taskFiller}
-                    returnEditParams={getEditParams} 
+                    returnEditParams={setParamsByInput} 
                 />
             </div>
         </div>

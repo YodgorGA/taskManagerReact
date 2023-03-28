@@ -7,8 +7,9 @@ import { LinkButton } from "./UI/LinkButton";
 import { Label } from "./UI/Label";
 import { Textarea } from "./UI/Textarea";
 import { resetField } from "./lib/helpers/inputHelper";
-import type { locationState } from "./lib/types/types";
+import type { locationState,ValueDataKeyFunc,ValueFunc,PaginationFunc,VoidFunc} from "./lib/types/types";
 import { getIdFromLocation, transformDate } from "./lib/helpers/dataTransformation";
+import * as colors from './styles/letterals'
 
 export {
     //UI
@@ -23,6 +24,8 @@ export {
     //helpers
     resetField,transformDate,getIdFromLocation,
     //types
-    locationState,
+    locationState,ValueFunc,ValueDataKeyFunc,PaginationFunc,VoidFunc,
     //sharedHelpers
+    //colors
+    colors
 }

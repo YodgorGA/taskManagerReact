@@ -2,6 +2,8 @@ import React,{FC, useEffect, useState} from 'react'
 import { Input, Dropdown as UnitDropdown, resetField} from 'shared';
 import { ApplyEditing, DenyEditing, useAddWorkTimeMutation,addWorkTimeBody } from 'entities/task';
 import { convertWorkTimeToMinutes } from '../lib/helpers/hepler';
+import { FilterInput } from 'pages/test/UI/FilterInput';
+import { Dropdown } from 'pages/test/UI/Dropdown';
 
 interface AddWorkTimeProps{
   elapsedTimeForView:string,
@@ -29,10 +31,10 @@ export const AddWorkTime:FC<AddWorkTimeProps> = ({taskId,currentUser,elapsedTime
     }
 
     const getDuration = (value:string) =>{
-      setDuration(value)
+      Number(value) > 0? setDuration(value):console.error('Count of time which you want to add must be positive')
     }
 
-    const getUnit = (dataSource:string,arg:string,value:string) =>{
+    const getUnit = (value:string) =>{
       setUnit(value)
     }
 
@@ -62,21 +64,25 @@ export const AddWorkTime:FC<AddWorkTimeProps> = ({taskId,currentUser,elapsedTime
         </div>
         <div className={`taskInfoItems_item__addWorkTimeForm addTimeForm__${addWorkTimeFormState}`}>
           <div className="addTimeForm__visible_form">
-            <Input 
-              dataSource='input'
-              returnValueCallback={getDuration}
+            <FilterInput 
+              callback={getDuration}
               monitorableState={isFormClear} 
-              parentClass='minutes'
+              dataKey='minutes'
               placeholder='Количество'
-              type='text' 
-              key={1}/>
-            <UnitDropdown 
-              dataSource='props' 
+              key={1}
+              type='number'
+            />
+              
+            <Dropdown 
               returnValue={getUnit}
-              parentClass='unit' 
+              dataKey='unit'
+              width='185px'
               defaultContent='Единица измерения' 
               dropdownItems={['Минуты','Часы']} 
-              monitorableState={isFormClear}/>
+              monitorableState={isFormClear}
+              key={2}
+            />
+              
           </div>
           <div className="addTimeForm__visible_buttons">
             <ApplyEditing callback={applyChanges}/>

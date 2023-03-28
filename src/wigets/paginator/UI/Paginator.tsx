@@ -4,6 +4,7 @@ import { Button } from 'shared'
 import { ChangeUserListVeiwButton } from 'features/paginator'
 import { getCountOfActiveButtons, getPageItemsCount } from '../lib/helpers'
 import 'wigets/paginator/styles/paginator.scss'
+import { Button as TestButton } from 'pages/test/UI/Button'
 
 interface PaginatorProps{
     parentClass:string,
@@ -54,45 +55,37 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
     return (
     <div className={`${parentClass}_paginator _paginator`}>
         <div className="_paginator_left leftsidePaginator">
-            <Button 
+            <TestButton 
                 callback={prevButtonClickHandler} 
-                parentClass='leftsidePaginator' 
-                color={(visibleButtonsNumber[0]!==1)?'primary':'disabled'} 
-                additionalClass='leftsidePaginator_prevButton' 
+                variant={(visibleButtonsNumber[0]!==1)?'primary':'disabled'} 
+                key={0}
                 content='Назад'
             />
-            <Button
-                purpose='paginationNubmer'
-                pagintationCallback={numberButtonClickHandler} 
-                parentClass='leftsidePaginator' 
-                color={(countOfButtons > visibleButtonsNumber[0])?'primary':'disabled'}
-                additionalClass='leftsidePaginator_numberButton' 
+            <TestButton
+                padding='0px 10px'
+                callback={numberButtonClickHandler} 
+                variant={(countOfButtons > visibleButtonsNumber[0])?'primary':'disabled'}
                 key={1} 
                 content={String(visibleButtonsNumber[0])}
             />
-            <Button 
-                purpose='paginationNubmer'
-                pagintationCallback={numberButtonClickHandler} 
-                parentClass='leftsidePaginator' 
-                color={(countOfButtons > visibleButtonsNumber[1])?'primary':'disabled'}
-                additionalClass='leftsidePaginator_numberButton' 
+            <TestButton 
+                padding='0px 10px'
+                callback={numberButtonClickHandler} 
+                variant={(countOfButtons > visibleButtonsNumber[1])?'primary':'disabled'}
                 key={2} 
                 content={String(visibleButtonsNumber[1])}
             />
-            <Button 
-                purpose='paginationNubmer'
-                pagintationCallback={numberButtonClickHandler} 
-                parentClass='leftsidePaginator' 
-                color={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'}
-                additionalClass='leftsidePaginator_numberButton' 
+            <TestButton
+                padding='0px 10px'
+                callback={numberButtonClickHandler} 
+                variant={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'}
                 key={3} 
                 content={String(visibleButtonsNumber[2])}
             />
-            <Button 
+            <TestButton 
                 callback={nextButtonClickHandler} 
-                parentClass='leftsidePaginator' 
-                color={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'} 
-                additionalClass='leftsidePaginator_nextButton' 
+                variant={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'} 
+                key={4}
                 content='Вперед'
             />
         </div>

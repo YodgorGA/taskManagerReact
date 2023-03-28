@@ -1,13 +1,15 @@
 import React,{FC, useState} from 'react'
 import { dataForTaskCreation, getTaskDropdownStaticArgument, useAddTaskMutation } from 'entities/task'
 import { useGetUserByNicknameMutation, useGetUsersAllQuery, useUserState } from 'entities/user'
-import { Button, Dropdown as AddTaskDropdown, Label, Textarea as AddTaskTextarea, Divider as AddTaskDivider } from 'shared'
+import { Button, Dropdown as AddTaskDropdown, Label, Textarea as AddTaskTextarea, Divider as AddTaskDivider, ValueFunc, ValueDataKeyFunc } from 'shared'
 import 'features/addTaskForm/styles/addTask.scss';
+import { Dropdown } from 'pages/test/UI/Dropdown';
 
 interface AddTaskFormProps{
     closeFormCallback:()=>void,
     fetchData:()=>void,
 }
+
 
 export const AddTaskForm:FC<AddTaskFormProps> = ({fetchData,closeFormCallback,...AddTaskFormProps}) => {
     const [isFormItemsClear,setIsFormItemsClear] = useState<boolean>(true);
@@ -46,27 +48,27 @@ export const AddTaskForm:FC<AddTaskFormProps> = ({fetchData,closeFormCallback,..
         clearForm()
         closeFormCallback()
     }
-    const getFieldValue = (dataSource:string,arg:string,value:string) =>{
-        if(dataSource === 'props'){
+    const getValueFromApi:ValueFunc = (value:string) => {
+        userData(value).unwrap().then((result)=>{
             setAddedData({
-              ...addedData,
-              [arg]:getTaskDropdownStaticArgument(arg,value)
-            })
-            }
-            else if(dataSource === 'api'){
-            userData(value).unwrap().then((result)=>{
-              setAddedData({
                 ...addedData,
-                assignedId:result.data[0].id});
+                assignedId:result.data[0].id
             });
-            }
-            else if(dataSource === 'input'){
-            setAddedData({
-              ...addedData,
-              [arg]:value
-            })
-        }
+        });
     }
+    const getValueFromProps:ValueDataKeyFunc = (value:string,dataKey:string)=>{
+        setAddedData({
+            ...addedData,
+            [dataKey]:getTaskDropdownStaticArgument(dataKey,value)
+        })
+    }
+    const getValueFromInput:ValueDataKeyFunc = (value:string,dataKey:string) =>{
+        setAddedData({
+            ...addedData,
+            [dataKey]:value
+        })
+    }
+
 
     return (
         <div className='taskList_addTask addTask'>
@@ -78,58 +80,56 @@ export const AddTaskForm:FC<AddTaskFormProps> = ({fetchData,closeFormCallback,..
                     <div className="addTaskForm_left">
                         <div className="addTaskForm_formItems addTaskFormFormItems">
                             <Label content='Тип'/>
-                            <AddTaskDropdown 
-                                dataSource='props' 
-                                parentClass='type'
+                            <Dropdown 
+                                width='230px'
+                                dataKey='type'
                                 purpose='addTask'
-                                returnValue={getFieldValue}
+                                returnValue={getValueFromProps}
                                 monitorableState={isFormItemsClear} 
                                 defaultContent='Выберите тип' 
                                 dropdownItems={['Создание','Фикс']}
                             />
                             <Label content='Пользователь'/>
-                            <AddTaskDropdown 
-                                dataSource='api' 
-                                parentClass='assignedId'
+                            <Dropdown
+                                width='230px'
+                                dataKey='assignedId'
                                 purpose='addTask'
-                                returnValue={getFieldValue}
+                                returnValue={getValueFromApi}
                                 monitorableState={isFormItemsClear} 
                                 defaultContent='Выберите исполнителя' 
                                 dropdownItems={userAllData !== undefined?userAllData.map((user)=>{return user.username}):[]}
                                 relatedData = {userAllData !== undefined?userAllData.map((user)=>{return user.id}):[]}
                             />
                             <Label content='Приоритет'/>
-                            <AddTaskDropdown 
-                                dataSource='props'
-                                parentClass='rank' 
+                            <Dropdown 
+                                width='230px'
+                                dataKey='rank' 
                                 purpose='addTask'
-                                returnValue={getFieldValue}
+                                returnValue={getValueFromProps}
                                 monitorableState={isFormItemsClear} 
                                 defaultContent='Выберите приоритет' 
                                 dropdownItems={['Низкий','Средний','Высокий']}
                             />
                             <Label content='Название задачи'/>
                             <AddTaskTextarea
-                                dataSource='input'
-                                parentClass='title'
+                                dataKey='title'
                                 purpose='addTaskTitle' 
-                                returnDataForApiCallback={getFieldValue}
+                                callback={getValueFromInput}
                                 monitorableState={isFormItemsClear} 
                                 placeholder='Введите название задачи' 
-                                />
+                            />
                         </div>
                     </div>
                     <AddTaskDivider purpose='addTaskForm'/>
                     <div className="addTaskForm_right">
                         <Label content='Описание'/>
                         <AddTaskTextarea
-                            dataSource='input'
-                            parentClass='description'
-                            purpose='addTaskDescription' 
-                            returnDataForApiCallback={getFieldValue}
+                            dataKey='description'
+                            purpose='addTaskDescription'
+                            callback={getValueFromInput}
                             monitorableState={isFormItemsClear} 
                             placeholder='Введите описание задания' 
-                            />
+                        />
                     </div>
                 </div>
                 <div className="addTaskForm_buttons">

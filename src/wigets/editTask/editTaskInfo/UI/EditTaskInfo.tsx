@@ -3,25 +3,27 @@ import { Task } from 'entities/task'
 import { useGetUserByIdQuery } from 'entities/user'
 import { Label,Dropdown as EditTaskInfoDropdown } from 'shared'
 import { getUserFriendlyRankValue, getUserFriendlyStatusValue, getUserFriendlyTypeValue } from '../lib/helpers/helpler'
+import { ValueDataKeyFunc,ValueFunc } from 'shared'
 
 interface ChangeTaskInfoProps{
     monitorableState:boolean,
-    returnEditParams:(dataSource:string,arg:string,value:string)=>void,
+    returnEditParamsByApi: ValueFunc,
+    returnEditParamsByProps: ValueDataKeyFunc,
+    returnEditParamsByInput: ValueDataKeyFunc
     assignedUserDropdownData:string[],
     assignedUserDropdownRelatedData:string[],
     taskData:Task,
 }
 
-export const EditTaskInfo:FC<ChangeTaskInfoProps> = ({taskData,assignedUserDropdownRelatedData,assignedUserDropdownData,returnEditParams,monitorableState,...ChangeTaskInfoProps}) => {
+export const EditTaskInfo:FC<ChangeTaskInfoProps> = ({returnEditParamsByApi,returnEditParamsByInput,returnEditParamsByProps,taskData,assignedUserDropdownRelatedData,assignedUserDropdownData,monitorableState,...ChangeTaskInfoProps}) => {
     const {data:assingedUserData} = useGetUserByIdQuery(taskData.assignedId)
     return (
         <div className='cardEditTaskPage_editTaskInfo editTaskInfo'>
             <div className='editTaskInfo_item'>
                 <Label content={"Статус"}/>
                 <EditTaskInfoDropdown 
-                    dataSource={'props'}
-                    parentClass={'status'}
-                    returnValue={returnEditParams} 
+                    dataKey={'status'}
+                    returnValue={returnEditParamsByProps} 
                     monitorableState={monitorableState} 
                     purpose={'changeTaskInfo'} 
                     defaultContent={'Выберите состояние задания'} 
@@ -32,9 +34,8 @@ export const EditTaskInfo:FC<ChangeTaskInfoProps> = ({taskData,assignedUserDropd
             <div className='editTaskInfo_item'>
                 <Label content={"Исполнитель"}/>
                 <EditTaskInfoDropdown 
-                    dataSource={'api'}
-                    parentClass={'assignedId'}
-                    returnValue={returnEditParams} 
+                    dataKey={'assignedId'}
+                    returnValue={returnEditParamsByApi} 
                     monitorableState={monitorableState} 
                     purpose={'changeTaskInfo'} 
                     defaultContent={'Выберите исполнителя задания'} 
@@ -46,9 +47,8 @@ export const EditTaskInfo:FC<ChangeTaskInfoProps> = ({taskData,assignedUserDropd
             <div className='editTaskInfo_item'>
                 <Label content={"Тип запроса"}/>
                 <EditTaskInfoDropdown 
-                    dataSource={'props'}
-                    parentClass={'type'}
-                    returnValue={returnEditParams} 
+                    dataKey={'type'}
+                    returnValue={returnEditParamsByProps} 
                     purpose={'changeTaskInfo'} 
                     defaultContent={'Выберите тип задания'} 
                     monitorableState={monitorableState} 
@@ -59,9 +59,8 @@ export const EditTaskInfo:FC<ChangeTaskInfoProps> = ({taskData,assignedUserDropd
             <div className='editTaskInfo_item'>
                 <Label content={"Приоритет"}/>
                 <EditTaskInfoDropdown 
-                    dataSource={'props'}
-                    parentClass={'rank'}
-                    returnValue={returnEditParams} 
+                    dataKey={'rank'}
+                    returnValue={returnEditParamsByInput} 
                     monitorableState={monitorableState} 
                     purpose={'changeTaskInfo'} 
                     defaultContent={'Выберите приоритет задания'} 

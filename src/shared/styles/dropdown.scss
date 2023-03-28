@@ -1,6 +1,7 @@
 @import '/src/app/styles/mixins';
 @import '/src//app//styles/letterals';
 
+
 ._dropdown{
     &__active{
         @include dropdownActive;
@@ -93,5 +94,4 @@
             background-color: #beb3f4;
         }
     }
-    
 }

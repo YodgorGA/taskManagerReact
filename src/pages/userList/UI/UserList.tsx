@@ -19,7 +19,9 @@ export const UserList = () => {
   return (
       <div className='userList_container _container'>
         {
-          view === 'list'?<UserListListViewWidget callback={changeView} userListView={view}/>:<UserListCardViewWidget callback={changeView} userListView={view}/>
+          view === 'list'
+          ?<UserListListViewWidget callback={changeView} userListView={view}/>
+          :<UserListCardViewWidget callback={changeView} userListView={view}/>
         }
         <Paginator 
           showedItemCountTotal={5}

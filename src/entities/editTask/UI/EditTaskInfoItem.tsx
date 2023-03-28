@@ -11,24 +11,22 @@ interface EditTaskInfoItemProps{
     defaultContent:string,
     parentClass:string,
     dataSource:string,
-    returnEditParams:(dataSource:string,arg:string,value:string)=>void,
 }
 
-export const EditTaskInfoItem:FC<EditTaskInfoItemProps> = ({dataSource,dropdownItemsRelatedData,parentClass,returnEditParams,defaultContent,monitorableState,dropdownItems,dropdownPurpose,label,...EditTaskInfoItemProps}) => {
+export const EditTaskInfoItem:FC<EditTaskInfoItemProps> = ({dataSource,dropdownItemsRelatedData,parentClass,defaultContent,monitorableState,dropdownItems,dropdownPurpose,label,...EditTaskInfoItemProps}) => {
 
     return (
         <div className='editTaskInfo_item'>
-        <Label content={label}/>
+        {/* <Label content={label}/>
         <EditTaskInfoDropdown 
-            parentClass={parentClass}
-            dataSource={dataSource}
+            dataKey={parentClass}
             returnValue={returnEditParams} 
             monitorableState={monitorableState} 
             purpose={dropdownPurpose} 
             defaultContent={defaultContent} 
             dropdownItems={dropdownItems}
             relatedData={dropdownItemsRelatedData}
-        />
+        /> */}
         </div>
     )
 }
