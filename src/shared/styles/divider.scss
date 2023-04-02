@@ -1,0 +1,9 @@
+@import '/src/app/styles/mixins';
+@import '/src//app//styles/letterals';
+
+._divider{
+    width: 1px;
+    height: 600px;
+    background-color: $disabledElementColor;
+    margin-right: 19px;
+}

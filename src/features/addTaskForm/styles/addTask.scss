@@ -1,0 +1,86 @@
+@import '/src/app/styles/mixins';
+@import '/src/app/styles/letterals';
+
+.addTask{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 100px;
+    box-sizing: border-box;
+    &_form{
+        width: 730px;
+        background-color: $white;
+        min-height: 405px;
+    }
+}
+
+.addTaskForm{
+    &_left{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-self: flex-start;
+        height: inherit;
+        padding: 0px 20px 0px 30px;
+        width: 230px;
+    }
+    &_right{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-self: flex-start;
+        width: 400px;
+        height: inherit;
+    }
+    &_content{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        height: 428px;
+    }
+    &_title{
+        width: inherit;
+        height: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @include font('Roboto',20px,400,171%);
+        & p{
+            text-align: center;
+        }
+    }
+    &_formItems{
+        min-height: 290px;
+        box-sizing: border-box;
+        width: 100%;
+        & input{
+            width: 100%;
+            &:hover{
+                width: 100%;
+            }
+        }
+    }
+    &_buttons{
+        padding: 10px 30px;
+        box-sizing: border-box;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        & :first-child{
+            margin-right: 10px;
+        }
+    }
+    &_divider{
+        height: inherit;
+    }
+}
+
+.addTaskFormFormItems{
+    &_dropdown{
+        margin-bottom: 20px;
+    }
+}

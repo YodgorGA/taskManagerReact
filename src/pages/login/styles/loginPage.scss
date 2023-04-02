@@ -1,0 +1,28 @@
+@import '/src/app/styles/mixins';
+@import '/src/app/styles/letterals';
+
+.loginPage{
+    z-index: 9;
+    &_container{
+        height: 727px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: $pageWrapperGrayColor;
+    }
+    &_form{
+        width: 300px;
+        height: 288px;
+        margin-top: 150px;
+        background-color: $white;
+        box-shadow: 0px 0px 5px 3px $disabledElementColor;
+        border-radius: 5px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        box-sizing: border-box;
+    }
+}

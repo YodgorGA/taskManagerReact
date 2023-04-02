@@ -1,0 +1,47 @@
+@import '_letterals.scss';
+@import '_mixins.scss';
+.taskList{
+    &_container{
+        @include somePageContainer();
+    }
+    &_contentWrapper{
+    }
+    &_card{
+        @include somePageCard();
+    }
+    &_paginator{
+        width: 1280px;
+        margin-top: 20px;
+    }
+    &_modal{
+
+    }
+    
+}
+
+.cardTaskList{
+    &_filter{
+
+    }
+    &_tasks{
+    }
+}
+
+.tasksCardTaskList{
+    position: relative;
+    width: 1240px;
+    height: 512px;
+    border: 1px solid $disabledElementColor;
+    border-radius: 3px;
+    margin-top: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    &_item{
+        width: 100%;
+        height: 64px;
+        padding: 20px 30px;
+        box-sizing: border-box;
+    }
+    
+}
+

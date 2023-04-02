@@ -1,0 +1,19 @@
+@import '/src/app/styles/mixins';
+@import '/src/app/styles/letterals';
+
+.navHeader{
+    width: 260px;
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    & >:first-child{
+        margin-right: 10px;
+    }
+    &_item{
+        @include navHeaderItem($white);
+        &__active{
+            @include navHeaderItem($primaryColor);
+        }
+    }
+}

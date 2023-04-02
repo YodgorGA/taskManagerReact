@@ -1,0 +1,111 @@
+//==============================GENERAL COLORS===========================================================================================
+$primaryColor:#7B61FF;
+$successColor:#5EE48C;
+$errorColor:#FF6161;
+$white:#FFFFFF;
+$pageWrapperGrayColor: #E3E3E3;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================TEXT COLORS===============================================================================================
+$darkTextColor:#000000;
+$lightTextColor:#F4F4F4;
+$labelTextColor:#CCCCCC;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================DISABLED COLORS===========================================================================================
+$disabledElementColor:#B5B5B5;
+$disabledElementTextColor:$labelTextColor;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================CHECKBOX COLORS===========================================================================================
+$defaultCheckboxColor:$white;
+$defaultCheckboxBorderColor:$darkTextColor;
+
+$hoverCheckboxColor:$white;
+$hoverCheckboxBorderColor:$primaryColor;
+
+$activeCheckBoxColor:$primaryColor;
+$activeCheckBoxBorderColor:$primaryColor;
+$activeCheckBoxContentColor:$white;
+
+$disabledCheckboxColor:$disabledElementColor;
+$disabledCheckboxBorderColor:$disabledElementColor;
+$disabledCheckboxContentColor:$disabledElementTextColor;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================STATUSBAR COLORS==========================================================================================
+$defaultStatusbarColor:$labelTextColor;
+$defaultSatusbarTextBorderColor:$darkTextColor;
+
+$warningStausbarColor:#FFC700;
+$warningStatusbarTextBorderColor:#846F00;
+
+$successStatusbarColor:#4BD379;
+$successStatusbarTextBorderColor:#4BD379;
+
+$dangerStatusbarColor:#EB4F4F;
+$dangerStatusbarTextBorderColor:#6D1313;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================TASK TYPE COLORS==========================================================================================
+$taskTypeTaskColor:#00D1FF;
+$taskTypeBugColor:#EB4F4F;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================RANK COLORS===============================================================================================
+$heighRankColor:#D14343;
+
+$mediumRankColor:#E9B500;
+
+$lowRankColor:#3CA961;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================INPUT TEXTAREA COLORS==============================================================================================
+$emptyInputTextareaBorderTextColor:$labelTextColor;
+
+$hoveredInputTextareaBorderColor:$primaryColor;
+$successInputTextareaBorderColor:$successColor;
+$errorInputTextareaBorderColor:$errorColor;
+
+$activeInputTextareaShadowColor:rgba(123, 97, 255, 0.5);
+$successActiveInpuTextareaShadowColor:rgba(97, 255, 151, 0.5);
+$errorActiveInputTextareShadowColor:rgba(255, 97, 97, 0.5);
+
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================DROPDOWN COLORS===========================================================================================
+$emptyDropdownBorderTextColor:$labelTextColor;
+
+$hoveredDropdownBorderColor:$primaryColor;
+
+$activeDropdownContainerBorderColor:rgba(123, 97, 255, 0.5);
+
+$hoveredDropDownItemColor:#E6E1FF;
+
+$activeDropdownItemColor:$primaryColor;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//==============================BUTTONS COLORS===========================================================================================
+$defaultButtonBorderTextColor:$darkTextColor;
+$defaultStayedButtonColor:$white;
+$defaultHoveredButtonColor:#E1E1E1;
+$defaultActiveButtonColor:#CFCFCF;
+
+$coloredButtonTextColor:$lightTextColor;
+
+$primaryStayedButtonBorderBackgroundColor:$primaryColor;
+$primaryHoveredButtonBorderBackgroundColor:#8A73FF;
+$primaryActiveButtonBorderBackgroundColor:#715BE3;
+
+$successStayedButtonBorderBackgroundColor:$successColor;
+$successHoveredButtonBorderBackgroundColor:#80F0A6;
+$successActiveButtonBorderBackgroundColor:#4BD379;
+
+$errorStayedButtonBorderBackgroundColor:$errorColor;
+$errorHoveredButtonBorderBackgroundColor:#FF8080;
+$errorActiveButtonBorderBackgroundColor:#D65D5D;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//==============================ROW COLORS===========================================================================================
+$whiteRowColor:$white;
+$grayRowColor:#F2F2F2;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
