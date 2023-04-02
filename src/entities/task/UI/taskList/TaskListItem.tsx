@@ -95,6 +95,10 @@ const ItemStatus = styled.div<ColumnProps>`
     width: 120px;
     margin-left: 13px;
     height: 40px;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    
     & div{
       width: 90px;
       height: 26px;

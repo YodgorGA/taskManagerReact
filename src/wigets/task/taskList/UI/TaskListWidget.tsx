@@ -1,6 +1,8 @@
 import React,{FC, useEffect, useState} from 'react'
 import { Task, TaskListItem } from 'entities/task'
 import { Tasks } from 'entities/task'
+import styled from '@emotion/styled';
+import { colors } from 'shared';
 
 interface TaskListWidgetProps{
   filteredData?:Tasks,
@@ -15,20 +17,29 @@ export const TaskList:FC<TaskListWidgetProps> = ({fetchData,filteredData,...Task
   },[filteredData])
   if(taskList?.data !== null){
     return (
-      <div className="cardTaskList_tasks tasksCardTaskList">
+      <StyledTaksListContainer>
         {
           taskList?.data.map((task:Task)=>{
             return <TaskListItem fetchData={fetchData} assignedId={task.assignedId} id={task.id} key={task.id}/>
           })
         }
-      </div>
+      </StyledTaksListContainer>
     )
   }
   return (
-    <div className="cardTaskList_tasks tasksCardTaskList">
-
-    </div>
+    <StyledTaksListContainer/>
   )
 }
+
+const StyledTaksListContainer = styled.div`
+    position: relative;
+    width: 1240px;
+    height: 512px;
+    border: 1px solid ${colors.disabledColors.disabledElementColor};
+    border-radius: 3px;
+    margin-top: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    `
 
 export {}
