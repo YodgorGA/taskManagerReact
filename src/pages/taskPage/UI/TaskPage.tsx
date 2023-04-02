@@ -1,6 +1,6 @@
 import React,{FC, useEffect, useState} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Button, LinkButton } from 'shared'
+import { Button } from 'shared'
 import { CardHeader } from 'shared' 
 import { Divider as TaskPageDivider} from 'shared'
 import { TaskInfoWidget } from 'wigets/task/taskInfo'
@@ -21,6 +21,10 @@ export const TaskPage:FC = ({...TaskPageProps}) => {
   const [removeTask] = useRemoveTaskMutation();
   
   const [isBecomeAssignedButtonClicked,setIsBecomeAssignedButtonClicked] = useState(false);
+
+  const navigateToEditTaskPage = (state:{[key:string]:any}) =>{
+    navigate(`${location.pathname}/edit`,state);
+  }
 
   const becomeTaskAssignedUserButtonClickHandler = () =>{
   if(taskData !== undefined){
@@ -43,11 +47,11 @@ export const TaskPage:FC = ({...TaskPageProps}) => {
   return (
     <div className='taskPage_container _container'>
         <div className="taskPage_contentWrapper _contentWrapper">
-            <CardHeader parentClass='taskPage' title={taskData?.title} 
+            <CardHeader title={taskData?.title} 
             childButtons={[
-                <Button callback={becomeTaskAssignedUserButtonClickHandler} color='white' content='Взять в работу' parentClass='_cardHeader' key={0}/>,
-                <LinkButton to={`${location.pathname}/edit`} color='primary' content='Редактировать' parentClass='_cardHeader' key={1}/>,
-                <Button callback={removeTaskButtonClickHandler} color='danger' content='Удалить' parentClass='_cardHeader' key={2}/>
+                <Button callback={becomeTaskAssignedUserButtonClickHandler} variant='white' content='Взять в работу' key={0}/>,
+                <Button callback={navigateToEditTaskPage} variant='primary' content='Редактировать' key={1}/>,
+                <Button callback={removeTaskButtonClickHandler} variant='red' content='Удалить' key={2}/>
             ]}
             />
             <div className="taskPage_card _card cardTaskPage">

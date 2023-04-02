@@ -15,11 +15,11 @@ export const UserPage:FC<UserPageProps> = ({...UserPageProps}) => {
         modalVisibility === 'hidden'?setModalVisibility('visible'):setModalVisibility('hidden');
     }
     return (
-        <div  className={`${parentClass}_container _container`}>
+        <div className={`${parentClass}_container _container`}>
             <div className={`${parentClass}_contentWrapper _contentWrapper`}>
-                <CardHeader parentClass={parentClass} title={`User Name From API`} childButtons={[
-                    <Button color='white' content='Добавить задачу' parentClass='_cardHeader' key={0}/>,
-                    <Button callback={toggleModalVisibilityButtonClickHandler} color='primary' content='Редактировать' parentClass='_cardHeader' key={1}/>
+                <CardHeader title={`User Name From API`} childButtons={[
+                    <Button variant='white' content='Добавить задачу' key={0}/>,
+                    <Button callback={toggleModalVisibilityButtonClickHandler} variant='primary' content='Редактировать' key={1}/>
                 ]}/>
                 <div className={`${parentClass}_card _card cardUserPage`}>
                     <UserPageUserInfo userProfilePhoto='/img/pageHeader/userImage.png'/>

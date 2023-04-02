@@ -23,7 +23,7 @@ export const CommentItem:FC<CommentItemProps> = ({commentId,currentUserId,ownerI
         <div className="postedComments_owner">
             <p>{`${author?.username} (${transformDate(commentDate)})`}</p>
             {
-              currentUserId === ownerId? <Button callback={deleteComment} color='delete' content='Удалить' parentClass='postedComments'></Button>:<div style={{position:"absolute"}}></div>
+              currentUserId === ownerId? <Button callback={deleteComment} variant='red' content='Удалить'></Button>:<div style={{position:"absolute"}}></div>
             } 
             
         </div>

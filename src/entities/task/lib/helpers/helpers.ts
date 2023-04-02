@@ -31,24 +31,29 @@ export const getListItemButtonItemsState = (propStatus:string|undefined) => {
   switch (propStatus){
     case 'opened':
       return {
-        test:'disabled',
-        reopen:'disabled',
+        test:false,
+        reopen:false,
       }
     case 'testing':
       return{
-        test:'disabled',
-        reopen:'',
+        test:false,
+        reopen:true,
       }
     case 'inProgress':
       return {
-        test:'',
-        reopen:'',
+        test:true,
+        reopen:true,
       }
     case 'complete':
       return {
-        test:'disabled',
-        reopen:'',
-      } 
+        test:false,
+        reopen:true,
+      }
+    default:
+      return{
+        test:false,
+        reopen:false
+      }
   }
 }
 

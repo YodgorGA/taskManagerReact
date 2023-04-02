@@ -4,8 +4,6 @@
     &_container{
         @include somePageContainer();
     }
-    &_contentWrapper{
-    }
     &_card{
         @include somePageCard();
     }
@@ -13,19 +11,9 @@
         width: 1280px;
         margin-top: 20px;
     }
-    &_modal{
-
-    }
     
 }
 
-.cardTaskList{
-    &_filter{
-
-    }
-    &_tasks{
-    }
-}
 
 .tasksCardTaskList{
     position: relative;

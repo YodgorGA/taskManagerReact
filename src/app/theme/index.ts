@@ -1,3 +1,4 @@
+
 export const generalColor = {
     primaryColor:'#7B61FF',
     greenColor:'#5EE48C',
@@ -31,6 +32,7 @@ export const textColors = {
     darkTextColor:'#000000',
     lightTextColor:'#F4F4F4',
     labelTextColor:'#CCCCCC',
+    placeholderTextColor:'#B5B5B5'
 }
 
 export const disabledColors = {
@@ -90,7 +92,5 @@ export const listRowColors = {
     whiteRow:generalColor.white,
     grayRow:'#F2F2F2'
 }
-
-
 
 export {}

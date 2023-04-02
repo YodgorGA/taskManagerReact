@@ -1,77 +1,120 @@
 import React,{FC, useEffect, useState} from 'react'
+import styled from '@emotion/styled'
 import { ValueDataKeyFunc, ValueFunc } from 'shared';
-import 'shared/styles/dropdown.scss';
+import { colors } from 'shared'
+import { css } from '@emotion/react';
 
-interface DropdownProps{
-  monitorableState:boolean[]|boolean,
-  dropdownItems:string[],
-  relatedData?:string[],
-  defaultContent:string,
-  purpose?:string,
-  dataKey?:string,
-  returnValue?: ValueDataKeyFunc | ValueFunc;
-  propsValue?:string
+export interface DropdownProps{
+    width?:string,
+    active?:boolean,
+    hasValue?:boolean,
+    monitorableState?:boolean[]|boolean,
+    dropdownItems?:string[],
+    relatedData?:string[],
+    defaultContent?:string,
+    purpose?:string,
+    dataKey?:string,
+    propsValue?:string
+    returnValue?: ValueDataKeyFunc | ValueFunc;
 }
 
-export const Dropdown:FC<DropdownProps> = ({propsValue,relatedData,returnValue,dataKey,purpose,defaultContent,dropdownItems,monitorableState,...UnitDropdownProps}) => {
-  const [state,setState] = useState<string>('closed');
-  const [arrow,setArrow] = useState<string>('open');
-  const [active,setActive] = useState<string>('default');
-  const [content,setContent] = useState<string>(propsValue !== undefined?propsValue:defaultContent);
-  
-  
-  const dropdownClickHandler = () =>{
-    if(state === 'open'){ 
-        setState('closed');
-        setArrow('open');
-        (content !== defaultContent)?setActive('active'):setActive('default');
+export const Dropdown:FC<DropdownProps> = ({monitorableState,returnValue,dataKey,defaultContent,dropdownItems,...DropdownProps}) => {
+    const [isOpen,setIsOpen] = useState<boolean>(false);
+    const [isItemPicked,setIsItemPicked] = useState<boolean>(false);
+    const [dropdownValue,setDropdownValue] = useState<string|null|undefined>(defaultContent)
+    const dropdownClickHandler = () =>{
+        setIsOpen(!isOpen);
+    };
+    const itemClickHandler = (e:React.MouseEvent<HTMLDivElement>) =>{
+        setDropdownValue(e.currentTarget.textContent)
+        setIsItemPicked(true);
+        setIsOpen(false)
+        if(dataKey && e.currentTarget.textContent !== null && returnValue){
+            returnValue(e.currentTarget.textContent,dataKey);
+        } 
     }
-    else{
-        setState('open');
-        setArrow('close');
-        setActive('active');
-    }
-}
-  const dropdownItemClickHandler = (e:React.MouseEvent<HTMLParagraphElement, MouseEvent>) =>{
-  e.currentTarget.textContent && setContent(e.currentTarget.textContent);
-  if(dataKey !== undefined && e.currentTarget.textContent !== null && returnValue){
-    returnValue(e.currentTarget.textContent,dataKey);
-  }
-  setState('closed');
-  setArrow('open');
-  setActive('active');
-  }
-  useEffect(()=>{
-    if(propsValue !== undefined){
-      setContent(propsValue)
-      setState('closed');
-      setArrow('open');
-      setActive('active');
-    }
-    else{
-      setContent(defaultContent);
-      setState('closed');
-      setArrow('open');
-      setActive('default')
-    }
-  },[propsValue,monitorableState])
-  return (
-    <div className={`${dataKey !== undefined?'_dropdown_'+dataKey:''} ${purpose !== undefined?'_dropdown_'+purpose:''} _dropdown__${active}`}>
-          <div className="_dropdown_form" onMouseDown={dropdownClickHandler}>
-                <div className={`_dropdown_text__${active}`}>{content}</div>
-                <div className={`_dropdown_arrow__${arrow}`}></div>
-            </div>
-            {state === 'open' && ( 
-                <div className={`_dropdown_droppedfield droppedFieldDropdown__${state}`}>
-                  {dropdownItems.map((item)=>{
-                    return(
-                      <div key={Math.random() }className="droppedFieldDropdown_item">
-                        <p onMouseDown={dropdownItemClickHandler}>{item}</p>
-                      </div>
-                    )
-                  })}
-            </div>)}
-    </div>)
+    useEffect(()=>{
+        setIsItemPicked(false);
+        setDropdownValue(defaultContent);
+    },[monitorableState])
+    return (
+        <div style={{position:'relative'}}>
+            <StyledDropdown hasValue={isItemPicked} active={isOpen} onClick={dropdownClickHandler} {...DropdownProps}  >
+                {dropdownValue}
+            </StyledDropdown>
+            {
+                isOpen && <DropdownMenu {...DropdownProps}>
+                    {dropdownItems?.map((item)=>{
+                        return <DropdownItem onClick={itemClickHandler}>{item}</DropdownItem>
+                    })}
+                </DropdownMenu>
+            }
+            
+        </div>
+
+    )
 }
 
+const DropdownItem = styled.div`
+    font-family:'Inter';
+    font-size:14px;
+    font-weight:400;
+    line-height:100%;
+    height: 18px;
+    width: 100%;
+    background-color: ${colors.generalColor.white};
+    cursor: pointer;
+    padding: 2px 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    &:hover{
+        background-color: #E6E1FF;
+    }
+    &:active{
+        background-color: #beb3f4;
+    }
+`
+
+const DropdownMenu = styled.div<DropdownProps>`
+    width: ${({width})=>width||'inherit'};
+    box-sizing:border-box;
+    min-height:fit-content;
+    background-color: ${colors.generalColor.white};
+    top:25px;
+    left:0px;
+    border-radius: 3px;
+    padding: 5px 0px;
+    z-index: 10;
+    position:absolute;
+    box-shadow: 0px 0px 2px 2px ${colors.inputColors.primary.shadow};
+`
+
+const activeDnButton = css`
+    box-shadow:0px 0px 2px 2px ${colors.inputColors.primary.shadow};
+    color:${colors.textColors.darkTextColor};
+`
+const defaultDnButton = css`
+    border:1px solid ${colors.generalColor.white};
+    box-shadow:inset 0px 0px 2px 1px ${colors.disabledColors.disabledElementTextColor};
+    color:${colors.disabledColors.disabledElementTextColor};
+`
+
+const StyledDropdown = styled.div<DropdownProps>`
+    height: 24px;
+    width:${({width})=>width||'inherit'};
+    background-color: ${colors.generalColor.white};
+    ${({active})=>active && activeDnButton || defaultDnButton}
+    ${({hasValue})=>hasValue && activeDnButton}
+    border-radius: 3px;
+    box-sizing: border-box;
+    position: relative;
+    padding:2px 5px 0px 10px;
+    font-family:'Inter';
+    font-size:14px;
+    font-weight:400;
+    line-height:140%;
+    &:hover{
+        border-color:${colors.generalColor.primaryColor}
+    }
+`
 export {}

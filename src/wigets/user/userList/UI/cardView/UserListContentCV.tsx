@@ -1,7 +1,7 @@
 import React,{FC, useState} from 'react'
 import { Button } from 'shared'
 import { UserListContentCVItem } from 'entities/user'
-import { Input } from 'shared/UI/Input'
+import { Input } from 'shared'
 
 interface UserListContentCVProps{
     userListView:string
@@ -17,8 +17,8 @@ export const UserListContentCV:FC<UserListContentCVProps> = ({callback,userListV
   return (
     <div className="userList_contentWrapper _contentWrapper">
         <div className={`userList_searchBar`}>
-          <Input parentClass='_input' monitorableState={isInputClear} placeholder='Имя пользователя' type='text'/>
-          <Button callback={findUserButtonClickHandler} color='primary' content='Поиск' parentClass='userList'/>
+          <Input variant='primary' monitorableState={isInputClear} placeholder='Имя пользователя' type='text'/>
+          <Button callback={findUserButtonClickHandler} variant='primary' content='Поиск'/>
         </div>
         <div className="userList_cards cardsUserList">
             <UserListContentCVItem profilePhotoUrl='/img/pageHeader/userProfile.png'/>

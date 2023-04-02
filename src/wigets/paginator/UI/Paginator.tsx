@@ -4,7 +4,7 @@ import { Button } from 'shared'
 import { ChangeUserListVeiwButton } from 'features/paginator'
 import { getCountOfActiveButtons, getPageItemsCount } from '../lib/helpers'
 import 'wigets/paginator/styles/paginator.scss'
-import { Button as TestButton } from 'pages/test/UI/Button'
+import { Button as TestButton } from 'shared/UI/Button'
 
 interface PaginatorProps{
     parentClass:string,

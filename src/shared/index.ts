@@ -3,7 +3,6 @@ import { CardHeader } from "./UI/CardHeader";
 import { Input } from "./UI/Input";
 import { Divider } from "./UI/Divider";
 import { Dropdown } from './UI/Dropdown';
-import { LinkButton } from "./UI/LinkButton";
 import { Label } from "./UI/Label";
 import { Textarea } from "./UI/Textarea";
 import { resetField } from "./lib/helpers/inputHelper";
@@ -18,7 +17,6 @@ export {
     Input,
     Divider,
     Dropdown,
-    LinkButton,
     Label,
     Textarea,
     //helpers

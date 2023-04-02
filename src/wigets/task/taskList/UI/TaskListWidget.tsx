@@ -1,6 +1,8 @@
 import React,{FC, useEffect, useState} from 'react'
 import { Task, TaskListItem } from 'entities/task'
 import { Tasks } from 'entities/task'
+import styled from '@emotion/styled';
+import { colors } from 'shared';
 
 interface TaskListWidgetProps{
   filteredData?:Tasks,
@@ -15,20 +17,42 @@ export const TaskList:FC<TaskListWidgetProps> = ({fetchData,filteredData,...Task
   },[filteredData])
   if(taskList?.data !== null){
     return (
-      <div className="cardTaskList_tasks tasksCardTaskList">
+      <StyledTaskListWrapper>
         {
           taskList?.data.map((task:Task)=>{
-            return <TaskListItem fetchData={fetchData} assignedId={task.assignedId} id={task.id} key={task.id}/>
+            return (
+              <TaskListItem 
+                fetchData={fetchData} 
+                assignedId={task.assignedId} 
+                id={task.id} 
+                key={task.id}
+              />
+            )
           })
         }
-      </div>
+      </StyledTaskListWrapper>
     )
   }
   return (
-    <div className="cardTaskList_tasks tasksCardTaskList">
-
-    </div>
+    <StyledTaskListWrapper />
   )
 }
+
+const StyledTaskListWrapper = styled.div`
+    position: relative;
+    width: 1240px;
+    height: 512px;
+    border: 1px solid ${colors.disabledColors.disabledElementColor};
+    border-radius: 3px;
+    margin-top: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    &>{
+        width: 100%;
+        height: 64px;
+        padding: 20px 30px;
+        box-sizing: border-box;
+    }
+`
 
 export {}

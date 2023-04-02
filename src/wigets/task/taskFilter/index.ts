@@ -1,3 +1,3 @@
-import { Filter as TaskFilter} from "./UI/Filter";
+import { TaskFilter} from "./UI/TaskFilter";
 
 export {TaskFilter}

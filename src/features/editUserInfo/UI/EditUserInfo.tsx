@@ -27,15 +27,15 @@ export const EditUserInfo:FC<EditUserInfoProps> = ({closeFormCallback,...EditUse
                 <div className="editUserInfoForm_title"><p>Редактирование пользователя</p></div>
                 <div className="editUserInfoForm_formItems">
                     <Label content='Имя пользователя'/>
-                    <Input placeholder='Введите имя пользователя' type='text' monitorableState={isFormItemsClear}/>
+                    <Input variant='primary' placeholder='Введите имя пользователя' type='text' monitorableState={isFormItemsClear}/>
                     <Label content='URL фотографии'/>
-                    <Input placeholder='Введите URL изображения' type='text' monitorableState={isFormItemsClear}/>
+                    <Input variant='primary' placeholder='Введите URL изображения' type='text' monitorableState={isFormItemsClear}/>
                     <Label content='О себе'/>
-                    <Textarea placeholder='Введите описание' purpose='editUserInfoForm' monitorableState={isFormItemsClear}/>
+                    <Textarea placeholder='Введите описание' monitorableState={isFormItemsClear}/>
                 </div>
                 <div className="editUserInfoForm_buttons">
-                    <Button color='primary' content='Сохранить' callback={saveChangesButtonClickHanler} parentClass={'editUserInfoForm'}/>
-                    <Button color='white' content='Отмена' callback={denyChangesButtonClickHanler} parentClass={'editUserInfoForm'}/>
+                    <Button variant='primary' content='Сохранить' callback={saveChangesButtonClickHanler}/>
+                    <Button variant='white' content='Отмена' callback={denyChangesButtonClickHanler}/>
                 </div>
             </div>
         </div>

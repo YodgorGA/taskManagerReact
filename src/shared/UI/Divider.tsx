@@ -1,14 +1,20 @@
 import React, { FC } from 'react'
-import '../styles/divider.scss';
-
+import styled from '@emotion/styled';
+import {colors} from 'shared'
 interface DividerProps{
-  purpose?:string,
+  height?:string;
 }
 
-export const Divider:FC<DividerProps> = ({purpose,...DividerProps}) => {
+export const Divider:FC<DividerProps> = ({height,...DividerProps}) => {
   return (
-    <div className={`${purpose !== undefined? purpose+'_divider':''} _divider`}></div>
+    <StyledDivider />
   )
 }
 
+const StyledDivider = styled.div<DividerProps>`
+    width: 1px;
+    height: ${({height})=>height ||'600px'};
+    background-color: ${colors.disabledColors.disabledElementColor};
+    margin-right: 19px;
+`
 export {}

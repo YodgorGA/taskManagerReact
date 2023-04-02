@@ -1,7 +1,7 @@
 import React,{FC, useEffect, useState} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Label,Button,locationState } from 'shared'
-import { Input } from 'pages/test/UI/Input';
+import { Input } from 'shared/UI/Input';
 import { useGetUserAuthDataMutation } from 'entities/user' 
 import { useAppDispatch } from 'app/store/hooks'
 import { setCurrentUser } from 'entities/user'
@@ -64,7 +64,7 @@ export const LoginForm:FC = () => {
                 dataKey='password'
               />
           </div>
-          <Button callback={buttonClickHandler} parentClass='formLoginPage' color='success' content='Вход' />
+          <Button callback={buttonClickHandler} variant='green' content='Вход' />
       </div>
   )
 }

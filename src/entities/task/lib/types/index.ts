@@ -4,12 +4,12 @@ export type Task = {
     assignedId: string,
     title: string,
     description: string,
-    type: string,
+    type: 'task'|'bug',
     dateOfCreation: string,
     dateOfUpdate: string,
     timeInMinutes: number,
-    status: string,
-    rank: string
+    status: 'opened'|'testing'|'inProgress'|'complete',
+    rank: 'low'|'medium'|'high'
 }
 
 export type changeTaskStatusQuery = {

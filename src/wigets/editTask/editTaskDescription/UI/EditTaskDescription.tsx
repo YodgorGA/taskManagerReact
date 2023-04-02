@@ -12,8 +12,8 @@ export const EditTaskDescription:FC<EditTaskDescriptionProps> = ({taskData,retur
         <div className='cardEditTaskPage_editTaskDescription editTaskDescription'>
             <Label content='Название'/>
             <EditTaskDesctriptionInput
-                returnDataForApiCallback={returnEditParams}
-                parentClass='title'
+                variant='primary'
+                callback={returnEditParams}
                 type='text' 
                 key={0} 
                 placeholder='Введите название задания' 
@@ -23,9 +23,7 @@ export const EditTaskDescription:FC<EditTaskDescriptionProps> = ({taskData,retur
             <EditTaskTextarea
                 callback={returnEditParams}
                 dataKey='description'
-                placeholder='Введите описание задания' 
-                purpose='editTaskPageDescription' 
-                propsValue={taskData.description}
+                placeholder='Введите описание задания'
             />
         </div>
     )

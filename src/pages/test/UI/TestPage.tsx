@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import { Paginator } from 'wigets/paginator';
 import { TaskFilter } from 'wigets/task/taskFilter';
 import { TaskListWidget } from 'wigets/task/taskList';
-import { Button } from './Button';
-import { CardHeader } from './CardHeader';
-import { ContentWrapper } from './ContentWrapper';
-import { Dropdown } from './Dropdown';
-import { Input } from './Input';
-import { PageCard } from './PageCard';
-import { PageContainer } from './PageContainer';
+import { Button } from '../../../shared/UI/Button';
+import { CardHeader } from '../../../shared/UI/CardHeader';
+import { ContentWrapper } from '../../../shared/UI/ContentWrapper';
+import { Dropdown } from '../../../shared/UI/Dropdown';
+import { Input } from '../../../shared/UI/Input';
+import { PageCard } from '../../../shared/UI/PageCard';
+import { PageContainer } from '../../../shared/UI/PageContainer';
 
 
 export const TestPage = () => {

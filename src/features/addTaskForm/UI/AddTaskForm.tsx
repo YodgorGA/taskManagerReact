@@ -3,7 +3,7 @@ import { dataForTaskCreation, getTaskDropdownStaticArgument, useAddTaskMutation 
 import { useGetUserByNicknameMutation, useGetUsersAllQuery, useUserState } from 'entities/user'
 import { Button, Dropdown as AddTaskDropdown, Label, Textarea as AddTaskTextarea, Divider as AddTaskDivider, ValueFunc, ValueDataKeyFunc } from 'shared'
 import 'features/addTaskForm/styles/addTask.scss';
-import { Dropdown } from 'pages/test/UI/Dropdown';
+import { Dropdown } from 'shared/UI/Dropdown';
 
 interface AddTaskFormProps{
     closeFormCallback:()=>void,
@@ -113,19 +113,17 @@ export const AddTaskForm:FC<AddTaskFormProps> = ({fetchData,closeFormCallback,..
                             <Label content='Название задачи'/>
                             <AddTaskTextarea
                                 dataKey='title'
-                                purpose='addTaskTitle' 
                                 callback={getValueFromInput}
                                 monitorableState={isFormItemsClear} 
                                 placeholder='Введите название задачи' 
                             />
                         </div>
                     </div>
-                    <AddTaskDivider purpose='addTaskForm'/>
+                    <AddTaskDivider />
                     <div className="addTaskForm_right">
                         <Label content='Описание'/>
                         <AddTaskTextarea
                             dataKey='description'
-                            purpose='addTaskDescription'
                             callback={getValueFromInput}
                             monitorableState={isFormItemsClear} 
                             placeholder='Введите описание задания' 
@@ -133,8 +131,8 @@ export const AddTaskForm:FC<AddTaskFormProps> = ({fetchData,closeFormCallback,..
                     </div>
                 </div>
                 <div className="addTaskForm_buttons">
-                    <Button color='primary' content='Сохранить' callback={saveChangesButtonClickHanler} parentClass={'addTaskForm'}/>
-                    <Button color='white' content='Отмена' callback={denyChangesButtonClickHanler} parentClass={'addTaskForm'}/>
+                    <Button variant='primary' content='Сохранить' callback={saveChangesButtonClickHanler}/>
+                    <Button variant='white' content='Отмена' callback={denyChangesButtonClickHanler}/>
                 </div>
             </div>
         </div>

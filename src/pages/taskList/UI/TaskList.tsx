@@ -4,12 +4,13 @@ import { TaskFilter } from 'wigets/task/taskFilter'
 import { Paginator } from 'wigets/paginator'
 import { AddTaskForm } from 'features/addTaskForm'
 import { taskFilterParams, Tasks, useGetTaskListMutation } from 'entities/task'
-import { PageContainer } from 'pages/test/UI/PageContainer'
-import { ContentWrapper } from 'pages/test/UI/ContentWrapper'
-import { CardHeader as TestCardHeader } from 'pages/test/UI/CardHeader'
-import { PageCard } from 'pages/test/UI/PageCard'
-import { Button as TestButton } from 'pages/test/UI/Button'
-import { PageModal } from 'pages/test/UI/PageModal'
+import { PageContainer } from 'shared/UI/PageContainer'
+import { ContentWrapper } from 'shared/UI/ContentWrapper'
+import { CardHeader as TestCardHeader } from 'shared/UI/CardHeader'
+import { PageCard } from 'shared/UI/PageCard'
+import { Button as TestButton } from 'shared/UI/Button'
+import { PageModal } from 'shared/UI/PageModal'
+import { TaskFilter as TestTaskFilter } from 'wigets/task/taskFilter/UI/TaskFilter'
 
 export const TaskList:FC = () => {
     const parentClass = 'taskList'
@@ -72,7 +73,7 @@ export const TaskList:FC = () => {
                 }
             />
             <PageCard>
-                <TaskFilter returnFilterParams={returnFilterParams}/>
+                <TestTaskFilter returnFilterParams={returnFilterParams}/>
                 <TaskListWidget fetchData={fetchData} filteredData={visibleTasks}/>
             </PageCard>
             <Paginator handlePageChangeFetchCallback={returnPageNumber} parentClass={parentClass} showedItemCountTotal={taskListTotal}/>

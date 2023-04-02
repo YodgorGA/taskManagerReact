@@ -2,8 +2,8 @@ import React,{FC, useEffect, useState} from 'react'
 import { Input, Dropdown as UnitDropdown, resetField} from 'shared';
 import { ApplyEditing, DenyEditing, useAddWorkTimeMutation,addWorkTimeBody } from 'entities/task';
 import { convertWorkTimeToMinutes } from '../lib/helpers/hepler';
-import { FilterInput } from 'pages/test/UI/FilterInput';
-import { Dropdown } from 'pages/test/UI/Dropdown';
+import { FilterInput } from 'shared/UI/FilterInput';
+import { Dropdown } from 'shared/UI/Dropdown';
 
 interface AddWorkTimeProps{
   elapsedTimeForView:string,

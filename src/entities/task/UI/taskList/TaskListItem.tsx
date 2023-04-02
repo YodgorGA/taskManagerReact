@@ -1,82 +1,116 @@
 import React,{FC, useEffect, useState} from 'react'
 import { useGetUserByIdQuery } from 'entities/user';
-import { useChangeTaskStausMutation, useGetTaskByIdQuery, useRemoveTaskMutation } from 'entities/task';
-import { Link } from 'react-router-dom';
-import { getListItemButtonItemsState } from 'entities/task';
-import 'entities/task/styles/taskListItem.scss';
+import { useGetTaskByIdQuery } from 'entities/task';
+import { TaskListButton } from './TaskListButton';
+import { colors, VoidFunc } from 'shared';
+import styled from '@emotion/styled';
 
 interface TaskListItemProps{
   id:string,
   assignedId:string,
-  fetchData:()=>void
+  fetchData?:VoidFunc,
+  isOpen?:boolean
 }
 
-export const TaskListItem:FC<TaskListItemProps> = ({fetchData,id,assignedId,...TaskListItemProps}) => {
-  const [dropdownState,setDropdownState] = useState('closed');
-  const [dropdownButtonState,setDropdownButtonState] = useState('stayed');
-  const [buttonItemState,setButtonItemState] = useState<{test:string,reopen:string}>()
+interface ColumnProps{
+  status?:"opened"|"testing"|"inProgress"|"complete"
+  type?:"task"|"bug"
+  priority?:'low'|'medium'|'high'
+}
 
-  
-  const {data:taskData,isFetching:isTaskFetching} = useGetTaskByIdQuery(id);
+export const TaskListItem:FC<TaskListItemProps> = ({isOpen,fetchData,id,assignedId,...TaskListItemProps}) => {
+  const {data:taskData} = useGetTaskByIdQuery(id);
   const {data:userData} = useGetUserByIdQuery(assignedId);
-  const [removeTask] = useRemoveTaskMutation();
 
-  const [changeTaskStatus] = useChangeTaskStausMutation();
-  
-  const dropdownStateHandler = () =>{
-    if (dropdownButtonState === 'stayed'){
-      setDropdownButtonState('active');
-      setDropdownState('open'); 
-    }
-    else{
-      setDropdownButtonState('stayed');
-      setDropdownState('closed'); 
-    }
-  }
-  const toTestButtonClickHandler = () =>{
-    changeTaskStatus({id:id,status:'testing'})
-  }
-  const reopenButtonClickHandler = () =>{
-    changeTaskStatus({id:id,status:'opened'})
-  }
-  const removeButtonClickHandler = () =>{
-    removeTask(id).then(()=>{
-      fetchData()
-    })
-  }
+  const [taskStatus,setTaskStatus] = useState<"opened"|"testing"|"inProgress"|"complete">('opened')
 
   useEffect(()=>{
-    if(isTaskFetching === false){
-      setButtonItemState(getListItemButtonItemsState(taskData?.status))
+    if(taskData !== undefined){
+        setTaskStatus(taskData.status)
     }
-  },[taskData?.status,isTaskFetching])
+  },[taskData])
   return (
-    <div className="tasksCardTaskList_item taskListItem">
-      <div className={`taskListItem_type__${taskData?.type}`}></div>
-      <div className="taskListItem_taskName"><p>{taskData?.title}</p></div>
-      <div className="taskListItem_assignedUser"><p>{userData?.username}</p></div>
-      <div className={`taskListItem_status`}>
-        <div className={`taskStatus__${taskData?.status}`}></div>
-      </div>
-      <div className={`taskListItem_priority__${taskData?.rank}`}></div>
-      <div className="taskListItem_menuButton taskDropdown">
-        <div className={`taskDropdown_button__${dropdownButtonState}`} onClick={dropdownStateHandler}></div>
-        <div className={`taskDropdown_droppedField__${dropdownState} droppedFieldTaskDropdown`}>
-            <div 
-            className={`droppedFieldTaskDropdown_sendToTest${
-              (buttonItemState?.test !== '')?'__'+buttonItemState?.test:buttonItemState.test
-            }`}
-            onClick={toTestButtonClickHandler}>На тестирование</div>
-            <Link to={`/tasks/${id}`} className="droppedFieldTaskDropdown_edit">Редактировать</Link>
-            <div className={`droppedFieldTaskDropdown_reopen${
-              (buttonItemState?.reopen !=='')?'__'+buttonItemState?.reopen:buttonItemState.reopen
-            }`}
-            onClick={reopenButtonClickHandler}>Переоткрыть</div>
-            <div onMouseDown={removeButtonClickHandler} className="droppedFieldTaskDropdown_delete">Удалить</div>
-        </div>
-      </div>
-    </div>
+    <StyledTaskListItem assignedId={assignedId} id={id} {...TaskListItemProps}>
+      <ItemType type={taskData?.type}></ItemType>
+      <ItemTaskName>{taskData?.title}</ItemTaskName>
+      <ItemAssignedUser>{userData?.username}</ItemAssignedUser>
+      <ItemStatus status={taskStatus}><div></div></ItemStatus>
+      <ItemPriority priority={taskData?.rank}></ItemPriority>
+      <TaskListButton assignedId={assignedId} id={id && id} taskDataStatus={taskData && taskData.status}/>
+    </StyledTaskListItem>
   )
 }
 
+const StyledTaskListItem = styled.div<TaskListItemProps>`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    height: 64px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    font-family:'Roboto';
+    font-size:16px;
+    font-weight:400;
+    line-height:171%;
+    &:nth-child(odd) {
+        background-color: ${colors.listRowColors.whiteRow};
+    }
+    &:nth-child(even) {
+        background-color: ${colors.listRowColors.grayRow};
+    }
+    &:first-child{
+        border-radius: 5px 5px 0px 0px;
+    }
+    &:last-child{
+        border-radius: 0px 0px 5px 5px;
+    }
+`
+const ItemType = styled.div<ColumnProps>`
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-image: ${({type})=> type === 'task'
+    ?`url('img/taskList/taskIcon.png')`
+    :`url('img/taskList/bugIcon.png')`
+    };
+`
+const ItemTaskName = styled.div`
+    margin-left: 60px;
+    width: 527px;
+    max-height: 54px;
+    overflow: hidden;
+`
+const ItemAssignedUser = styled.div`
+    width: 180px;
+    margin-left: 20px;
+    height: 27px;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+`
+
+const ItemStatus = styled.div<ColumnProps>`
+    width: 120px;
+    margin-left: 13px;
+    height: 40px;
+    & div{
+      width: 90px;
+      height: 26px;
+      background-position: bottom;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-image: ${({status})=>`url(img/taskList/taskStatus/${status}.svg)`};
+    }
+`
+
+const ItemPriority = styled.div<ColumnProps>`
+    width: 80px;
+    height: 25px;
+    margin-left: 35px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: ${({priority})=>`url(img/taskList/priority/${priority}.svg)`};
+`
 export {}

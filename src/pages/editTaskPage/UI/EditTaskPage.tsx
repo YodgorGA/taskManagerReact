@@ -84,10 +84,10 @@ export const EditTaskPage = () => {
     return (
     <div className='editTaskPage_container _container'>
         <div className="editTaskPage_contentWrapper _contentWrapper">
-            <CardHeader parentClass='editTaskPage' title='Редактирование'
+            <CardHeader title='Редактирование'
             childButtons={[
-                <Button callback={saveChangesButtonHandler} color='primary' content='Сохранить' parentClass='editTaskPage' key={0}/>,
-                <Button callback={denyChangesButtonClickHandler} color='white' content='Отмена' parentClass='editTaskPage' key={1}/>
+                <Button callback={saveChangesButtonHandler} variant='primary' content='Сохранить' key={0}/>,
+                <Button callback={denyChangesButtonClickHandler} variant='white' content='Отмена' key={1}/>
             ]}/>
             <div className="editTaskPage_card _card cardEditTaskPage">
                 <EditTaskInfoWidget
