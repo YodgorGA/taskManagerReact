@@ -2,13 +2,15 @@ import React from 'react';
 import { withProviders } from './providers';
 import { Routing } from 'pages';
 import './index.scss';
+import { ContentWrapper } from 'shared';
 
 const App = () => {
   return (
-      <div className='page_wrapper'>
+      <ContentWrapper flexDirection='column' alignItems='center'>
         <Routing/>
-      </div>
+      </ContentWrapper>
   );
 }
+
 
 export default withProviders(App);

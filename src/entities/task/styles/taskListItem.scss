@@ -61,28 +61,28 @@
         height: 40px;
         .taskStatus{
             &__opened{
-                @include taskItemStatus('../.././../public/img/taskList/taskOpen.svg')
+                @include taskItemStatus('../../../../public/img/taskList/taskStatus/opened.svg')
             }
             &__inProgress{
-                @include taskItemStatus('../.././../public/img/taskList/taskProcess.svg')
+                @include taskItemStatus('../../../../public/img/taskList/taskStatus/inProgress.svg')
             }
             &__testing{
-                @include taskItemStatus('../.././../public/img/taskList/taskTest.svg')
+                @include taskItemStatus('../../../../public/img/taskList/taskStatus/testing.svg')
             }
             &__complete{
-                @include taskItemStatus('../.././../public/img/taskList/taskDone.svg')
+                @include taskItemStatus('../../../../public/img/taskList/taskStatus/complete.svg')
             }
         }
     }
     &_priority{
         &__high{
-            @include taskPriority('../.././../public/img/taskList/priorHigh.svg');
+            @include taskPriority('../../../../public/img/taskList/priority/high.svg');
         }
         &__medium{
-            @include taskPriority('../.././../public/img/taskList/priorMedium.svg');
+            @include taskPriority('../../../../public/img/taskList/priority/low.svg');
         }
         &__low{
-            @include taskPriority('../.././../public/img/taskList/priorLow.svg');
+            @include taskPriority('../../../../public/img/taskList/priority/medium.svg');
         }
     }
     &_menuButton{

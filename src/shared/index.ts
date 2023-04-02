@@ -1,3 +1,4 @@
+import { ContentWrapper } from './UI/ContentWrapper';
 import { Button } from "./UI/Button";
 import { CardHeader } from "./UI/CardHeader";
 import { Input } from "./UI/Input";
@@ -21,6 +22,7 @@ export {
     LinkButton,
     Label,
     Textarea,
+    ContentWrapper,
     //helpers
     resetField,transformDate,getIdFromLocation,
     //types
