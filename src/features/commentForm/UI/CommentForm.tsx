@@ -39,7 +39,7 @@ export const CommentForm:FC<CommentFormProps> = ({taskId,currentUser,...CommentF
           monitorableState={isCommentSended} 
           dataKey='text'
           callback={getTextareaData}
-
+          height='150px'
           />
         <Button margin={'10px 0px 0px 0px'} callback={buttonClickHandler} variant='green' content='Добавить'/>
     </ContentWrapper>
