@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { comment, TaskCommentItem } from 'entities/comment'
+import styled from '@emotion/styled'
 
 interface TaskCommentsProps{
   comments:[comment] | [],
@@ -8,7 +9,7 @@ interface TaskCommentsProps{
 
 export const TaskComments:FC<TaskCommentsProps> = ({currentUserId,comments,...TaskCommentsProps}) => {
   return (
-    <div className="commentsCardTaskPage_postedComments postedComments">
+    <StyledTaskPageComentsWrapper>
         {
           comments.map((comment)=>{
               return (
@@ -22,8 +23,18 @@ export const TaskComments:FC<TaskCommentsProps> = ({currentUserId,comments,...Ta
               />)
           })
         }
-    </div>
+    </StyledTaskPageComentsWrapper>
   )
 }
+
+const StyledTaskPageComentsWrapper = styled.div`
+    width: 100%;
+    max-height: 450px;
+    overflow: auto;
+    &::-webkit-scrollbar{
+      width: 0px;
+      height: 0px;
+    }
+`
 
 export {}

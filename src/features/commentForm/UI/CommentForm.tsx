@@ -33,7 +33,7 @@ export const CommentForm:FC<CommentFormProps> = ({taskId,currentUser,...CommentF
     resetCommentForm()
   }
   return (
-    <ContentWrapper margin='0px 0px 20px 0px' height='fit-content' flexDirection='column' justifyContent='flex-start'>  
+    <ContentWrapper margin='0px 0px 10px 0px' height='fit-content' flexDirection='column' justifyContent='flex-start'>  
         <Textarea 
           placeholder='Введите текст комментария' 
           monitorableState={isCommentSended} 
