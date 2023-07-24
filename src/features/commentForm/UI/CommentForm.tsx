@@ -1,7 +1,6 @@
 import React,{FC, useState} from 'react'
 import { useAddNewCommentMutation } from 'entities/comment';
-import { Button } from 'shared'
-import { Textarea as TaskPageTextarea } from 'shared/UI/Textarea'
+import { Button, ContentWrapper } from 'shared'
 import { Textarea } from 'shared/UI/Textarea';
 
 interface CommentFormProps{
@@ -34,16 +33,16 @@ export const CommentForm:FC<CommentFormProps> = ({taskId,currentUser,...CommentF
     resetCommentForm()
   }
   return (
-    <>  
+    <ContentWrapper margin='0px 0px 20px 0px' height='fit-content' flexDirection='column' justifyContent='flex-start'>  
         <Textarea 
           placeholder='Введите текст комментария' 
           monitorableState={isCommentSended} 
           dataKey='text'
           callback={getTextareaData}
-          />
 
-        <Button callback={buttonClickHandler} variant='green' content='Добавить'/>
-    </>
+          />
+        <Button margin={'10px 0px 0px 0px'} callback={buttonClickHandler} variant='green' content='Добавить'/>
+    </ContentWrapper>
   )
 }
 
