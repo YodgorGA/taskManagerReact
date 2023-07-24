@@ -13,6 +13,24 @@ interface TextareaProps{
     monitorableState?:boolean;
 }
 
+export const Textarea:FC<TextareaProps> = ({callback,dataKey,monitorableState,placeholder,...TextareaProps}) => {
+    const [value,setValue] = useState<string>('');
+    const [hasValue,setHasValue] = useState<boolean>(value.length > 0)
+
+    const changeHandler = (e:React.ChangeEvent<HTMLTextAreaElement>) =>{
+        let currentTargetValue = e.currentTarget.value
+        currentTargetValue.length > 0? setHasValue(true):setHasValue(false)
+        setValue(currentTargetValue)
+        if(dataKey !== undefined && callback !== undefined){
+        callback(e.currentTarget.value,dataKey)
+        }
+    }
+    useEffect(()=>{setValue('');setHasValue(false)},[monitorableState])
+    return(
+        <StyledTextarea onChange={changeHandler} hasValue={hasValue} placeholder={placeholder} {...TextareaProps}/>
+    )
+}
+
 const StyledTextarea = styled.textarea<TextareaProps>`
     font-family:"Roboto";
     font-size:14px;
@@ -44,20 +62,4 @@ const StyledTextarea = styled.textarea<TextareaProps>`
         box-shadow: 0px 0px 2px 2px ${colors.inputColors.primary.shadow};
     }
 `
-export const Textarea:FC<TextareaProps> = ({callback,dataKey,monitorableState,placeholder,...TextareaProps}) => {
-    const [value,setValue] = useState<string>('');
-    const [hasValue,setHasValue] = useState<boolean>(value.length > 0)
-    const changeHandler = (e:React.ChangeEvent<HTMLTextAreaElement>) =>{
-        let currentTargetValue = e.currentTarget.value
-        currentTargetValue.length > 0? setHasValue(true):setHasValue(false)
-        setValue(currentTargetValue)
-        if(dataKey !== undefined && callback !== undefined){
-        callback(e.currentTarget.value,dataKey)
-        }
-    }
-    useEffect(()=>{setValue('');setHasValue(false)},[monitorableState])
-    return(
-        <StyledTextarea onChange={changeHandler} hasValue={hasValue} placeholder={placeholder} {...TextareaProps}/>
-    )
-}
 export {}
