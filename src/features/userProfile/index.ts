@@ -1,3 +1,3 @@
-import { UserProfile as HeaderUserProfile} from "./UI/UserProfile";
+import { UserProfile} from "./UI/UserProfile";
 
-export { HeaderUserProfile }
+export { UserProfile }

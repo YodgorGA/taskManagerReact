@@ -1,4 +1,3 @@
-
 export const generalColor = {
     primaryColor:'#7B61FF',
     greenColor:'#5EE48C',

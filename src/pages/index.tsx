@@ -1,5 +1,5 @@
 import { PageHeader } from 'wigets/header';
-import { HeaderUserProfile } from 'features/userProfile';
+import { UserProfile as HeaderUserProfile } from 'features/userProfile';
 import { Routes ,Route, useLocation } from 'react-router-dom';
 import { Navbar as HeaderNavbar} from 'entities/navbar';
 import { LoginPage } from 'pages/login';
@@ -18,9 +18,8 @@ export const Routing = () => {
         {
             (location.pathname !== '/login')?
             <PageHeader 
-                navBar={<HeaderNavbar/>} 
-                userProfile={<HeaderUserProfile 
-                userProfilePhoto='/img/pageHeader/userImage.png'/>}
+                navbar={<HeaderNavbar itemsContent={['Задания','Пользователи']}/>} 
+                currentUser={<HeaderUserProfile/> }
             />
             :<PageHeader/>
         }

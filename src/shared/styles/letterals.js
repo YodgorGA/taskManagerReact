@@ -4,6 +4,9 @@ export const generalColor = {
     greenColor:'#5EE48C',
     redColor:'#FF6161',
     white:'#FFFFFF',
+}
+
+export const pageColor = {
     pageWrapperGrayColor: '#E3E3E3',
 }
 

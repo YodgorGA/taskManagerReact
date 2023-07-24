@@ -26,7 +26,7 @@ export const UserTaskList:FC<UserTaskListProps> = ({...UserTaskListProps}) => {
                 <UserPageTaskListItem id={Math.random()} type='bug' taskName='Some task name' status={'open'} priority='low'/>
             </div>
             <Paginator 
-                parentClass={'userPageTaskList'} 
+                
                 showedItemCountTotal={5}
             />
         </div>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { ChangeUserListVeiwButton } from 'features/paginator'
 import { Paginator } from 'wigets/paginator'
 import { UserListCardViewWidget } from 'wigets/user/userList'
 import { UserListListViewWidget } from 'wigets/user/userList'
-import { useGetUsersAllQuery, useUserIsAuth } from 'entities/user' 
+import { useGetUsersAllQuery } from 'entities/user' 
 
 export const UserList = () => {
   const [view,setView] = useState('cards');
@@ -23,12 +22,7 @@ export const UserList = () => {
           ?<UserListListViewWidget callback={changeView} userListView={view}/>
           :<UserListCardViewWidget callback={changeView} userListView={view}/>
         }
-        <Paginator 
-          showedItemCountTotal={5}
-          parentClass='cardUserListLV'
-          setView={changeView}
-          userListVeiw={view}
-          />
+        <Paginator handlePageChangeFetchCallback={()=>1} showedItemCountTotal={40}/>
       </div>
     )
 }    

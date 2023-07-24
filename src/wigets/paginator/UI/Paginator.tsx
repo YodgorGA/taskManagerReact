@@ -1,20 +1,21 @@
 import React,{FC, useEffect, useState} from 'react'
+import styled from '@emotion/styled'
+import { Button, colors } from 'shared'
 import { useLocation } from 'react-router-dom'
-import { Button } from 'shared'
 import { ChangeUserListVeiwButton } from 'features/paginator'
 import { getCountOfActiveButtons, getPageItemsCount } from '../lib/helpers'
 import 'wigets/paginator/styles/paginator.scss'
-import { Button as TestButton } from 'shared/UI/Button'
 
 interface PaginatorProps{
-    parentClass:string,
     showedItemCountTotal:number,
-    userListVeiw?:string
-    setView?: ()=>void | undefined
+    userListVeiw?:string,
+    setView?: ()=>void | undefined,
     handlePageChangeFetchCallback?:(page:number)=>void,
+    width?:string;
 }
 
-export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,userListVeiw,setView,handlePageChangeFetchCallback,...PaginatorProps}) => {
+
+export const Paginator:FC<PaginatorProps> = ({width,handlePageChangeFetchCallback,setView,showedItemCountTotal,userListVeiw,...PaginatorProps}) => {
     const location = useLocation();
     const [pageInfo,setPageInfo] = useState<{first:number,last:number}>({first:1,last:8})
     const [visibleButtonsNumber,setVisibleButtonNubmer] = useState([1,2,3]);
@@ -31,11 +32,11 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
     }
 
     const numberButtonClickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
-        let eText = Number(e.currentTarget.textContent);
-        setPageInfo(getPageItemsCount(8,showedItemCountTotal,eText));
+        let eventTargetText = Number(e.currentTarget.textContent);
+        setPageInfo(getPageItemsCount(8,showedItemCountTotal,eventTargetText));
 
         if(handlePageChangeFetchCallback !== undefined){
-            handlePageChangeFetchCallback(eText-1);
+            handlePageChangeFetchCallback(eventTargetText-1);
         }
     }
     useEffect(()=>{
@@ -53,49 +54,80 @@ export const Paginator:FC<PaginatorProps> = ({parentClass,showedItemCountTotal,u
         }
     },[showedItemCountTotal])
     return (
-    <div className={`${parentClass}_paginator _paginator`}>
-        <div className="_paginator_left leftsidePaginator">
-            <TestButton 
-                callback={prevButtonClickHandler} 
-                variant={(visibleButtonsNumber[0]!==1)?'primary':'disabled'} 
-                key={0}
-                content='Назад'
-            />
-            <TestButton
-                padding='0px 10px'
-                callback={numberButtonClickHandler} 
-                variant={(countOfButtons > visibleButtonsNumber[0])?'primary':'disabled'}
-                key={1} 
-                content={String(visibleButtonsNumber[0])}
-            />
-            <TestButton 
-                padding='0px 10px'
-                callback={numberButtonClickHandler} 
-                variant={(countOfButtons > visibleButtonsNumber[1])?'primary':'disabled'}
-                key={2} 
-                content={String(visibleButtonsNumber[1])}
-            />
-            <TestButton
-                padding='0px 10px'
-                callback={numberButtonClickHandler} 
-                variant={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'}
-                key={3} 
-                content={String(visibleButtonsNumber[2])}
-            />
-            <TestButton 
-                callback={nextButtonClickHandler} 
-                variant={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'} 
-                key={4}
-                content='Вперед'
-            />
-        </div>
-        <div className={`_paginator_right rightSidePaginator`}>
-            {location.pathname === '/users'?<ChangeUserListVeiwButton setView={setView} userListVeiw={userListVeiw}/>:<div></div>}
-            <p>{`Показано ${pageInfo.first} - ${pageInfo.last} из ${showedItemCountTotal}`}</p>
-        </div>
-
-    </div>
-  )
+        <PaginatorContainer showedItemCountTotal={showedItemCountTotal} {...PaginatorProps}>
+            <PaginatorButtons>
+                <Button 
+                    callback={prevButtonClickHandler} 
+                    variant={(visibleButtonsNumber[0]!==1)?'primary':'disabled'} 
+                    key={0}
+                    content='Назад'
+                />
+                <Button
+                    padding='0px 10px'
+                    callback={numberButtonClickHandler} 
+                    variant={(countOfButtons > visibleButtonsNumber[0])?'primary':'disabled'}
+                    key={1} 
+                    content={String(visibleButtonsNumber[0])}
+                />
+                <Button 
+                    padding='0px 10px'
+                    callback={numberButtonClickHandler} 
+                    variant={(countOfButtons > visibleButtonsNumber[1])?'primary':'disabled'}
+                    key={2} 
+                    content={String(visibleButtonsNumber[1])}
+                />
+                <Button
+                    padding='0px 10px'
+                    callback={numberButtonClickHandler} 
+                    variant={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'}
+                    key={3} 
+                    content={String(visibleButtonsNumber[2])}
+                />
+                <Button 
+                    callback={nextButtonClickHandler} 
+                    variant={(countOfButtons > visibleButtonsNumber[2])?'primary':'disabled'} 
+                    key={4}
+                    content='Вперед'
+                />
+            </PaginatorButtons> 
+            <PaginatorInfo>
+                {
+                    location.pathname === '/users'&&
+                    <ChangeUserListVeiwButton setView={setView} userListVeiw={userListVeiw}/>
+                }
+                <p>{`Показано ${pageInfo.first} - ${pageInfo.last} из ${showedItemCountTotal}`}</p>
+            </PaginatorInfo>
+        </PaginatorContainer>
+    )
 }
 
+const PaginatorContainer = styled.div<PaginatorProps>`
+    height: 24px;
+    width:${({width})=>width || '1280px'};
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    font-family:"Roboto";
+    font-weight:400;
+    line-height:172%;
+`
+const PaginatorButtons = styled.div`
+    min-width: 176px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+`
+const PaginatorInfo = styled.div`
+    min-width: 125px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    font-size:14px;
+    color:${colors.textColors.darkTextColor};
+`
 export {}

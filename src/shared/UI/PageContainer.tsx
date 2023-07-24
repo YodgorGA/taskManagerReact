@@ -12,9 +12,9 @@ interface PageContainerProps{
 }
 
 const StyledPageContainer = styled.div<PageContainerProps>`
+    background-color: ${colors.pageColor.pageWrapperGrayColor};
     width: ${({width})=>width||'1440px'};
     height: ${({height})=>height||'727px'};
-    background-color: ${colors.generalColor.pageWrapperGrayColor};
     display: flex;
     flex-direction: ${({flexDirection})=>flexDirection||'column'};
     justify-content: ${({justifyContent})=>justifyContent||'space-between'};

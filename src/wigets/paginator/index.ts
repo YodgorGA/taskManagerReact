@@ -1,3 +1,3 @@
 import { Paginator } from "./UI/Paginator";
 
-export { Paginator }
+export { Paginator}

@@ -3,17 +3,11 @@ import { TaskListWidget } from 'wigets/task/taskList'
 import { TaskFilter } from 'wigets/task/taskFilter'
 import { Paginator } from 'wigets/paginator'
 import { AddTaskForm } from 'features/addTaskForm'
-import { taskFilterParams, Tasks, useGetTaskListMutation } from 'entities/task'
-import { PageContainer } from 'shared/UI/PageContainer'
-import { ContentWrapper } from 'shared/UI/ContentWrapper'
-import { CardHeader as TestCardHeader } from 'shared/UI/CardHeader'
-import { PageCard } from 'shared/UI/PageCard'
-import { Button as TestButton } from 'shared/UI/Button'
-import { PageModal } from 'shared/UI/PageModal'
-import { TaskFilter as TestTaskFilter } from 'wigets/task/taskFilter/UI/TaskFilter'
+import { taskFilterParams,Tasks,useGetTaskListMutation } from 'entities/task'
+import { PageContainer,ContentWrapper,CardHeader,PageCard,Button,PageModal } from 'shared'
+
 
 export const TaskList:FC = () => {
-    const parentClass = 'taskList'
     const [modalVisibility,setModalVisibility] = useState<boolean>(false);
     const [visibleTasks,setVisibleTasks] = useState<Tasks>();
     const [fetchTaskListDataBody,setFetchTaskListDataBody] = useState({filter:{},page:0,limit:8})
@@ -61,22 +55,22 @@ export const TaskList:FC = () => {
                 page:(taskListTotal % 8 > 0)? Math.floor(taskListTotal / 8):taskListTotal/8 -1
             })
         }
-        console.log(fetchTaskListDataBody.page)
+        console.log(fetchTaskListDataBody.page,isDataChangedFromButton)
     },[modalVisibility])
 
     return (
     <PageContainer>
         <ContentWrapper padding='24px 0px 0px 0px' width='1280px' flexDirection='column' alignItems='flex-start'>
-            <TestCardHeader title='Задачи' 
+            <CardHeader title='Задачи' 
                 childButtons={
-                    <TestButton callback={toggleModalVisability} variant='primary' content='Добавить задачу' key={0}/>
+                    <Button callback={toggleModalVisability} variant='primary' content='Добавить задачу' key={0}/>
                 }
             />
             <PageCard>
-                <TestTaskFilter returnFilterParams={returnFilterParams}/>
+                <TaskFilter returnFilterParams={returnFilterParams}/>
                 <TaskListWidget fetchData={fetchData} filteredData={visibleTasks}/>
             </PageCard>
-            <Paginator handlePageChangeFetchCallback={returnPageNumber} parentClass={parentClass} showedItemCountTotal={taskListTotal}/>
+            <Paginator handlePageChangeFetchCallback={returnPageNumber} showedItemCountTotal={taskListTotal}/>
         </ContentWrapper>
         <PageModal visible={modalVisibility}>
             <AddTaskForm fetchData={fetchData} closeFormCallback={toggleModalVisability}/>

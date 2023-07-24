@@ -91,6 +91,7 @@ const DropdownMenu = styled.div<DropdownProps>`
 
 const activeDnButton = css`
     box-shadow:0px 0px 2px 2px ${colors.inputColors.primary.shadow};
+    border:1px solid ${colors.generalColor};
     color:${colors.textColors.darkTextColor};
 `
 const defaultDnButton = css`

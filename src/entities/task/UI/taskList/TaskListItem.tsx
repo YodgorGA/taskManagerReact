@@ -36,7 +36,7 @@ export const TaskListItem:FC<TaskListItemProps> = ({isOpen,fetchData,id,assigned
       <ItemAssignedUser>{userData?.username}</ItemAssignedUser>
       <ItemStatus status={taskStatus}><div></div></ItemStatus>
       <ItemPriority priority={taskData?.rank}></ItemPriority>
-      <TaskListButton assignedId={assignedId} id={id && id} taskDataStatus={taskData && taskData.status}/>
+      <TaskListButton fetchData={fetchData} assignedId={assignedId} id={id && id} taskDataStatus={taskData && taskData.status}/>
     </StyledTaskListItem>
   )
 }
@@ -54,16 +54,16 @@ const StyledTaskListItem = styled.div<TaskListItemProps>`
     font-size:16px;
     font-weight:400;
     line-height:171%;
-    &:nth-child(odd) {
+    &:nth-of-type(odd) {
         background-color: ${colors.listRowColors.whiteRow};
     }
-    &:nth-child(even) {
+    &:nth-of-type(even) {
         background-color: ${colors.listRowColors.grayRow};
     }
-    &:first-child{
+    &:first-of-type{
         border-radius: 5px 5px 0px 0px;
     }
-    &:last-child{
+    &:last-of-type{
         border-radius: 0px 0px 5px 5px;
     }
 `

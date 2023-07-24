@@ -9,7 +9,22 @@ interface ButtonProps{
     callback?:VoidFunc|PaginationFunc,
     width?:string,
     padding?:string,
+    margin?:string,
 }
+
+export const Button:FC<ButtonProps> = ({variant,content,callback,...ButtonProps}) => {
+    const clickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
+        if(variant !== 'disabled'){
+            callback && callback(e)
+        }
+    }
+    return (
+        <StyledButton onClick={clickHandler} variant={variant} {...ButtonProps}>
+            {content}
+        </StyledButton>
+    )
+}
+
 
 export const StyledButton = styled.div<ButtonProps>`
     box-sizing: content-box;
@@ -19,10 +34,14 @@ export const StyledButton = styled.div<ButtonProps>`
     font-family:'Roboto';
     font-size:16px;
     font-weight:400;
-    line-height:119%;   
+    line-height:119%;
+    margin:${({margin})=>margin || '0px'};
     color:${({variant})=>colors.buttonTextColors[variant]};
     background-color: ${({variant})=>colors.buttonColors[variant].stayed};
-    border: 1px solid ${({variant})=>colors.buttonColors[variant].stayed};
+    border: 1px solid ${({variant})=>variant === 'white'
+    ? colors.textColors.darkTextColor
+    : colors.buttonColors[variant].stayed
+    };
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -39,16 +58,4 @@ export const StyledButton = styled.div<ButtonProps>`
         border: 1px solid ${({variant})=>colors.buttonColors[variant].active};
     }
 `
-export const Button:FC<ButtonProps> = ({variant,content,callback,...ButtonProps}) => {
-    const clickHandler = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
-        if(variant !== 'disabled'){
-            callback && callback(e)
-        }
-    }
-    return (
-        <StyledButton onClick={clickHandler} variant={variant} {...ButtonProps}>
-            {content}
-        </StyledButton>
-    )
-}
 export {}

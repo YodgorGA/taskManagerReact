@@ -33,11 +33,12 @@ export const StyledFilterInput = styled.input<FilterInputProps>`
         color:${colors.textColors.labelTextColor};
     }
     &:hover{
+        border-color:${colors.generalColor.white};
         border-color:${colors.inputColors.primary.hover};
     }
     &:focus{
-        border-color:${colors.inputColors.primary.hover};
-        box-shadow: 0px 0px 2px 1px ${colors.inputColors.primary.active};
+        border-color:${colors.generalColor.white};
+        box-shadow: 0px 0px 2px 2px ${colors.inputColors.primary.shadow};
     }
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {

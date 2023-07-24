@@ -7,7 +7,7 @@ interface DividerProps{
 
 export const Divider:FC<DividerProps> = ({height,...DividerProps}) => {
   return (
-    <StyledDivider />
+    <StyledDivider height={height} />
   )
 }
 

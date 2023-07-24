@@ -1,5 +1,7 @@
 import { Tasks } from 'entities/task';
+import { AddTaskForm } from 'features/addTaskForm';
 import React, { useState } from 'react'
+import { PageModal } from 'shared';
 import { Paginator } from 'wigets/paginator';
 import { TaskFilter } from 'wigets/task/taskFilter';
 import { TaskListWidget } from 'wigets/task/taskList';
@@ -21,20 +23,9 @@ export const TestPage = () => {
   //написать onChange посмотреть как валидируется форма
   return (
     <PageContainer>
-      <ContentWrapper padding='24px 0px 0px 0px' width='1280px' flexDirection='column' alignItems='flex-start'>
-        <CardHeader
-          title='Задачи' 
-          childButtons={[
-            <Button variant={'primary'} content={'Добавить задачу'} />,
-            <Button variant={'red'} content={'Удалить задачу'} />
-          ]}
-        />
-        <PageCard>
-          <TaskFilter returnFilterParams={()=>{}}/>
-          <TaskListWidget fetchData={()=>{}} filteredData={visibleTasks}/>
-        </PageCard>
-        <Paginator handlePageChangeFetchCallback={()=>{}} parentClass={'taskList'} showedItemCountTotal={40}/>
-      </ContentWrapper>
+      <PageModal visible={true}>
+          {/* <TestAddTaskForm /> */}
+      </PageModal>
     </PageContainer>
   )
 }
