@@ -28,13 +28,15 @@ export const TaskComments:FC<TaskCommentsProps> = ({currentUserId,comments,...Ta
 }
 
 const StyledTaskPageComentsWrapper = styled.div`
-    width: 100%;
-    max-height: 450px;
-    overflow: auto;
-    &::-webkit-scrollbar{
-      width: 0px;
-      height: 0px;
-    }
+  width: 100%;
+  max-height: 450px;
+  overflow: auto;
+  display:flex;
+  flex-direction:column-reverse;
+  &::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+  }
 `
 
 export {}
