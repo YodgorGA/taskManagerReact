@@ -1,0 +1,30 @@
+@import 'app/styles/mixins';
+@import 'app/styles/letterals';
+
+._filter{
+    height: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+
+    &_button{
+       height: 22px;
+    }
+    &_input{
+        
+    }
+    &_reset{
+        height: 20px;
+        width: 25px;
+        background-image: url('../../../../../public/img/filter/reset.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}

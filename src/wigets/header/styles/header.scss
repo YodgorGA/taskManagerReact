@@ -1,0 +1,20 @@
+@import '/src/app/styles/mixins';
+@import '/src/app/styles/letterals';
+
+.headerPage{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 4px $disabledElementColor;
+    z-index: 10;
+    &_logo{
+        width: 120px;
+        height: 20px;
+        background-image: url('../../../../public/img/pageHeader/Logo.svg');
+        background-repeat: no-repeat;
+        box-sizing: border-box;
+        margin: 20px;
+    }
+}
